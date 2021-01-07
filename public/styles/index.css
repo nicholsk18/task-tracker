@@ -20,12 +20,6 @@
     padding: 10px 25px;
 }
 
-.activity-component,
-.schedule-component {
-    border: 1px solid black;
-    margin: 25px;
-}
-
 /*************************/
 /* activity component
 /*************************/
@@ -34,23 +28,15 @@
 }
 
 /*************************/
-/* schedule component
+/* View Component
 /*************************/
-.schedule-sortables {
+.view-component {
     border: 1px solid black;
     margin: 25px;
-    padding: 10px;
 }
 
-/*************************/
-/* session component
-/*************************/
-.sessions-component {
+.view-sortables {
     border: 1px solid black;
-    margin: 25px;
-}
-.sessions-sortables {
-    border: 1px solid black;
+    margin: 10px 25px;
     padding: 10px;
-    margin: 0 25px;
 }
