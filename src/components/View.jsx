@@ -9,6 +9,7 @@ const View = ({ name }) => {
                 </h2>
                 {/* 
                     Should we generate session from data you get here?
+                    Stay away from the data heavy sides of things for now
                 */}
                 <div className="view-sortables">
                     <div>
