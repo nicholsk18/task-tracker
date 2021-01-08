@@ -6,6 +6,10 @@
     margin: 25px;
 }
 
+.view-component span {
+    display: block;
+}
+
 .view-sortables {
     border: 1px solid black;
     margin: 10px 25px;

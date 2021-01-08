@@ -1,12 +1,13 @@
 import React from 'react'
 import './View.css'
 
-const View = ({ name }) => {
+const View = ({ type, name }) => {
     return (
         <>
             <div className="view-component">
                 <h2>
-                    { name }
+                    { type }
+                    <span>{ name }</span>
                 </h2>
             </div>
         </>
