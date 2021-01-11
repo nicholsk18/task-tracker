@@ -1,8 +1,16 @@
-const express = require('express')
-const router = new express.Router()
+const express = require("express");
+const jsonData = require("../data.json");
+const router = new express.Router();
 
-router.get('/', (req, res) => {
-    res.json({"test": "data"})
-})
+router.get("/:id", (req, res) => {
+  const findID = req.params.id;
 
-module.exports = router
+  const { id, name } = jsonData[findID];
+
+  res.json({
+    id,
+    name,
+  });
+});
+
+module.exports = router;

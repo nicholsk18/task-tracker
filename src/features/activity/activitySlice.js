@@ -25,12 +25,12 @@ export const { resetState, setActivity } = activitySlice.actions;
 
 export const fetchActivity = (id) => (dispatch) => {
   dispatch(resetState());
-  console.log(id);
 
-  const data = fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+  // const data = fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+  const data = fetch(`http://localhost:3001/${id}`)
     .then((response) => response.json())
     .then((json) => {
-      dispatch(setActivity({ id: json.id, name: json.title }));
+      dispatch(setActivity({ id: json.id, name: json.name }));
     });
 
   // setTimeout(() => {
