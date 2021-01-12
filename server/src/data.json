@@ -1,10 +1,15 @@
-{
-  "1": {
-    "id": 1,
-    "name": "running"
+[
+  {
+    "id": "1",
+    "name": "Running",
+    "schedule": {}
   },
-  "2": {
-    "id": 2,
-    "name": "swiming"
+  {
+    "id": "2",
+    "name": "Swiming"
+  },
+  {
+    "id": "3",
+    "name": "Sleeping"
   }
-}
+]

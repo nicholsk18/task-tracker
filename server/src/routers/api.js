@@ -2,10 +2,14 @@ const express = require("express");
 const jsonData = require("../data.json");
 const router = new express.Router();
 
-router.get("/:id", (req, res) => {
-  const findID = req.params.id;
+router.get('/', (req, res) => {
+  res.json( jsonData )
+})
 
-  const { id, name } = jsonData[findID];
+router.get("/:id", (req, res) => {
+  const reqID = req.params.id;
+
+  let { id, name } = jsonData.find(obj => (obj.id === reqID))
 
   res.json({
     id,

@@ -10,40 +10,47 @@ export const activitySlice = createSlice({
     },
   },
   reducers: {
+    startLoading: (state, action) => {
+      state.loading = true
+    },
+    finishLoading: (state) => {
+      state.loading = false
+    },
     resetState: (state) => {
-      state.loading = true;
-      state.activity = {};
+      state.activity = { id: 0, name: '' };
     },
     setActivity: (state, action) => {
       state.activity = action.payload;
-      state.loading = false;
     },
   },
 });
 
-export const { resetState, setActivity } = activitySlice.actions;
+export const { startLoading, finishLoading, resetState, setActivity } = activitySlice.actions;
 
+// all this below need to be in different file?
 export const fetchActivity = (id) => (dispatch) => {
-  dispatch(resetState());
+  // just for now lets keep it
+  dispatch(startLoading())
 
-  // const data = fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-  const data = fetch(`http://localhost:3001/${id}`)
-    .then((response) => response.json())
-    .then((json) => {
-      dispatch(setActivity({ id: json.id, name: json.name }));
-    });
+  // Timeout just for loading
+  setTimeout(() => {
+    fetch(`http://localhost:3001/${id}`)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch(setActivity({ id: json.id, name: json.name }));
+        dispatch(finishLoading())
+      });
 
-  // setTimeout(() => {
-  //   dispatch(setActivity({ id: id, name: "Running" }));
-  // }, 1000);
+  }, 1000)
 };
 
 export const resetActivity = (id) => (dispatch) => {
-  dispatch(resetState()); // this is just for laoding
-  dispatch(setActivity({ id: 0, name: "" }));
+  dispatch(resetState({ id }));
 };
+
 
 export const selectActivity = (state) => state.activity.activity;
 export const isLoading = (state) => state.activity.loading;
+
 
 export default activitySlice.reducer;
