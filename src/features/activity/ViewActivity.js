@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectActivity,
@@ -7,13 +7,18 @@ import {
   resetActivity,
 } from "./activitySlice";
 
-export function ViewActivity() {
+export function ViewActivity({ id }) {
   const activity = useSelector(selectActivity); // function?
   const loading = useSelector(isLoading); // function?
   const dispatch = useDispatch(); // redux stuff
+  const [ oldID, setOldID ] = useState(id)
 
-  // I wanted to keep this in for fun
-  // Maybe change it to a spinner?
+  // I know useEffect has to rely on something to not get stuck in a loop
+  // would love ideas to do this a better way
+  useEffect(()=>{
+      dispatch(fetchActivity(id))
+  }, [oldID])
+
   if (loading) {
     return <p>LOADING</p>;
   }
@@ -21,14 +26,7 @@ export function ViewActivity() {
     <div>
       <p>Id: {activity.id}</p>
       <p>Name: {activity.name}</p>
-
-      {activity.id === 0 && (
-          <button onClick={() => (dispatch(fetchActivity(1)))}>Load id 1</button>
-      )}
-
-      {activity.name && (
-        <button onClick={() => dispatch(resetActivity(1))}>reset</button>
-      )}
+      <p>Schedule: {activity.schedule}</p>
     </div>
   );
 }

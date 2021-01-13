@@ -3,10 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const activitySlice = createSlice({
   name: "activity",
   initialState: {
-    loading: false,
+    loading: true,
     activity: {
       id: 0,
       name: "",
+      schedule: ""
     },
   },
   reducers: {
@@ -17,7 +18,7 @@ export const activitySlice = createSlice({
       state.loading = false
     },
     resetState: (state) => {
-      state.activity = { id: 0, name: '' };
+      state.activity = { id: 0, name: '', schedule: {} };
     },
     setActivity: (state, action) => {
       state.activity = action.payload;
@@ -37,7 +38,8 @@ export const fetchActivity = (id) => (dispatch) => {
     fetch(`http://localhost:3001/${id}`)
       .then((response) => response.json())
       .then((json) => {
-        dispatch(setActivity({ id: json.id, name: json.name }));
+        const { id, name, schedule} = json
+        dispatch(setActivity({ id, name, schedule }));
         dispatch(finishLoading())
       });
 
@@ -45,7 +47,7 @@ export const fetchActivity = (id) => (dispatch) => {
 };
 
 export const resetActivity = (id) => (dispatch) => {
-  dispatch(resetState({ id }));
+  dispatch(resetState());
 };
 
 

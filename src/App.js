@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewActivity } from './features/activity/ViewActivity'
+import { ViewAllActivities } from './features/allActivities/ViewAllActivities'
 import './App.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
               Activities
           </h2>
 
-          <ViewActivity />
+          <ViewAllActivities />
       </div>
   );
 }

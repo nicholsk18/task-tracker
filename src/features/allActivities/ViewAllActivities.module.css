@@ -1,0 +1,10 @@
+.container {
+    border: 1px solid black;
+    padding: 10px 0;
+}
+.activity_container {
+    border: 1px solid black;
+    width: 200px;
+    margin: 20px auto;
+    padding: 20px 0;
+}
