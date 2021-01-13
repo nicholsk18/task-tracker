@@ -2,7 +2,7 @@
   {
     "id": "1",
     "name": "Running",
-    "schedule": {}
+    "schedule": "schedule"
   },
   {
     "id": "2",

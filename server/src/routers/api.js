@@ -9,11 +9,12 @@ router.get('/', (req, res) => {
 router.get("/:id", (req, res) => {
   const reqID = req.params.id;
 
-  let { id, name } = jsonData.find(obj => (obj.id === reqID))
+  let { id, name, schedule } = jsonData.find(obj => (obj.id === reqID))
 
   res.json({
     id,
     name,
+    schedule
   });
 });
 
