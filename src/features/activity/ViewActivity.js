@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {fetchAllActivities, selectAllActivities} from '../allActivities/allActivitiesSlice'
 import {
   selectActivity,
   isLoading,
@@ -9,7 +8,6 @@ import {
 } from "./activitySlice";
 
 export function ViewActivity() {
-  const activities = useSelector(selectAllActivities)
   const activity = useSelector(selectActivity); // function?
   const loading = useSelector(isLoading); // function?
   const dispatch = useDispatch(); // redux stuff
@@ -21,17 +19,11 @@ export function ViewActivity() {
   }
   return (
     <div>
-      {/*want to show all the objs*/}
-      <p>test {activities.name}</p>
       <p>Id: {activity.id}</p>
       <p>Name: {activity.name}</p>
 
       {activity.id === 0 && (
           <button onClick={() => (dispatch(fetchActivity(1)))}>Load id 1</button>
-      )}
-
-      {activities.name == "" && (
-          <button onClick={() => (dispatch(fetchAllActivities()))}>Load</button>
       )}
 
       {activity.name && (
