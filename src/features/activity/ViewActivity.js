@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import ViewScheduleFragment from "../../components/ViewScheduleFragment";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectActivity,
@@ -25,8 +26,9 @@ export function ViewActivity({ id }) {
     <div>
       <p>Id: {activity.id}</p>
       <p>Name: {activity.name}</p>
-      {/* We will change this to <ViewScheduleFragment schedule={activity.schedule} /> */}
-      <p>Schedule: {activity.schedule}</p>
+      <div>
+          <ViewScheduleFragment schedule={ activity.schedule } />
+      </div>
     </div>
   );
 }
