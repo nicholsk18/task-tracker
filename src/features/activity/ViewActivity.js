@@ -11,13 +11,12 @@ export function ViewActivity({ id }) {
   const activity = useSelector(selectActivity); // function?
   const loading = useSelector(isLoading); // function?
   const dispatch = useDispatch(); // redux stuff
-  const [ oldID, setOldID ] = useState(id)
+  const [ activityId, setActivityId ] = useState(id)
 
-  // I know useEffect has to rely on something to not get stuck in a loop
-  // would love ideas to do this a better way
+  // I think this is right! Changed the name to be better though.
   useEffect(()=>{
-      dispatch(fetchActivity(id))
-  }, [oldID])
+      dispatch(fetchActivity(activityId))
+  }, [activityId])
 
   if (loading) {
     return <p>LOADING</p>;
