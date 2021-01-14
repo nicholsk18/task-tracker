@@ -25,6 +25,7 @@ export function ViewActivity({ id }) {
     <div>
       <p>Id: {activity.id}</p>
       <p>Name: {activity.name}</p>
+      {/* We will change this to <ViewScheduleFragment schedule={activity.schedule} /> */}
       <p>Schedule: {activity.schedule}</p>
     </div>
   );
