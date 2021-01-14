@@ -1,6 +1,9 @@
 .container {
     border: 1px solid black;
-    padding: 10px 0;
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
 }
 .activity_container {
     border: 1px solid black;

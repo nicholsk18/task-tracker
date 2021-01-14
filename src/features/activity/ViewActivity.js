@@ -5,8 +5,8 @@ import {
   selectActivity,
   isLoading,
   fetchActivity,
-  resetActivity,
 } from "./activitySlice";
+import style from './ViewActivity.module.css'
 
 export function ViewActivity({ id }) {
   const activity = useSelector(selectActivity); // function?
@@ -19,16 +19,23 @@ export function ViewActivity({ id }) {
       dispatch(fetchActivity(activityId))
   }, [activityId])
 
-  if (loading) {
-    return <p>LOADING</p>;
-  }
-  return (
-    <div>
-      <p>Id: {activity.id}</p>
-      <p>Name: {activity.name}</p>
-      <div>
-          <ViewScheduleFragment schedule={ activity.schedule } />
-      </div>
-    </div>
-  );
+
+
+    if (loading) {
+        return (
+            <div className={style.view_container}>
+                <p>LOADING</p>
+            </div>
+        )
+    }
+    return (
+        <div className={style.view_container}>
+            <h2>Activity</h2>
+            <p>Id: {activity.id}</p>
+            <p>Name: {activity.name}</p>
+            <div>
+                <ViewScheduleFragment schedule={ activity.schedule } />
+            </div>
+        </div>
+    );
 }

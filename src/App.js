@@ -1,16 +1,34 @@
 import React from 'react';
-import { ViewAllActivities } from './features/allActivities/ViewAllActivities'
-import './App.css';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+} from "react-router-dom";
+import Home from "./components/Home";
+import {ViewAllActivities} from "./features/allActivities/ViewAllActivities";
+import {ViewActivity} from "./features/activity/ViewActivity";
 
 function App() {
   return (
-      <div className="container">
-          <h2>
-              Activities
-          </h2>
+      // <div className="container">
+          <Router>
+              <Switch>
+                  <Route path='/view/allActivities'>
+                      <ViewAllActivities />
+                  </Route>
 
-          <ViewAllActivities />
-      </div>
+                  {/* The id here needs to be dynamic. If you read this dont give it away, I want a try to solve it :) */}
+                  <Route path='/view/Activity/1'>
+                      <ViewActivity id={1} />
+                  </Route>
+
+                  <Route path='/'>
+                      <Home />
+                  </Route>
+              </Switch>
+          </Router>
+
+      // </div>
   );
 }
 

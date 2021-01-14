@@ -1,58 +1,43 @@
 //https://reactjs.org/docs/lists-and-keys.html
 
 import React, { useState, useEffect } from 'react'
-import { ViewActivity } from "../activity/ViewActivity";
 import ActivityListItem from "../../components/ActivityListItem"
-import {
-    BrowserRouter,
-    Link,
-    Switch,
-    Route,
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import {
     fetchAllActivities,
     selectAllActivities,
-    isLoaded
 } from '../allActivities/allActivitiesSlice'
 import style from './ViewAllActivities.module.css'
 
 export function ViewAllActivities() {
     const activities = useSelector(selectAllActivities)
-    const loaded = useSelector(isLoaded)
     const dispatch = useDispatch()
 
-    // This needs to be useEffect. Can pass in []
-    // eg
+    // fetch once only
     useEffect(()=>{
         dispatch(fetchAllActivities())
     }, [])
-    // if (!loaded) {
-    //     dispatch(fetchAllActivities())
-    //     console.log('test')
-    // }
 
     // Much nicer to use the object name
     const allActivities = activities.map((activity) =>
             <div key={activity.id} className={style.activity_container}>
-                <Link to={`/view/${activity.id}`}>
+                <Link to={`/view/Activity/${activity.id}`}>
                     <ActivityListItem name={activity.name} />
                 </Link>
-
-                {/* This react router code doesn't belong in this file, and will be hurting the clarity of other concepts */}
-                <Switch>
-                    <Route path={`/view/${activity.id}`}>
-                        <ViewActivity id={activity.id} />
-                    </Route>
-                </Switch>
             </div>
      )
 
     return (
         <div className={style.container}>
-            <BrowserRouter>
-                {allActivities}
-            </BrowserRouter>
+            {/*{allActivities}*/}
+            {activities.map((activity) =>
+                <div key={activity.id} className={style.activity_container}>
+                    <Link to={`/view/Activity/${activity.id}`}>
+                        <ActivityListItem name={activity.name} />
+                    </Link>
+                </div>
+            )}
         </div>
     )
 

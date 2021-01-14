@@ -1,0 +1,15 @@
+.home_container {
+    border: 1px solid black;
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.home_btn {
+    border: 1px solid green;
+    background-color: green;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5px 30px;
+}
