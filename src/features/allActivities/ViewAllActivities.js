@@ -21,16 +21,24 @@ export function ViewAllActivities() {
     const loaded = useSelector(isLoaded)
     const dispatch = useDispatch()
 
+    // This needs to be useEffect. Can pass in []
+    // eg
+    // useEffect(()=>{
+    //     dispatch(fetchAllActivities())
+    // }, [])
     if (!loaded) {
         dispatch(fetchAllActivities())
     }
 
-    const allActivities = activities.map(({ id, name }) =>
+    // Much nicer to use the object name
+    const allActivities = activities.map((activity) =>
             <div key={id} className={style.activity_container}>
-                <Link to={`/view/${id}`}>
-                    {name}
+                <Link to={`/view/${activity.id}`}>
+                    {activity.name}
                 </Link>
+                {/* We should make this into a <ActivityListItem/> component */}
 
+                {/* This react router code doesn't belong in this file, and will be hurting the clarity of other concepts */}
                 <Switch>
                     <Route path={`/view/${id}`}>
                         <ViewActivity id={id} />
