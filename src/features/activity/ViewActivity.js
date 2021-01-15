@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import ViewScheduleFragment from "../../components/ViewScheduleFragment";
-import { useSelector, useDispatch } from "react-redux";
-import { selectActivity, isLoading, fetchActivity } from "./activitySlice";
-import style from "./ViewActivity.module.css";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import ViewScheduleFragment from '../../components/fragments/ViewScheduleFragment';
+import { selectActivity, isLoading, fetchActivity } from './activitySlice';
+import style from './ViewActivity.module.css';
 
-export function ViewActivity({ id }) {
+export function ViewActivity() {
   const activity = useSelector(selectActivity);
   const loading = useSelector(isLoading);
   const dispatch = useDispatch();
-  const [activityId, setActivityId] = useState(id);
+  const [params, setParams] = useState(useParams());
 
   // I think this is right! Changed the name to be better though.
   useEffect(() => {
-    dispatch(fetchActivity(activityId));
-  }, [activityId]);
+    const { id } = params;
+    dispatch(fetchActivity(id));
+  }, [params]);
 
   if (loading) {
     return (

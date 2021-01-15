@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const activitySlice = createSlice({
-  name: "activity",
+  name: 'activity',
   initialState: {
     loading: true,
     activity: {
       id: 0,
-      name: "",
-      schedule: "",
+      name: '',
+      schedule: '',
     },
   },
   reducers: {
@@ -18,7 +18,7 @@ export const activitySlice = createSlice({
       state.loading = false;
     },
     resetState: (state) => {
-      state.activity = { id: 0, name: "", schedule: {} };
+      state.activity = { id: 0, name: '', schedule: {} };
     },
     setActivity: (state, action) => {
       state.activity = action.payload;
