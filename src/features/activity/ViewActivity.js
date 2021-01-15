@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import ViewScheduleFragment from '../../components/fragments/ViewScheduleFragment';
+import ViewScheduleFragment from './ViewScheduleFragment';
 import { selectActivity, isLoading, fetchActivity } from './activitySlice';
 import style from './ViewActivity.module.css';
 

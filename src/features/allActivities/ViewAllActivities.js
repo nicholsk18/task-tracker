@@ -1,14 +1,14 @@
 //https://reactjs.org/docs/lists-and-keys.html
 
-import React, { useState, useEffect } from "react";
-import ActivityListItem from "../../components/ActivityListItem";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import ActivityListItem from './ActivityListItem';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchAllActivities,
   selectAllActivities,
-} from "../allActivities/allActivitiesSlice";
-import style from "./ViewAllActivities.module.css";
+} from '../allActivities/allActivitiesSlice';
+import style from './ViewAllActivities.module.css';
 
 export function ViewAllActivities() {
   const activities = useSelector(selectAllActivities);
@@ -19,18 +19,11 @@ export function ViewAllActivities() {
     dispatch(fetchAllActivities());
   }, []);
 
-  // Much nicer to use the object name
-  const allActivities = activities.map((activity) => (
-    <div key={activity.id} className={style.activity_container}>
-      <Link to={`/view/Activity/${activity.id}`}>
-        <ActivityListItem name={activity.name} />
-      </Link>
-    </div>
-  ));
-
   return (
     <div className={style.container}>
-      {/*{allActivities}*/}
+      <h2>Activities</h2>
+
+      {/* Much nicer to use the object name */}
       {activities.map((activity) => (
         <div key={activity.id} className={style.activity_container}>
           <Link to={`/view/Activity/${activity.id}`}>

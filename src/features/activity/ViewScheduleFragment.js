@@ -1,12 +1,10 @@
 import React from 'react';
+import style from './ViewScheduleFragment.module.css';
 
 const ViewScheduleFragment = ({ schedule }) => {
   return (
-    <div>
-      <p>Schedule title will be here</p>
-      <small>loop over schedule here?</small>
-      <br />
-      {schedule}
+    <div className={style.schedule_container}>
+      <h2>{schedule.name}</h2>
     </div>
   );
 };
