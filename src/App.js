@@ -1,19 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import { ViewAllActivities } from './features/allActivities/ViewAllActivities';
-import { ViewActivity } from './features/activity/ViewActivity';
+import { ViewAllActivities } from './views/ViewAllActivities';
+import { ViewActivity } from './views/activity/ViewActivity';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/view/allActivities'>
-          <ViewAllActivities />
-        </Route>
-
         <Route exact path='/'>
-          <Home />
+          <ViewAllActivities />
         </Route>
         <Route path='/view/Activity/:id'>
           <ViewActivity />
