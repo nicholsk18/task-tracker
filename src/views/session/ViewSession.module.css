@@ -1,0 +1,11 @@
+.session_container {
+    border: 1px solid black;
+    margin: 20px 0;
+    padding: 10px 0;
+}
+.session_item {
+    border: 1px solid black;
+    width: 250px;
+    margin: 10px auto;
+    padding: 10px 0;
+}

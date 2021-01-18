@@ -1,0 +1,9 @@
+.schedule_container {
+    border: 1px solid black;
+    margin: 20px 0;
+}
+.schedule_body {
+    border: 1px solid black;
+    width: 250px;
+    margin: 10px auto;
+}

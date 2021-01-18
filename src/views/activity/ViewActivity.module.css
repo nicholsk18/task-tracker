@@ -1,0 +1,11 @@
+.view_container {
+    border: 1px solid black;
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+.view_name {
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
