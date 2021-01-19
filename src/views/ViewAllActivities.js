@@ -8,7 +8,7 @@ import {
   fetchAllActivities,
   selectAllActivities,
 } from '../features/allActivities/allActivitiesSlice';
-import style from './ViewAllActivities.module.css';
+import '../App.css';
 
 export function ViewAllActivities() {
   const activities = useSelector(selectAllActivities);
@@ -20,7 +20,7 @@ export function ViewAllActivities() {
   }, []);
 
   return (
-    <div className={style.container}>
+    <div className='container'>
       <h2>
         View
         <br />
@@ -28,7 +28,7 @@ export function ViewAllActivities() {
       </h2>
 
       {activities.map((activity) => (
-        <div key={activity.id} className={style.activity_container}>
+        <div key={activity.id} className='view-item'>
           <Link to={`/view/Activity/${activity.id}`}>
             <ActivityListItem name={activity.name} />
           </Link>

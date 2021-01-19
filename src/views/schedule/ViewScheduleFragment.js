@@ -1,11 +1,11 @@
 import React from 'react';
-import style from './ViewScheduleFragment.module.css';
+import '../../App.css';
 
 const ViewScheduleFragment = ({ schedule }) => {
   return (
-    <div className={style.schedule_container}>
+    <div>
       <h3>Schedule</h3>
-      <div className={style.schedule_body}>
+      <div className='view-item'>
         <p>
           {schedule.repeatable.map((repeat) => (
             <span key={repeat}>[{repeat}]</span>

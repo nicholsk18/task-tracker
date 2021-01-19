@@ -1,16 +1,15 @@
 import React from 'react';
-
-import style from './ViewSession.module.css';
+import '../../App.css';
 
 const ViewSessionFragment = () => {
   return (
-    <div className={style.session_container}>
+    <div>
       <h3>Sessions</h3>
-      <div>
+      <div className='view-item'>
         <button>Load Previous</button>
         <div>
-          <div className={style.session_item}>session</div>
-          <div className={style.session_item}>session</div>
+          <div>session</div>
+          <div>session</div>
         </div>
         <button>Load More</button>
       </div>

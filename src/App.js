@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ViewAllActivities } from './views/ViewAllActivities';
 import { ViewActivity } from './views/activity/ViewActivity';
+import ViewSchedule from './views/schedule/ViewSchedule';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         </Route>
         <Route path='/view/Activity/:id'>
           <ViewActivity />
+        </Route>
+        <Route path='/view/schedule/:id'>
+          <ViewSchedule />
         </Route>
       </Switch>
     </Router>
