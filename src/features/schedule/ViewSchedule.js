@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  fetchActivity,
-  selectActivity,
-} from '../../features/activity/activitySlice';
+import { fetchActivity, selectActivity } from '../activity/activitySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../App.css';
 

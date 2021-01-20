@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ViewAllActivities } from './views/ViewAllActivities';
-import { ViewActivity } from './views/activity/ViewActivity';
-import ViewSchedule from './views/schedule/ViewSchedule';
+import { ViewAllActivities } from './features/allActivities/ViewAllActivities';
+import { ViewActivity } from './features/activity/ViewActivity';
+import ViewSchedule from './features/schedule/ViewSchedule';
 
 function App() {
   return (

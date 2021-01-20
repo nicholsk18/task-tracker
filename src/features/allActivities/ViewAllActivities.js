@@ -1,14 +1,11 @@
 //https://reactjs.org/docs/lists-and-keys.html
 
 import React, { useEffect } from 'react';
-import ActivityListItem from '../components/ActivityListItem';
+import ActivityListItem from '../../components/ActivityListItem';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  fetchAllActivities,
-  selectAllActivities,
-} from '../features/allActivities/allActivitiesSlice';
-import '../App.css';
+import { fetchAllActivities, selectAllActivities } from './allActivitiesSlice';
+import '../../App.css';
 
 export function ViewAllActivities() {
   const activities = useSelector(selectAllActivities);

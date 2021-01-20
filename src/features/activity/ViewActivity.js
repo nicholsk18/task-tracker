@@ -4,11 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
 import ViewSessionFragment from '../session/ViewSessionFragment';
-import {
-  selectActivity,
-  isLoading,
-  fetchActivity,
-} from '../../features/activity/activitySlice';
+import { selectActivity, isLoading, fetchActivity } from './activitySlice';
 import '../../App.css';
 
 export function ViewActivity() {
