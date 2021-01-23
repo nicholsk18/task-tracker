@@ -1,0 +1,45 @@
+/**
+ * so somewhere in the back end will be api call for session id
+ * based on that session id we will use the schedule and activity id
+ * and return those objs
+ * example:
+ * fetch sessions id 1
+ * look in to activity id 1 and return that object
+ * look in to schedule for id 1 and return that obj
+ * now do we get all sortables before we return schedule or after
+ * and make another api call for all the sortables
+ */
+{
+  "sessions": [
+    {
+      "id": "1",
+      "scheduleId": "1",
+      "activityId": "1"
+    },
+    {
+      "id": "2",
+      "scheduleId": "2",
+      "activityId": "2"
+    }
+  ],
+  "activities": [
+    {
+      "id": "1",
+      "name": "Work"
+    },
+    {
+      "id": "2",
+      "name": "Eat"
+    }
+  ],
+  "schedules": [
+    {
+      "id": "1",
+      "sortableIds": [1]
+    },
+    {
+      "id": "2",
+      "sortableIds": [2]
+    }
+  ]
+}

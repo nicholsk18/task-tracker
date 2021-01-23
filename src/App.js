@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ViewAllActivities } from './features/allActivities/ViewAllActivities';
 import { ViewActivity } from './features/activity/ViewActivity';
 import ViewSchedule from './features/schedule/ViewSchedule';
+import ViewSession from './features/session/ViewSession';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         </Route>
         <Route path='/view/schedule/:id'>
           <ViewSchedule />
+        </Route>
+        <Route path='/view/session/'>
+          <ViewSession />
         </Route>
       </Switch>
     </Router>
