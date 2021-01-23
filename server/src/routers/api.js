@@ -19,7 +19,13 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.get('/activity/:id', (req, res) => {});
+router.get('/activity/:id', (req, res) => {
+  const activityData = apiData.activities.find(
+    (obj) => obj.id === req.params.id
+  );
+
+  res.json(activityData);
+});
 
 router.get('/session/:id', (req, res) => {
   const sesssionData = apiData.sessions.find((obj) => obj.id === req.params.id);
@@ -27,7 +33,11 @@ router.get('/session/:id', (req, res) => {
   res.json(sesssionData);
 });
 
-router.get('/schedule/:id', (req, res) => {});
+router.get('/schedule/:id', (req, res) => {
+  const scheduleData = apiData.schedule.find((obj) => obj.id === req.params.id);
+
+  res.json(scheduleData);
+});
 
 router.get('/sortable/:id', (req, res) => {});
 

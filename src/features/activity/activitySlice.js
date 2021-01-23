@@ -7,7 +7,6 @@ export const activitySlice = createSlice({
     activity: {
       id: 0,
       name: '',
-      schedule: '',
     },
   },
   reducers: {
@@ -39,15 +38,12 @@ export const fetchActivity = (id) => (dispatch) => {
   dispatch(startLoading());
 
   // Timeout just for loading
-  setTimeout(() => {
-    fetch(`http://localhost:3001/${id}`)
-      .then((response) => response.json())
-      .then((json) => {
-        const { id, name, schedule } = json;
-        dispatch(setActivity({ id, name, schedule }));
-        dispatch(finishLoading());
-      });
-  }, 1000);
+  fetch(`http://localhost:3001/activity/${id}`)
+    .then((response) => response.json())
+    .then((json) => {
+      dispatch(setActivity({ id: json.id, name: json.name }));
+      dispatch(finishLoading());
+    });
 };
 
 export const resetActivity = (id) => (dispatch) => {
