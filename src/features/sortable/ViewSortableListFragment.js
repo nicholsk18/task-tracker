@@ -9,10 +9,18 @@ const ViewSortableListFragment = ({ sortableId }) => {
   const [id, setId] = useState(sortableId);
 
   useEffect(() => {
-    console.log(sortableList);
     dispatch(fetchSortableList(id));
   }, [id, dispatch]);
-  return <div>sortable</div>;
+  return (
+    <div>
+      {/* Here it shows the last one fetched */}
+      {/* But it should be two different ones */}
+      <p>{sortableList.id}</p>
+      <p>
+        [{sortableList.one}][{sortableList.two}]
+      </p>
+    </div>
+  );
 };
 
 export default ViewSortableListFragment;

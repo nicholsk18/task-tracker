@@ -4,7 +4,9 @@ const sortableListSlice = createSlice({
   name: 'sortableList',
   initialState: {
     sortableList: {
-      list: [],
+      id: '',
+      one: '',
+      two: '',
     },
   },
   reducers: {
@@ -21,7 +23,7 @@ export const fetchSortableList = (id) => (dispatch) => {
     .then((res) => res.json())
     .then((json) => {
       // how to save this in the slice
-      dispatch(setSortableList({ list: [json] }));
+      dispatch(setSortableList({ id: json.id, one: json.one, two: json.two }));
     })
     .catch((error) => {
       console.log(error);
