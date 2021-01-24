@@ -12,7 +12,7 @@ const ViewSession = () => {
 
   useEffect(() => {
     dispatch(fetchSession(1));
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return (

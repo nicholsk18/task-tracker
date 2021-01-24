@@ -6,7 +6,7 @@ export const scheduleSlice = createSlice({
     loading: true,
     schedule: {
       id: 0,
-      sortableIds: '',
+      sortableIds: [],
     },
   },
   reducers: {
@@ -34,7 +34,7 @@ export const fetchSchedule = (id) => (dispatch) => {
   dispatch(startLoading());
 
   // Timeout just for loading
-  fetch(`http://localhost:3001/activity/${id}`)
+  fetch(`http://localhost:3001/schedule/${id}`)
     .then((response) => response.json())
     .then((json) => {
       dispatch(setSchedule({ id: json.id, sortableIds: json.sortableIds }));

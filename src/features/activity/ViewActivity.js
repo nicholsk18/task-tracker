@@ -16,7 +16,7 @@ export function ViewActivity() {
   useEffect(() => {
     const { id } = params;
     dispatch(fetchActivity(id));
-  }, [params]);
+  }, [params, dispatch]);
 
   if (loading) {
     return (

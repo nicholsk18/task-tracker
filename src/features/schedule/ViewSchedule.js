@@ -12,7 +12,7 @@ const ViewSchedule = () => {
   useEffect(() => {
     const { id } = params;
     dispatch(fetchActivity(id));
-  }, [params]);
+  }, [params, dispatch]);
 
   return (
     <div className='container'>

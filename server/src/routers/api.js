@@ -34,11 +34,19 @@ router.get('/session/:id', (req, res) => {
 });
 
 router.get('/schedule/:id', (req, res) => {
-  const scheduleData = apiData.schedule.find((obj) => obj.id === req.params.id);
+  const scheduleData = apiData.schedules.find(
+    (obj) => obj.id === req.params.id
+  );
 
   res.json(scheduleData);
 });
 
-router.get('/sortable/:id', (req, res) => {});
+router.get('/sortable/:id', (req, res) => {
+  const sortableData = apiData.sortables.find(
+    (obj) => obj.id === req.params.id
+  );
+
+  res.json(sortableData);
+});
 
 module.exports = router;

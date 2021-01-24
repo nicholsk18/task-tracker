@@ -14,7 +14,7 @@ export function ViewAllActivities() {
   // fetch once only
   useEffect(() => {
     dispatch(fetchAllActivities());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='container'>

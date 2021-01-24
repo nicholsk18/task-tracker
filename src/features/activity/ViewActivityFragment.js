@@ -10,7 +10,7 @@ const ViewActivityFragment = ({ activityId }) => {
 
   useEffect(() => {
     dispatch(fetchActivity(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   return <div>{activity.name}</div>;
 };
