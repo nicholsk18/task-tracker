@@ -13,8 +13,7 @@ const ViewSortableListFragment = ({ sortableId }) => {
   }, [id, dispatch]);
   return (
     <div>
-      {/* Here it shows the last one fetched */}
-      {/* But it should be two different ones */}
+      {/* call a sortable fragment here */}
       <p>{sortableList.id}</p>
       <p>
         [{sortableList.one}][{sortableList.two}]
