@@ -15,26 +15,26 @@ const ViewSchedule = () => {
   }, [params, dispatch]);
 
   return (
-    <div className='container'>
+    <div>
       <h3>View Schedule Screen</h3>
-      <div className='view-item'>
+      <div>
         <h4>{activity.name}</h4>
       </div>
-      <div className='view-item'>
+      <div>
         <h4>Sortables</h4>
-        <div className='view-item'>
+        <div>
           <p>stuff</p>
         </div>
-        <div className='view-item'>
+        <div>
           <p>stuff</p>
         </div>
       </div>
-      <div className='view-item'>
+      <div>
         <h4>Sessions</h4>
-        <div className='view-item'>
+        <div>
           <p>stuff</p>
         </div>
-        <div className='view-item'>
+        <div>
           <p>stuff</p>
         </div>
       </div>

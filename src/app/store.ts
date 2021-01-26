@@ -5,7 +5,7 @@ import sessionReducer from '../features/session/sessionSlice';
 import scheduleReducer from '../features/schedule/scheduleSlice';
 import sortableListReducer from '../features/sortable/sortableListSlice';
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
     activity: activityReducer,
     allActivities: allActivitiesReducer,
@@ -14,3 +14,5 @@ export default configureStore({
     sortableList: sortableListReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;

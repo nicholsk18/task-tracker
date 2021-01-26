@@ -10,7 +10,7 @@ interface IProps {
 
 const ViewSortableListItem: FunctionComponent<IProps> = ({ sortable }) => {
   return (
-    <div>
+    <div className='view-item'>
       <span>[{sortable.one}]</span> <span>[{sortable.two}]</span>
     </div>
   );

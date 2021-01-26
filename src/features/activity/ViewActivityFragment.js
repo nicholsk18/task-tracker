@@ -12,7 +12,7 @@ const ViewActivityFragment = ({ activityId }) => {
     dispatch(fetchActivity(id));
   }, [id, dispatch]);
 
-  return <div>{activity.name}</div>;
+  return <div className='view-item'>{activity.name}</div>;
 };
 
 export default ViewActivityFragment;

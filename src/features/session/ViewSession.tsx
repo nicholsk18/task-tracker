@@ -25,9 +25,10 @@ const ViewSession = () => {
   return (
     <div className='container'>
       <h1>View Session Screen</h1>
-      <p>id: {session.sessionId}</p>
-      <ViewActivityFragment activityId={session.activityId} />
-      <ViewScheduleFragment scheduleId={session.scheduleId} />
+      <div className='view-item'>
+        <ViewActivityFragment activityId={session.activityId} />
+        <ViewScheduleFragment scheduleId={session.scheduleId} />
+      </div>
     </div>
   );
 };

@@ -32,9 +32,10 @@ export function ViewActivity() {
         <h3>{activity.name}</h3>
       </div>
       <div className='view-item'>
-        <Link to={`/view/schedule/${activity.id}`}>
-          <ViewScheduleFragment schedule={activity.schedule} />
-        </Link>
+        {/*<Link to={`/view/schedule/${activity.id}`}>*/}
+        {/*  {console.log(activity)}*/}
+        {/*  <ViewScheduleFragment schedule={activity.schedule} />*/}
+        {/*</Link>*/}
       </div>
       <div className='view-item'>
         <ViewSessionFragment />

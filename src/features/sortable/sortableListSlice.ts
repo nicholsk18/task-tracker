@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const sortableListSlice = createSlice({
+export const sortableListSlice = createSlice({
   name: 'sortableList',
   initialState: {
     sortableList: [],
   },
   reducers: {
-    setSortableList: (state, action) => {
+    setSortableList: (state, action: PayloadAction<[]>) => {
       state.sortableList = action.payload;
     },
   },
@@ -14,7 +14,7 @@ const sortableListSlice = createSlice({
 
 export const { setSortableList } = sortableListSlice.actions;
 
-export const fetchSortableList = (idList) => (dispatch) => {
+export const fetchSortableList = (idList: []) => (dispatch: any) => {
   const data = {
     idList: idList,
   };
@@ -32,6 +32,9 @@ export const fetchSortableList = (idList) => (dispatch) => {
     });
 };
 
-export const selectSortableList = (state) => state.sortableList.sortableList;
+export const selectSortableList = (state: any) => {
+  return state.sortableList.sortableList;
+};
 
+// @ts-ignore
 export default sortableListSlice.reducer;

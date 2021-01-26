@@ -15,14 +15,11 @@ const ViewScheduleFragment = ({ scheduleId }) => {
   }, [id, dispatch]);
 
   return (
-    <div className='container'>
+    <div className='view-item'>
       <h3>Schedule</h3>
-      <div className='view-item'>
+      <div>
         {schedule.id !== 0 && (
-          <>
-            <p>{schedule.id}</p>
-            <ViewSortableListFragment sortableIds={schedule.sortableIds} />
-          </>
+          <ViewSortableListFragment sortableIds={schedule.sortableIds} />
         )}
       </div>
     </div>
