@@ -49,4 +49,11 @@ router.get('/sortable/:id', (req, res) => {
   res.json(sortableData);
 });
 
+router.post('/sortable/list', (req, res) => {
+  const list = req.body.idList;
+  const data = list.map((id) => apiData.sortables.find((obj) => obj.id === id));
+
+  res.send(data);
+});
+
 module.exports = router;

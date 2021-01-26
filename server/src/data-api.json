@@ -33,14 +33,19 @@
   ],
   "sortables": [
     {
-      "id": "1",
+      "id": 1,
       "one": "Every",
       "two": "Day"
     },
     {
-      "id": "2",
+      "id": 2,
       "one": "On the",
       "two": "2021-02-03"
+    },
+    {
+      "id": 3,
+      "one": "On the",
+      "two": "2021-02-04"
     }
   ]
 }
