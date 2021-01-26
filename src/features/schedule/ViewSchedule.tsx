@@ -4,10 +4,14 @@ import { fetchActivity, selectActivity } from '../activity/activitySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../App.css';
 
+export interface IUseParams {
+  id: string;
+}
+
 const ViewSchedule = () => {
   const dispatch = useDispatch();
   const activity = useSelector(selectActivity);
-  const [params, setParams] = useState(useParams());
+  const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
     const { id } = params;

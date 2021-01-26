@@ -36,5 +36,4 @@ export const selectSortableList = (state: any) => {
   return state.sortableList.sortableList;
 };
 
-// @ts-ignore
 export default sortableListSlice.reducer;

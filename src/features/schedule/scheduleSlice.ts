@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const scheduleSlice = createSlice({
   name: 'schedule',
@@ -10,13 +10,16 @@ export const scheduleSlice = createSlice({
     },
   },
   reducers: {
-    startLoading: (state, action) => {
+    startLoading: (state) => {
       state.loading = true;
     },
     finishLoading: (state) => {
       state.loading = false;
     },
-    setSchedule: (state, action) => {
+    setSchedule: (
+      state,
+      action: PayloadAction<{ id: number; sortableIds: [] }>
+    ) => {
       state.schedule = action.payload;
     },
   },
@@ -29,7 +32,7 @@ export const {
 } = scheduleSlice.actions;
 
 // all this below need to be in different file?
-export const fetchSchedule = (id) => (dispatch) => {
+export const fetchSchedule = (id: any) => (dispatch: any) => {
   // just for now lets keep it
   dispatch(startLoading());
 
@@ -42,7 +45,7 @@ export const fetchSchedule = (id) => (dispatch) => {
     });
 };
 
-export const selectSchedule = (state) => state.schedule.schedule;
-export const isLoading = (state) => state.schedule.loading;
+export const selectSchedule = (state: any) => state.schedule.schedule;
+export const isLoading = (state: any) => state.schedule.loading;
 
 export default scheduleSlice.reducer;

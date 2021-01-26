@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, Provider } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
 import ViewSessionFragment from '../session/ViewSessionFragment';
 import { selectActivity, isLoading, fetchActivity } from './activitySlice';
 import '../../App.css';
 
+export interface IUseParams {
+  id: string;
+}
+
 export function ViewActivity() {
   const activity = useSelector(selectActivity);
   const loading = useSelector(isLoading);
   const dispatch = useDispatch();
-  const [params, setParams] = useState(useParams());
+  const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
     const { id } = params;

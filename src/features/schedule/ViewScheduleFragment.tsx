@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../App.css';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import { fetchSchedule, selectSchedule } from './scheduleSlice';
 
-const ViewScheduleFragment = ({ scheduleId }) => {
+interface IProps {
+  scheduleId: {
+    id: number;
+    name: string;
+  };
+}
+
+const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
   const schedule = useSelector(selectSchedule);
   const dispatch = useDispatch();
 

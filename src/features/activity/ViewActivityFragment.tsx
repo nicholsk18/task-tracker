@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchActivity, selectActivity } from './activitySlice';
 
-const ViewActivityFragment = ({ activityId }) => {
+interface IProps {
+  activityId: {
+    id: string;
+    name: string;
+  };
+}
+
+const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
   const activity = useSelector(selectActivity);
   const dispatch = useDispatch();
 
   const [id, setId] = useState(activityId);
 
   useEffect(() => {
-    dispatch(fetchActivity(id));
+    console.log(id);
+    // dispatch(fetchActivity(id));
   }, [id, dispatch]);
 
   return <div className='view-item'>{activity.name}</div>;
