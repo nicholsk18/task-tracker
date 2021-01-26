@@ -1,36 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchSortableList,
-  selectSortableList,
-  isLoading,
-} from './sortableListSlice';
+import { fetchSortableList, selectSortableList } from './sortableListSlice';
+import ViewSortableListItem from './ViewSortableListItem';
 
-const ViewSortableListFragment = ({ sortableId }) => {
+const ViewSortableListFragment = ({ sortableIds }) => {
   const sortableList = useSelector(selectSortableList);
-  const loading = useSelector(isLoading);
   const dispatch = useDispatch();
 
-  const [id, setId] = useState(sortableId);
-  const [list, setList] = useState([]);
+  const [idList, setIdList] = useState(sortableIds);
 
   useEffect(() => {
-    dispatch(fetchSortableList(id));
-  }, [id, dispatch]);
-
-  if (loading === 'loaded') {
-    console.log(sortableList);
-  }
-
-  useEffect(() => {
-    setList(sortableList);
-  }, [setList, sortableList]);
+    dispatch(fetchSortableList(idList));
+  }, [idList, fetchSortableList]);
 
   return (
     <div>
-      {/* call a sortable fragment here */}
-      inside
-      {list.length > 0 && <div>{/* {list[id].one} {list[id].two} */}</div>}
+      {sortableList.length > 0 &&
+        sortableList.map((sortable) => (
+          <div key={sortable.id}>
+            <ViewSortableListItem sortable={sortable} />
+          </div>
+        ))}
     </div>
   );
 };

@@ -1,55 +1,37 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-export const fetchSortableList = createAsyncThunk(
-  'list/sortableListFragmentStatus',
-  async (id) =>
-    await fetch(`http://localhost:3001/sortable/${id}`)
-      .then((res) => res.json())
-      .catch((error) => {
-        console.log(error);
-      })
-);
+import { createSlice } from '@reduxjs/toolkit';
 
 const sortableListSlice = createSlice({
   name: 'sortableList',
   initialState: {
-    status: 'idle',
-    list: [],
+    sortableList: [],
   },
   reducers: {
-    // setSortableList: (state, action) => {
-    //   console.log(action.payload);
-    //   state.sortableList = [action.payload];
-    // },
-  },
-  extraReducers: {
-    [fetchSortableList.pending]: (state, action) => {
-      state.status = 'loading';
-    },
-    [fetchSortableList.fulfilled]: (state, action) => {
-      state.status = 'loaded';
-      state.list.push(action.payload);
+    setSortableList: (state, action) => {
+      state.sortableList = action.payload;
     },
   },
 });
 
-// export const { setSortableList } = sortableListSlice.actions;
+export const { setSortableList } = sortableListSlice.actions;
 
-// export const fetchSortableList = (id) => (dispatch) => {
-//   fetch(`http://localhost:3001/sortable/${id}`)
-//     .then((res) => res.json())
-//     .then((json) => {
-//       dispatch(setSortableList({ id: json.id, one: json.one, two: json.two }));
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
+export const fetchSortableList = (idList) => (dispatch) => {
+  const data = {
+    idList: idList,
+  };
 
-export const selectSortableList = (state) => state.sortableList.list;
-export const isLoading = (state) => {
-  // console.log(state.sortableList);
-  return state.sortableList.status;
+  fetch('http://localhost:3001/sortable/list', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      dispatch(setSortableList(json));
+    });
 };
+
+export const selectSortableList = (state) => state.sortableList.sortableList;
 
 export default sortableListSlice.reducer;

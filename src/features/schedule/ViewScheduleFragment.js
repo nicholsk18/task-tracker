@@ -18,12 +18,12 @@ const ViewScheduleFragment = ({ scheduleId }) => {
     <div className='container'>
       <h3>Schedule</h3>
       <div className='view-item'>
-        <p>{schedule.id}</p>
-        {schedule.sortableIds.map((sortableId) => (
-          <div key={sortableId}>
-            <ViewSortableListFragment sortableId={sortableId} />
-          </div>
-        ))}
+        {schedule.id !== 0 && (
+          <>
+            <p>{schedule.id}</p>
+            <ViewSortableListFragment sortableIds={schedule.sortableIds} />
+          </>
+        )}
       </div>
     </div>
   );
