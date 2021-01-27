@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../App.css';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
@@ -20,12 +21,12 @@ const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
 
   return (
     <div className='view-item'>
-      <h3>Schedule</h3>
-      <div>
+      <Link to={`/view/schedule/${schedule.id}`}>
+        <h3>Schedule</h3>
         {schedule.id !== 0 && (
           <ViewSortableListFragment sortableIds={schedule.sortableIds} />
         )}
-      </div>
+      </Link>
     </div>
   );
 };
