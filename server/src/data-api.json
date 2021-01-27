@@ -24,26 +24,26 @@
   "schedules": [
     {
       "id": "1",
-      "sortableIds": [1, 2]
+      "sortableIds": ["1", "2"]
     },
     {
       "id": "2",
-      "sortableIds": [2]
+      "sortableIds": ["2"]
     }
   ],
   "sortables": [
     {
-      "id": 1,
+      "id": "1",
       "one": "Every",
       "two": "Day"
     },
     {
-      "id": 2,
+      "id": "2",
       "one": "On the",
       "two": "2021-02-03"
     },
     {
-      "id": 3,
+      "id": "3",
       "one": "On the",
       "two": "2021-02-04"
     }
