@@ -32,7 +32,7 @@ export const {
 } = scheduleSlice.actions;
 
 // all this below need to be in different file?
-export const fetchSchedule = (id: any) => (dispatch: any) => {
+export const fetchSchedule = (id: string) => (dispatch: any) => {
   // just for now lets keep it
   dispatch(startLoading());
 

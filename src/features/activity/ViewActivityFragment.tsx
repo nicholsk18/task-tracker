@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchActivity, selectActivity } from './activitySlice';
 
 interface IProps {
-  activityId: {
-    id: string;
-    name: string;
-  };
+  activityId: string;
 }
 
 const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
@@ -16,11 +14,14 @@ const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
   const [id, setId] = useState(activityId);
 
   useEffect(() => {
-    console.log(id);
-    // dispatch(fetchActivity(id));
+    dispatch(fetchActivity(id));
   }, [id, dispatch]);
 
-  return <div className='view-item'>{activity.name}</div>;
+  return (
+    <Link to={`/view/activity/${activity.id}`}>
+      <div className='view-item'>{activity.name}</div>
+    </Link>
+  );
 };
 
 export default ViewActivityFragment;

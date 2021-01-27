@@ -5,10 +5,7 @@ import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import { fetchSchedule, selectSchedule } from './scheduleSlice';
 
 interface IProps {
-  scheduleId: {
-    id: number;
-    name: string;
-  };
+  scheduleId: string;
 }
 
 const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
