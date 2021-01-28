@@ -26,14 +26,14 @@ const ViewSortableListFragment: FunctionComponent<IProps> = ({
   }, [idList, fetchSortableList]);
 
   return (
-    <div>
+    <>
       {sortableList.length > 0 &&
         sortableList.map((sortable: Sortable) => (
           <div key={sortable.id}>
             <ViewSortableListItem sortable={sortable} />
           </div>
         ))}
-    </div>
+    </>
   );
 };
 

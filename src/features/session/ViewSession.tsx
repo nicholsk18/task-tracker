@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Box } from '@material-ui/core';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
 import ViewActivityFragment from '../activity/ViewActivityFragment';
 import { fetchSession, selectSession, isLoading } from './sessionSlice';
-import '../../App.css';
+import Loading from '../../components/Loading';
 
 const ViewSession = () => {
   const session = useSelector(selectSession);
@@ -15,21 +16,17 @@ const ViewSession = () => {
   }, [dispatch]);
 
   if (loading) {
-    return (
-      <div className='container'>
-        <p>LOADING</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
-    <div className='container'>
+    <Box>
       <h1>View Session Screen</h1>
-      <div className='view-item'>
+      <div>
         <ViewActivityFragment activityId={session.activityId} />
         <ViewScheduleFragment scheduleId={session.scheduleId} />
       </div>
-    </div>
+    </Box>
   );
 };
 

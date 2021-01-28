@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Card, CardContent, Box } from '@material-ui/core';
 
 interface IProps {
   sortable: {
@@ -10,9 +11,13 @@ interface IProps {
 
 const ViewSortableListItem: FunctionComponent<IProps> = ({ sortable }) => {
   return (
-    <div className='view-item'>
-      <span>[{sortable.one}]</span> <span>[{sortable.two}]</span>
-    </div>
+    <Box m={2}>
+      <Card variant='outlined'>
+        <Box py={2}>
+          <span>[{sortable.one}]</span> <span>[{sortable.two}]</span>
+        </Box>
+      </Card>
+    </Box>
   );
 };
 

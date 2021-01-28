@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import '../../App.css';
-import { fetchSession, selectSession } from '../session/sessionSlice';
+import { Card, CardContent, Box } from '@material-ui/core';
 import { fetchSchedule, selectSchedule } from './scheduleSlice';
+import { fetchSession, selectSession } from '../session/sessionSlice';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import { fetchActivity, selectActivity } from '../activity/activitySlice';
 import Loading from '../../components/Loading';
@@ -40,19 +40,25 @@ const ViewSchedule = () => {
   }
 
   return (
-    <div className='container'>
+    <Box mx='auto' my={3} maxWidth='450px'>
       <h2>View Schedule Screen</h2>
-      <div className='view-item'>{<h3>{activity.name}</h3>}</div>
-
-      <div className='view-item'>
-        <h3>Sortables</h3>
-        <ViewSortableListFragment sortableIds={schedule.sortableIds} />
-      </div>
-
-      <div className='view-item'>
-        <h3>Sessions</h3>
-      </div>
-    </div>
+      <Box my={3}>
+        <Card variant='outlined'>
+          <h3>{activity.name}</h3>
+        </Card>
+      </Box>
+      <Box my={3}>
+        <Card variant='outlined'>
+          <h3>Sortables</h3>
+          <ViewSortableListFragment sortableIds={schedule.sortableIds} />
+        </Card>
+      </Box>
+      <Box my={3}>
+        <Card variant='outlined'>
+          <h3>Sessions</h3>
+        </Card>
+      </Box>
+    </Box>
   );
 };
 

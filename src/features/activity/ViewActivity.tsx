@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch, Provider } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Card, CardContent, Box } from '@material-ui/core';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
 import ViewSessionFragment from '../session/ViewSessionFragment';
 import { selectActivity, isLoading, fetchActivity } from './activitySlice';
-import '../../App.css';
+import Loading from '../../components/Loading';
 
 export interface IUseParams {
   id: string;
@@ -23,27 +24,28 @@ export function ViewActivity() {
   }, [params, dispatch]);
 
   if (loading) {
-    return (
-      <div className='container'>
-        <p>LOADING</p>
-      </div>
-    );
+    return <Loading />;
   }
   return (
-    <div className='container'>
+    <Box mx='auto' maxWidth='450px'>
       <h2>View Activity Screen</h2>
-      <div className='view-item'>
-        <h3>{activity.name}</h3>
-      </div>
-      <div className='view-item'>
-        {/*<Link to={`/view/schedule/${activity.id}`}>*/}
-        {/*  {console.log(activity)}*/}
-        {/*  <ViewScheduleFragment schedule={activity.schedule} />*/}
-        {/*</Link>*/}
-      </div>
-      <div className='view-item'>
-        <ViewSessionFragment />
-      </div>
-    </div>
+      <Box my={3}>
+        <Card variant='outlined'>
+          <h3>{activity.name}</h3>
+        </Card>
+      </Box>
+      {/* We only talked about activity.name in this view? */}
+      {/*<Box my={3}>*/}
+      {/*<Link to={`/view/schedule/${activity.id}`}>*/}
+      {/*  {console.log(activity)}*/}
+      {/*  <ViewScheduleFragment schedule={activity.schedule} />*/}
+      {/*</Link>*/}
+      {/*</Box>*/}
+      {/*<Box my={3}>*/}
+      {/*  <Card variant='outlined'>*/}
+      {/*    <ViewSessionFragment />*/}
+      {/*  </Card>*/}
+      {/*</Box>*/}
+    </Box>
   );
 }

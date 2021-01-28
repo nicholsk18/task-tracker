@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardContent, Box } from '@material-ui/core';
 import { fetchActivity, selectActivity } from './activitySlice';
 
 interface IProps {
@@ -18,9 +19,15 @@ const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
   }, [id, dispatch]);
 
   return (
-    <Link to={`/view/activity/${activity.id}`}>
-      <div className='view-item'>{activity.name}</div>
-    </Link>
+    <Box mx='auto' my={3} maxWidth='450px'>
+      <Link to={`/view/activity/${activity.id}`}>
+        <Card variant='outlined'>
+          <CardContent>
+            <h3>{activity.name}</h3>
+          </CardContent>
+        </Card>
+      </Link>
+    </Box>
   );
 };
 
