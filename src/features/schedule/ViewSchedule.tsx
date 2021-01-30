@@ -36,7 +36,7 @@ const ViewSchedule = () => {
   }
 
   // wait till all the ids are fetched before displaying
-  if (activity.id == 0 || schedule.id == 0) {
+  if (activity.id === 0 || schedule.id === 0) {
     return <Loading />;
   }
 
