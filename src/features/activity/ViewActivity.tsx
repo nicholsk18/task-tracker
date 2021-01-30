@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch, Provider } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Card, CardContent, Box } from '@material-ui/core';
-import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
-import ViewSessionFragment from '../session/ViewSessionFragment';
+import { useSelector, useDispatch } from 'react-redux';
+import { Card, Box } from '@material-ui/core';
 import { selectActivity, isLoading, fetchActivity } from './activitySlice';
 import Loading from '../../components/Loading';
 
