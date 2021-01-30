@@ -23,7 +23,7 @@ const ViewSortableListFragment: FunctionComponent<IProps> = ({
 
   useEffect(() => {
     dispatch(fetchSortableList(idList));
-  }, [idList, fetchSortableList]);
+  }, [idList, dispatch]);
 
   return (
     <>
