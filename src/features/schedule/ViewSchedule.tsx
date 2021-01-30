@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, CardContent, Box } from '@material-ui/core';
+import { Card, Box } from '@material-ui/core';
 import { fetchSchedule, selectSchedule } from './scheduleSlice';
 import { fetchSession, selectSession } from '../session/sessionSlice';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import { fetchActivity, selectActivity } from '../activity/activitySlice';
 import Loading from '../../components/Loading';
+import ViewSessionFragment from '../session/ViewSessionFragment';
 
 export interface IUseParams {
   id: string;
@@ -27,7 +28,7 @@ const ViewSchedule = () => {
       dispatch(fetchActivity(session.activityId));
       dispatch(fetchSchedule(session.scheduleId));
     }
-  }, [params, dispatch, fetchSession, sessionState]);
+  }, [params, dispatch, sessionState, session.activityId, session.scheduleId]);
 
   // how do you do this cleaner?
   if (session.sessionId !== 0 && !sessionState) {
@@ -56,6 +57,7 @@ const ViewSchedule = () => {
       <Box my={3}>
         <Card variant='outlined'>
           <h3>Sessions</h3>
+          <ViewSessionFragment />
         </Card>
       </Box>
     </Box>

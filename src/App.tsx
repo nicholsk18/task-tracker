@@ -13,7 +13,7 @@ import { Container, Box } from '@material-ui/core';
 function App() {
   return (
     <Container maxWidth='sm'>
-      <Box border={1} mt={10} textAlign='center'>
+      <Box border={1} my={5} textAlign='center'>
         <Router>
           <Switch>
             <Route exact path='/'>
