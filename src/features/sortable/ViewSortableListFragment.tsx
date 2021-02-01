@@ -23,17 +23,17 @@ const ViewSortableListFragment: FunctionComponent<IProps> = ({
 
   useEffect(() => {
     dispatch(fetchSortableList(idList));
-  }, [idList, fetchSortableList]);
+  }, [idList, dispatch]);
 
   return (
-    <div>
+    <>
       {sortableList.length > 0 &&
         sortableList.map((sortable: Sortable) => (
           <div key={sortable.id}>
             <ViewSortableListItem sortable={sortable} />
           </div>
         ))}
-    </div>
+    </>
   );
 };
 

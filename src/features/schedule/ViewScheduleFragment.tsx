@@ -1,14 +1,12 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import '../../App.css';
+import { Card, CardContent, Box } from '@material-ui/core';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import { fetchSchedule, selectSchedule } from './scheduleSlice';
 
 interface IProps {
-  scheduleId: {
-    id: number;
-    name: string;
-  };
+  scheduleId: string;
 }
 
 const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
@@ -22,14 +20,18 @@ const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
   }, [id, dispatch]);
 
   return (
-    <div className='view-item'>
-      <h3>Schedule</h3>
-      <div>
-        {schedule.id !== 0 && (
-          <ViewSortableListFragment sortableIds={schedule.sortableIds} />
-        )}
-      </div>
-    </div>
+    <Box mx='auto' my={3} maxWidth='450px'>
+      <Link to={`/view/schedule/${schedule.id}`}>
+        <Card variant='outlined'>
+          <CardContent>
+            <h3>Schedule</h3>
+            {schedule.id !== 0 && (
+              <ViewSortableListFragment sortableIds={schedule.sortableIds} />
+            )}
+          </CardContent>
+        </Card>
+      </Link>
+    </Box>
   );
 };
 
