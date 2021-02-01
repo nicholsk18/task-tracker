@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Card, CardContent, Box } from '@material-ui/core';
+import { Card, Box } from '@material-ui/core';
 
 interface IProps {
   sortable: {
