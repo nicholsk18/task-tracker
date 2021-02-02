@@ -1,6 +1,8 @@
-import { Sortable } from './Sortable';
-
 export type Schedule = {
-  id: number;
-  sortable: Sortable[];
+  scheduleId: number;
+  sortable: [
+    sortableId: number,
+    partOne: string,
+    partTwo: string
+  ];
 };

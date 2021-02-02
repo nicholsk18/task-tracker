@@ -1,5 +1,5 @@
 export type Sortable = {
-  id: number;
+  sortableId: number;
   partOne: string;
   partTwo: string;
 };
