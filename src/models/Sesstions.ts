@@ -1,5 +1,5 @@
-export type Sesstion = {
-  sessionId: number;
+export type Sesstions = {
+  id: number;
   activityId: number;
   scheduleId: number;
 };
