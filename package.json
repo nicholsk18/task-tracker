@@ -26,7 +26,6 @@
     "eject": "react-scripts eject",
     "format": "prettier \"src/**/*.{js,ts,tsx,html}\" --write",
     "lint": "eslint . --ext .ts",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
