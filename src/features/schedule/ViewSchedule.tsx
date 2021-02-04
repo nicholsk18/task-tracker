@@ -31,18 +31,10 @@ const ViewSchedule = () => {
     <Box mx='auto' my={3} maxWidth='450px'>
       <h2>View Schedule Screen</h2>
 
-      <ViewActivityFragment activityId={schedule.id} />
-
       <Box my={3}>
         <Card variant='outlined'>
           <h3>Sortables</h3>
           <ViewSortableListFragment sortableIds={schedule.sortableIds} />
-        </Card>
-      </Box>
-      <Box my={3}>
-        <Card variant='outlined'>
-          <h3>Sessions</h3>
-          <ViewSessionFragment />
         </Card>
       </Box>
     </Box>
