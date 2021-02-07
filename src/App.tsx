@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from 'react-router-dom';
-import { ViewActivity } from './features/activity/ViewActivity';
+import ViewActivity from './features/activity/ViewActivity';
 import ViewSchedule from './features/schedule/ViewSchedule';
 import ViewSession from './features/session/ViewSession';
 import { Container, Box } from '@material-ui/core';
+import ViewTag from './features/tag/ViewTag';
 
-function App() {
+const App: FunctionComponent = () => {
   return (
     <Container maxWidth='sm'>
       <Box border={1} my={5} textAlign='center'>
@@ -28,11 +29,14 @@ function App() {
             <Route path='/view/session/'>
               <ViewSession />
             </Route>
+            <Route path='/view/tag/'>
+              <ViewTag />
+            </Route>
           </Switch>
         </Router>
       </Box>
     </Container>
   );
-}
+};
 
 export default App;

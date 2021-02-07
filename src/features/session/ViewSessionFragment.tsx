@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Card, Box, Button, Typography } from '@material-ui/core';
 
-const ViewSessionFragment = () => {
+const ViewSessionFragment: FunctionComponent = () => {
   return (
     <Box mx={3} my={3}>
       <Card variant='outlined'>

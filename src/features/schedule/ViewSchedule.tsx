@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Box } from '@material-ui/core';
 import { fetchSchedule, selectSchedule } from './scheduleSlice';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import Loading from '../../components/Loading';
-import ViewSessionFragment from '../session/ViewSessionFragment';
-import ViewActivityFragment from '../activity/ViewActivityFragment';
 
 export interface IUseParams {
   id: string;
 }
 
-const ViewSchedule = () => {
+const ViewSchedule: FunctionComponent = () => {
   const dispatch = useDispatch();
   const schedule = useSelector(selectSchedule);
   const [params, setParams] = useState<IUseParams>(useParams());
