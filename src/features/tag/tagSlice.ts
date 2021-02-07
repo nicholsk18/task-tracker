@@ -3,28 +3,48 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export const tagSlice = createSlice({
   name: 'tag',
   initialState: {
-    tag: {
-      id: 0,
-      name: '',
-    },
+    loading: true,
+    tags: [],
   },
   reducers: {
-    setTag: (state, action) => {
-      state.tag = action.payload;
+    startLoading: (state) => {
+      state.loading = true;
+    },
+    finishLoading: (state) => {
+      state.loading = false;
+    },
+    setTags: (state, action: PayloadAction<[]>) => {
+      state.tags = action.payload;
     },
   },
 });
 
-export const { setTag } = tagSlice.actions;
+export const { setTags, startLoading, finishLoading } = tagSlice.actions;
 
-export const fetchTag = (id: any) => (dispatch: any) => {
-  fetch(`http://localhost:3001/tag/${id}`)
+export const fetchTags = (tagIds: []) => (dispatch: any) => {
+  // This is probably not needed as init state is true?!
+  dispatch(startLoading());
+
+  const data = {
+    tagIds: tagIds,
+  };
+
+  fetch('http://localhost:3001/tags', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
     .then((res) => res.json())
     .then((json) => {
-      console.log(json);
+      dispatch(setTags(json));
+
+      dispatch(finishLoading());
     });
 };
 
-export const selectTag = (state: any) => state.tag.tag;
+export const selectTags = (state: any) => state.tag.tags;
+export const isLoading = (state: any) => state.tag.loading;
 
 export default tagSlice.reducer;

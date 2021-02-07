@@ -1,29 +1,19 @@
-import { Box, Card } from '@material-ui/core';
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { Box, Card } from '@material-ui/core';
 
 interface IProps {
-  tagIds: [];
+  tag: {
+    id: number;
+    name: string;
+  };
 }
 
-const ViewTagFragment: FunctionComponent<IProps> = ({ tagIds }) => {
+const ViewTagFragment: FunctionComponent<IProps> = ({ tag }) => {
   return (
-    <Box m={2}>
-      <h2>Tags</h2>
-      <Box my={3}>
-        <Card variant='outlined'>
-          <Link to='/view/tag'>
-            <Box py={3}>Exercise</Box>
-          </Link>
-        </Card>
-      </Box>
-      <Box my={3}>
-        <Card variant='outlined'>
-          <Link to='/view/tag'>
-            <Box py={3}>Outdoor</Box>
-          </Link>
-        </Card>
-      </Box>
+    <Box m={3}>
+      <Card variant='outlined'>
+        <Box p={3}>{tag.name}</Box>
+      </Card>
     </Box>
   );
 };

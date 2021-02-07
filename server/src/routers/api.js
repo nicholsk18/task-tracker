@@ -56,4 +56,14 @@ router.post('/sortable/list', (req, res) => {
   res.send(data);
 });
 
+router.post('/tags', (req, res) => {
+  const tagIds = req.body.tagIds;
+
+  const tagData = tagIds.map((tagId) =>
+    apiData.tags.find((obj) => obj.id === tagId)
+  );
+
+  res.send(tagData);
+});
+
 module.exports = router;

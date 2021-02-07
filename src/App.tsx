@@ -29,9 +29,9 @@ const App: FunctionComponent = () => {
             <Route path='/view/session/'>
               <ViewSession />
             </Route>
-            <Route path='/view/tag/'>
+            {/* <Route path='/view/tag/'>
               <ViewTag />
-            </Route>
+            </Route> */}
           </Switch>
         </Router>
       </Box>
