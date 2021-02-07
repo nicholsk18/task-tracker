@@ -34,7 +34,7 @@ const ViewActivity: FunctionComponent = () => {
       </Box>
       <Box my={3}>
         <Card variant='outlined'>
-          <ViewTagFragment />
+          <ViewTagFragment tagIds={activity.tagIds} />
         </Card>
       </Box>
     </Box>

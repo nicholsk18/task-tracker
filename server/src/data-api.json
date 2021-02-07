@@ -14,7 +14,8 @@
   "activities": [
     {
       "id": "1",
-      "name": "Work"
+      "name": "Work",
+      "tagIds": [1, 2]
     },
     {
       "id": "2",
@@ -46,6 +47,16 @@
       "id": "3",
       "one": "On the",
       "two": "2021-02-04"
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "Exercise"
+    },
+    {
+      "id": 2,
+      "name": "Outdoor"
     }
   ]
 }
