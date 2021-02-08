@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Card, Box } from '@material-ui/core';
 import { selectActivity, isLoading, fetchActivity } from './activitySlice';
 import Loading from '../../components/Loading';
-import ViewTags from '../tag/ViewTags';
+import ViewTagsFragment from '../tag/ViewTagsFragment';
 
 export interface IUseParams {
   id: string;
@@ -34,7 +34,7 @@ const ViewActivity: FunctionComponent = () => {
       </Box>
       <Box my={3}>
         <Card variant='outlined'>
-          <ViewTags tagIds={activity.tagIds} />
+          <ViewTagsFragment tagIds={activity.tagIds} />
         </Card>
       </Box>
     </Box>

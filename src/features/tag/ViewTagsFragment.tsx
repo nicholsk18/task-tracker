@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Box } from '@material-ui/core';
-import ViewTagFragment from './ViewTagFragment';
+import { Link } from 'react-router-dom';
+import { Box, Card } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags, selectTags } from './tagSlice';
 
@@ -14,21 +14,29 @@ interface Tag {
 }
 
 const ViewTagsFragment: FunctionComponent<IProps> = ({ tagIds }) => {
-  const tags = useSelector(selectTags);
+  const getTags = useSelector(selectTags);
   const dispatch = useDispatch();
-  const [tagIdList, setTagIdList] = useState(tagIds);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchTags(tagIdList));
-  }, [dispatch, tagIdList]);
+    dispatch(fetchTags(tagIds));
+  }, [dispatch, tagIds]);
+
+  useEffect(() => {
+    setTags(getTags);
+  }, [setTags, getTags]);
 
   return (
     <Box m={2}>
       <h2>Tags</h2>
       {tags.map((tag: Tag) => (
-        <div key={tag.id}>
-          <ViewTagFragment tag={tag} />
-        </div>
+        <Box my={3} key={tag.id}>
+          <Link to={`/view/tag/${tag.id}`}>
+            <Card variant='outlined'>
+              <Box py={3}>{tag.name}</Box>
+            </Card>
+          </Link>
+        </Box>
       ))}
     </Box>
   );
