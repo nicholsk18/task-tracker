@@ -13,7 +13,7 @@ interface Tag {
   name: string;
 }
 
-const ViewTags: FunctionComponent<IProps> = ({ tagIds }) => {
+const ViewTagsFragment: FunctionComponent<IProps> = ({ tagIds }) => {
   const tags = useSelector(selectTags);
   const dispatch = useDispatch();
   const [tagIdList, setTagIdList] = useState(tagIds);
@@ -34,4 +34,4 @@ const ViewTags: FunctionComponent<IProps> = ({ tagIds }) => {
   );
 };
 
-export default ViewTags;
+export default ViewTagsFragment;
