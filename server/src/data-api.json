@@ -1,25 +1,26 @@
 {
   "sessions": [
     {
-      "id": "1",
-      "scheduleId": "1",
-      "activityId": "1"
+      "id": 1,
+      "scheduleId": 1,
+      "activityId": 1
     },
     {
-      "id": "2",
-      "scheduleId": "2",
-      "activityId": "2"
+      "id": 2,
+      "scheduleId": 2,
+      "activityId": 2
     }
   ],
   "activities": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Work",
       "tagIds": [1, 2]
     },
     {
-      "id": "2",
-      "name": "Eat"
+      "id": 2,
+      "name": "Eat",
+      "tagIds": [1, 2]
     },
     {
       "id": 3,
@@ -34,27 +35,27 @@
   ],
   "schedules": [
     {
-      "id": "1",
-      "sortableIds": ["1", "2"]
+      "id": 1,
+      "sortableIds": [1, 2]
     },
     {
-      "id": "2",
-      "sortableIds": ["2"]
+      "id": 2,
+      "sortableIds": [2]
     }
   ],
   "sortables": [
     {
-      "id": "1",
+      "id": 1,
       "one": "Every",
       "two": "Day"
     },
     {
-      "id": "2",
+      "id": 2,
       "one": "On the",
       "two": "2021-02-03"
     },
     {
-      "id": "3",
+      "id": 3,
       "one": "On the",
       "two": "2021-02-04"
     }
@@ -63,12 +64,12 @@
     {
       "id": 1,
       "name": "Exercise",
-      "activitiesId": []
+      "activitiesIds": []
     },
     {
       "id": 2,
       "name": "Outdoor",
-      "activitiesId": [3, 4]
+      "activitiesIds": [3, 4]
     }
   ]
 }
