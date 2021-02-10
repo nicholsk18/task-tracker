@@ -20,6 +20,16 @@
     {
       "id": "2",
       "name": "Eat"
+    },
+    {
+      "id": 3,
+      "name": "Running",
+      "tagIds": []
+    },
+    {
+      "id": 4,
+      "name": "Biking",
+      "tagIds": []
     }
   ],
   "schedules": [
@@ -52,11 +62,13 @@
   "tags": [
     {
       "id": 1,
-      "name": "Exercise"
+      "name": "Exercise",
+      "activitiesId": []
     },
     {
       "id": 2,
-      "name": "Outdoor"
+      "name": "Outdoor",
+      "activitiesId": [3, 4]
     }
   ]
 }
