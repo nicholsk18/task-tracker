@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Box, Card } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
+import { Box, Card, Button } from '@material-ui/core';
+import { useParams, Link } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import ViewActivityFragment from '../activity/ViewActivityFragment';
 
@@ -16,16 +16,23 @@ interface ITag {
 
 const ViewTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
+  const [tagId, setTagId] = useState<string>()
   const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
-    const { id } = params;
-    fetch(`http://localhost:3001/tag/${id}`)
+    const {id} = params
+    setTagId(id)
+  }, [tagId])
+
+  useEffect(() => {
+    if (tagId) {
+    fetch(`http://localhost:3001/tag/${tagId}`)
       .then((res) => res.json())
       .then((data) => {
         setTag(data);
       });
-  }, [params]);
+    }
+  }, [tagId]);
 
   if (!tag) {
     return <Loading />;
@@ -59,6 +66,11 @@ const ViewTag: FunctionComponent = () => {
             </Box>
           )}
         </Card>
+      </Box>
+      <Box my={3}>
+        <Button component={Link} to={`/edit/tag/${tagId}`} size="large" variant="contained" color="primary">
+          Edit Tag
+        </Button>
       </Box>
     </Box>
   );

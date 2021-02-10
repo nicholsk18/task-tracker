@@ -41,7 +41,7 @@ const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
   }
 
   return (
-    <Box mx='auto' my={3} maxWidth='450px'>
+    <Box my={3} mx={3} >
       <Link to={`/view/activity/${activity.id}`}>
         <Card variant='outlined'>
           <CardContent>
