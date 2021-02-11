@@ -1,4 +1,4 @@
 export type Schedule = {
   id: number;
-  sortables: number[]
+  sortables: number[];
 };

@@ -11,14 +11,14 @@ router.get('/activity/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const activityData = apiData.activities.find((obj) => obj.id === id);
 
-  res.json(activityData);
+  res.send(activityData);
 });
 
 router.get('/session/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const sesssionData = apiData.sessions.find((obj) => obj.id === id);
 
-  res.json(sesssionData);
+  res.send(sesssionData);
 });
 
 router.get('/schedule/:id', (req, res) => {
@@ -26,7 +26,7 @@ router.get('/schedule/:id', (req, res) => {
 
   const scheduleData = apiData.schedules.find((obj) => obj.id === id);
 
-  res.json(scheduleData);
+  res.send(scheduleData);
 });
 
 router.get('/sortable/:id', (req, res) => {
@@ -34,7 +34,7 @@ router.get('/sortable/:id', (req, res) => {
 
   const sortableData = apiData.sortables.find((obj) => obj.id === id);
 
-  res.json(sortableData);
+  res.send(sortableData);
 });
 
 router.post('/sortable/list', (req, res) => {

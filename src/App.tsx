@@ -10,7 +10,7 @@ import ViewSchedule from './features/schedule/ViewSchedule';
 import ViewSession from './features/session/ViewSession';
 import { Container, Box } from '@material-ui/core';
 import ViewTag from './features/tag/ViewTag';
-import EditTag from './features/tag/EditTag'
+import EditTag from './features/tag/EditTag';
 
 const App: FunctionComponent = () => {
   return (

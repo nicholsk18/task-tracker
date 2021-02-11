@@ -15,13 +15,13 @@ interface ITag {
 }
 const EditTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
-  const [tagId, setTagId] = useState<string>()
+  const [tagId, setTagId] = useState<string>();
   const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
-    const {id} = params
-    setTagId(id)
-  }, [tagId])
+    const { id } = params;
+    setTagId(id);
+  }, [tagId]);
 
   useEffect(() => {
     if (tagId) {
@@ -56,7 +56,13 @@ const EditTag: FunctionComponent = () => {
                 from state being overriden by next called componenet */}
                 <ViewActivityFragment activityId={id} />
 
-                <Button component={Link} to={`/edit/tag/${tagId}`} size="large" variant="contained" color="primary">
+                <Button
+                  component={Link}
+                  to={`/edit/tag/${tagId}`}
+                  size='large'
+                  variant='contained'
+                  color='primary'
+                >
                   This will be X once I do style
                 </Button>
               </div>
@@ -65,14 +71,16 @@ const EditTag: FunctionComponent = () => {
             <Box m={3}>
               <Card variant='outlined'>
                 <p>No Related Activities</p>
-                <Button component={Link} to={`/add/activity/`}>Add activity</Button>
+                <Button component={Link} to={`/add/activity/`}>
+                  Add activity
+                </Button>
               </Card>
             </Box>
           )}
         </Card>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default EditTag
+export default EditTag;

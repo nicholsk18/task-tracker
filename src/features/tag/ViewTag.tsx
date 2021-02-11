@@ -3,6 +3,7 @@ import { Box, Card, Button } from '@material-ui/core';
 import { useParams, Link } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import ViewActivityFragment from '../activity/ViewActivityFragment';
+import { getTag } from '../../app/fetchData';
 
 interface IUseParams {
   id: string;
@@ -16,23 +17,23 @@ interface ITag {
 
 const ViewTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
-  const [tagId, setTagId] = useState<string>()
-  const [params, setParams] = useState<IUseParams>(useParams());
+  const [tagId, setTagId] = useState<string>();
+  const [params, setParams] = useState<IUseParams>(useParams()); // this feels wrong
 
   useEffect(() => {
-    const {id} = params
-    setTagId(id)
-  }, [tagId])
-
-  useEffect(() => {
-    if (tagId) {
-    fetch(`http://localhost:3001/tag/${tagId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTag(data);
-      });
-    }
+    const { id } = params;
+    setTagId(id);
   }, [tagId]);
+
+  useEffect(() => {
+    const loadTag = async () => {
+      if (tagId) {
+        await getTag(tagId);
+      }
+    };
+
+    loadTag();
+  }, [tagId, getTag]);
 
   if (!tag) {
     return <Loading />;
@@ -68,7 +69,13 @@ const ViewTag: FunctionComponent = () => {
         </Card>
       </Box>
       <Box my={3}>
-        <Button component={Link} to={`/edit/tag/${tagId}`} size="large" variant="contained" color="primary">
+        <Button
+          component={Link}
+          to={`/edit/tag/${tagId}`}
+          size='large'
+          variant='contained'
+          color='primary'
+        >
           Edit Tag
         </Button>
       </Box>
