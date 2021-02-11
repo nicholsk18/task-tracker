@@ -11,7 +11,7 @@ interface IUseParams {
 interface ITag {
   id: number;
   name: string;
-  activitiesIds: [];
+  activityIds: [];
 }
 const EditTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
@@ -49,8 +49,8 @@ const EditTag: FunctionComponent = () => {
       <Box my={3}>
         <Card variant='outlined'>
           <h3>Activities</h3>
-          {tag.activitiesIds.length !== 0 ? (
-            tag.activitiesIds.map((id) => (
+          {tag.activityIds.length !== 0 ? (
+            tag.activityIds.map((id) => (
               <div key={id}>
                 {/* I really thought key was suppost to key
                 from state being overriden by next called componenet */}

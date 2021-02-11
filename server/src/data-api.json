@@ -64,12 +64,12 @@
     {
       "id": 1,
       "name": "Exercise",
-      "activitiesIds": []
+      "activityIds": []
     },
     {
       "id": 2,
       "name": "Outdoor",
-      "activitiesIds": [3, 4]
+      "activityIds": [3, 4]
     }
   ]
 }
