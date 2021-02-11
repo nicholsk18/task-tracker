@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
@@ -6,7 +6,7 @@ import ViewActivityFragment from '../activity/ViewActivityFragment';
 import { fetchSession, selectSession, isLoading } from './sessionSlice';
 import Loading from '../../components/Loading';
 
-const ViewSession = () => {
+const ViewSession: FunctionComponent = () => {
   const session = useSelector(selectSession);
   const loading = useSelector(isLoading);
   const dispatch = useDispatch();

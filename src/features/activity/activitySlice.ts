@@ -7,6 +7,7 @@ export const activitySlice = createSlice({
     activity: {
       id: 0,
       name: '',
+      tagIds: [],
     },
   },
   reducers: {
@@ -17,11 +18,11 @@ export const activitySlice = createSlice({
       state.loading = false;
     },
     resetState: (state) => {
-      state.activity = { id: 0, name: '' };
+      state.activity = { id: 0, name: '', tagIds: [] };
     },
     setActivity: (
       state,
-      action: PayloadAction<{ id: number; name: string }>
+      action: PayloadAction<{ id: number; name: string; tagIds: [] }>
     ) => {
       state.activity = action.payload;
     },
@@ -44,7 +45,9 @@ export const fetchActivity = (id: string) => (dispatch: any) => {
   fetch(`http://localhost:3001/activity/${id}`)
     .then((response) => response.json())
     .then((json) => {
-      dispatch(setActivity({ id: json.id, name: json.name }));
+      dispatch(
+        setActivity({ id: json.id, name: json.name, tagIds: json.tagIds })
+      );
       dispatch(finishLoading());
     });
 };

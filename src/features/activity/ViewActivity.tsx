@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, Box } from '@material-ui/core';
 import { selectActivity, isLoading, fetchActivity } from './activitySlice';
 import Loading from '../../components/Loading';
+import ViewTagsFragment from '../tag/ViewTagsFragment';
 
 export interface IUseParams {
   id: string;
 }
 
-export function ViewActivity() {
+const ViewActivity: FunctionComponent = () => {
   const activity = useSelector(selectActivity);
   const loading = useSelector(isLoading);
   const dispatch = useDispatch();
@@ -31,18 +32,13 @@ export function ViewActivity() {
           <h3>{activity.name}</h3>
         </Card>
       </Box>
-      {/* We only talked about activity.name in this view? */}
-      {/*<Box my={3}>*/}
-      {/*<Link to={`/view/schedule/${activity.id}`}>*/}
-      {/*  {console.log(activity)}*/}
-      {/*  <ViewScheduleFragment schedule={activity.schedule} />*/}
-      {/*</Link>*/}
-      {/*</Box>*/}
-      {/*<Box my={3}>*/}
-      {/*  <Card variant='outlined'>*/}
-      {/*    <ViewSessionFragment />*/}
-      {/*  </Card>*/}
-      {/*</Box>*/}
+      <Box my={3}>
+        <Card variant='outlined'>
+          <ViewTagsFragment tagIds={activity.tagIds} />
+        </Card>
+      </Box>
     </Box>
   );
-}
+};
+
+export default ViewActivity;
