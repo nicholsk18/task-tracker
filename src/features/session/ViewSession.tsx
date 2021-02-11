@@ -14,7 +14,7 @@ const ViewSession: FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(fetchSession(1));
-  }, [dispatch]);
+  }, [dispatch, fetchSession]);
 
   if (loading) {
     return <Loading />;

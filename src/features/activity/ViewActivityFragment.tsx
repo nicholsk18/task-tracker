@@ -4,7 +4,7 @@ import Loading from '../../components/Loading';
 import { getActivity } from '../../app/fetchData';
 
 interface IProps {
-  activityId: string;
+  activityId: number;
 }
 
 interface IActivity {
@@ -14,15 +14,14 @@ interface IActivity {
 }
 
 const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
-
   const [activity, setActivity] = useState<IActivity>();
 
   useEffect(() => {
     const fetchData = async () => {
       setActivity(await getActivity(activityId));
-    }
+    };
 
-    fetchData()
+    fetchData();
   }, [setActivity]);
 
   if (!activity) {

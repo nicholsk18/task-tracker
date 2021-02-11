@@ -6,27 +6,27 @@ import { getSchedule } from '../../app/fetchData';
 import Loading from '../../components/Loading';
 
 interface IProps {
-  scheduleId: string;
+  scheduleId: number;
 }
 
 interface ISchedule {
   id: number;
-  sortableIds: []
+  sortableIds: [];
 }
 
 const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
-  const [schedule, setSchedule] = useState<ISchedule>()
+  const [schedule, setSchedule] = useState<ISchedule>();
 
   useEffect(() => {
     const loadSchedule = async () => {
-      setSchedule(await getSchedule(scheduleId))
-    }
+      setSchedule(await getSchedule(scheduleId));
+    };
 
-    loadSchedule()
+    loadSchedule();
   }, [scheduleId]);
 
   if (!schedule) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (

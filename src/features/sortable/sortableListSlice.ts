@@ -14,7 +14,9 @@ export const sortableListSlice = createSlice({
 
 export const { setSortableList } = sortableListSlice.actions;
 
-export const fetchSortableList = (idList: []) => (dispatch: any) => {
+export const fetchSortableList = (idList: number[]) => (
+  dispatch: any
+): void => {
   const data = {
     idList: idList,
   };
@@ -32,8 +34,7 @@ export const fetchSortableList = (idList: []) => (dispatch: any) => {
     });
 };
 
-export const selectSortableList = (state: any) => {
-  return state.sortableList.sortableList;
-};
+export const selectSortableList = (state: any): [] =>
+  state.sortableList.sortableList;
 
 export default sortableListSlice.reducer;

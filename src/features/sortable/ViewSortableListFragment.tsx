@@ -4,7 +4,7 @@ import { fetchSortableList, selectSortableList } from './sortableListSlice';
 import ViewSortableListItem from './ViewSortableListItem';
 
 interface IProps {
-  sortableIds: [];
+  sortableIds: number[];
 }
 
 interface Sortable {

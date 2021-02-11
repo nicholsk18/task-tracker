@@ -18,7 +18,7 @@ const ViewSchedule: FunctionComponent = () => {
   useEffect(() => {
     const { id } = params;
     dispatch(fetchSchedule(id));
-  }, [params, dispatch]);
+  }, [params, dispatch, fetchSchedule]);
 
   // wait till all the ids are fetched before displaying
   if (schedule.id === 0) {
