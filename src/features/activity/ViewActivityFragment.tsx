@@ -23,7 +23,7 @@ const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
     }
 
     fetchData()
-  }, [activity]);
+  }, [setActivity]);
 
   if (!activity) {
     return <Loading />;

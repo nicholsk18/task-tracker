@@ -21,6 +21,11 @@ export const getActivity = async (id: string) => {
   return await getData(path).then((data) => data);
 };
 
+export const getSchedule = async (id: string) => {
+  const path = `schedule/${id}`
+  return await getData(path).then(data => data)
+}
+
 export const getTag = async (id: string) => {
   const path = `tag/${id}`;
   return await getData(path).then((data) => data);

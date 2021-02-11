@@ -1,26 +1,36 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardContent, Box } from '@material-ui/core';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
-import { fetchSchedule, selectSchedule } from './scheduleSlice';
+import { getSchedule } from '../../app/fetchData';
+import Loading from '../../components/Loading';
 
 interface IProps {
   scheduleId: string;
 }
 
-const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
-  const schedule = useSelector(selectSchedule);
-  const dispatch = useDispatch();
+interface ISchedule {
+  id: number;
+  sortableIds: []
+}
 
-  const [id, setId] = useState(scheduleId);
+const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
+  const [schedule, setSchedule] = useState<ISchedule>()
 
   useEffect(() => {
-    dispatch(fetchSchedule(id));
-  }, [id, dispatch]);
+    const loadSchedule = async () => {
+      setSchedule(await getSchedule(scheduleId))
+    }
+
+    loadSchedule()
+  }, [scheduleId]);
+
+  if (!schedule) {
+    return <Loading />
+  }
 
   return (
-    <Box mx='auto' my={3} maxWidth='450px'>
+    <Box mx={3} my={3}>
       <Link to={`/view/schedule/${schedule.id}`}>
         <Card variant='outlined'>
           <CardContent>

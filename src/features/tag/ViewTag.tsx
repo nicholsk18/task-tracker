@@ -23,24 +23,24 @@ const ViewTag: FunctionComponent = () => {
   useEffect(() => {
     const { id } = params;
     setTagId(id);
-  }, [tagId]);
+  }, [setTagId]);
 
   useEffect(() => {
     const loadTag = async () => {
       if (tagId) {
-        await getTag(tagId);
+        setTag(await getTag(tagId));
       }
     };
 
     loadTag();
-  }, [tagId, getTag]);
+  }, [tagId]);
 
   if (!tag) {
     return <Loading />;
   }
 
   return (
-    <Box mx='auto' maxWidth='450px'>
+    <Box mx={3}>
       <h2>View Tag</h2>
       <Box my={3}>
         <Card variant='outlined'>
@@ -54,8 +54,6 @@ const ViewTag: FunctionComponent = () => {
           {tag.activityIds.length !== 0 ? (
             tag.activityIds.map((id) => (
               <div key={id}>
-                {/* I really thought key was suppost to key 
-                from state being overriden by next called componenet */}
                 <ViewActivityFragment activityId={id} />
               </div>
             ))
