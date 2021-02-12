@@ -1,4 +1,4 @@
-export type Sessions = {
+export type Session = {
   id: number;
   activityId: number;
   scheduleId: number;
