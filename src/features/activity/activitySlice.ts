@@ -37,7 +37,6 @@ export const {
   setActivity,
 } = activitySlice.actions;
 
-// all this below need to be in different file?
 export const fetchActivity = (id: string) => (dispatch: any): void => {
   // just for now lets keep it
   dispatch(startLoading());
