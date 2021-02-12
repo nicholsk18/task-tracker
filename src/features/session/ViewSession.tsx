@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
@@ -13,7 +14,7 @@ const ViewSession: FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(fetchSession(1));
-  }, [dispatch]);
+  }, [dispatch, fetchSession]);
 
   if (loading) {
     return <Loading />;
@@ -23,7 +24,9 @@ const ViewSession: FunctionComponent = () => {
     <Box>
       <h1>View Session Screen</h1>
       <div>
-        <ViewActivityFragment activityId={session.activityId} />
+        <Link to={`/view/activity/${session.activityId}`}>
+          <ViewActivityFragment activityId={session.activityId} />
+        </Link>
         <ViewScheduleFragment scheduleId={session.scheduleId} />
       </div>
     </Box>

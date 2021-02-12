@@ -3,6 +3,7 @@ import { Box, Card, Button } from '@material-ui/core';
 import { useParams, Link } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import ViewActivityFragment from '../activity/ViewActivityFragment';
+import { getTag } from '../../app/fetchData';
 
 interface IUseParams {
   id: string;
@@ -16,22 +17,22 @@ interface ITag {
 
 const ViewTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
-  const [tagId, setTagId] = useState<string>()
-  const [params, setParams] = useState<IUseParams>(useParams());
+  const [tagId, setTagId] = useState<string>();
+  const [params, setParams] = useState<IUseParams>(useParams()); // this feels wrong
 
   useEffect(() => {
-    const {id} = params
-    setTagId(id)
-  }, [tagId])
+    const { id } = params;
+    setTagId(id);
+  }, [setTagId]);
 
   useEffect(() => {
-    if (tagId) {
-    fetch(`http://localhost:3001/tag/${tagId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTag(data);
-      });
-    }
+    const loadTag = async () => {
+      if (tagId) {
+        setTag(await getTag(tagId));
+      }
+    };
+
+    loadTag();
   }, [tagId]);
 
   if (!tag) {
@@ -39,7 +40,7 @@ const ViewTag: FunctionComponent = () => {
   }
 
   return (
-    <Box mx='auto' maxWidth='450px'>
+    <Box mx={3}>
       <h2>View Tag</h2>
       <Box my={3}>
         <Card variant='outlined'>
@@ -53,8 +54,6 @@ const ViewTag: FunctionComponent = () => {
           {tag.activityIds.length !== 0 ? (
             tag.activityIds.map((id) => (
               <div key={id}>
-                {/* I really thought key was suppost to key 
-                from state being overriden by next called componenet */}
                 <ViewActivityFragment activityId={id} />
               </div>
             ))
@@ -68,7 +67,13 @@ const ViewTag: FunctionComponent = () => {
         </Card>
       </Box>
       <Box my={3}>
-        <Button component={Link} to={`/edit/tag/${tagId}`} size="large" variant="contained" color="primary">
+        <Button
+          component={Link}
+          to={`/edit/tag/${tagId}`}
+          size='large'
+          variant='contained'
+          color='primary'
+        >
           Edit Tag
         </Button>
       </Box>

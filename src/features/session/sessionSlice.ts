@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Sessions } from '../../models/Session';
 
 const sessionSlice = createSlice({
   name: 'session',
@@ -32,7 +33,7 @@ const sessionSlice = createSlice({
 
 export const { setSession, startLoading, finishLoading } = sessionSlice.actions;
 
-export const fetchSession = (id: any) => (dispatch: any) => {
+export const fetchSession = (id: number) => (dispatch: any): void => {
   dispatch(startLoading());
 
   setTimeout(() => {
@@ -55,7 +56,7 @@ export const fetchSession = (id: any) => (dispatch: any) => {
   }, 1000);
 };
 
-export const selectSession = (state: any) => state.session.session;
-export const isLoading = (state: any) => state.session.loading;
+export const selectSession = (state: any): Sessions => state.session.session;
+export const isLoading = (state: any): boolean => state.session.loading;
 
 export default sessionSlice.reducer;

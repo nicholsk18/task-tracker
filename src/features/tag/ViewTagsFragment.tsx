@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags, selectTags } from './tagSlice';
 
 interface IProps {
-  tagIds: [];
+  tagIds: number[];
 }
 
 interface Tag {

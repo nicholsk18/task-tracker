@@ -21,7 +21,7 @@ export const tagSlice = createSlice({
 
 export const { setTags, startLoading, finishLoading } = tagSlice.actions;
 
-export const fetchTags = (tagIds: []) => (dispatch: any) => {
+export const fetchTags = (tagIds: number[]) => (dispatch: any): void => {
   // This is probably not needed as init state is true?!
   dispatch(startLoading());
 
@@ -43,8 +43,7 @@ export const fetchTags = (tagIds: []) => (dispatch: any) => {
       dispatch(finishLoading());
     });
 };
-
-export const selectTags = (state: any) => state.tag.tags;
-export const isLoading = (state: any) => state.tag.loading;
+export const selectTags = (state: any): [] => state.tag.tags;
+export const isLoading = (state: any): boolean => state.tag.loading;
 
 export default tagSlice.reducer;
