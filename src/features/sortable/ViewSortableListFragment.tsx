@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSortableList, selectSortableList } from './sortableListSlice';
 import ViewSortableListItem from './ViewSortableListItem';
+import Loading from '../../components/Loading';
+import { postSortableList } from '../../app/fetchData';
 
 interface IProps {
   sortableIds: number[];
 }
 
-interface Sortable {
+interface ISortableList {
   id: number;
   one: string;
   two: string;
@@ -16,19 +16,23 @@ interface Sortable {
 const ViewSortableListFragment: FunctionComponent<IProps> = ({
   sortableIds,
 }) => {
-  const sortableList = useSelector(selectSortableList);
-  const dispatch = useDispatch();
-
-  const [idList, setIdList] = useState(sortableIds);
+  const [sortableList, setSortableList] = useState<ISortableList[]>()
 
   useEffect(() => {
-    dispatch(fetchSortableList(idList));
-  }, [idList, dispatch]);
+    const loadSortableList = async () => {
+      setSortableList(await postSortableList(sortableIds))
+    }
+
+    loadSortableList()
+  }, [])
+
+  if(!sortableList) {
+    return <Loading />
+  }
 
   return (
     <>
-      {sortableList.length > 0 &&
-        sortableList.map((sortable: Sortable) => (
+      {sortableList.map((sortable: ISortableList) => (
           <div key={sortable.id}>
             <ViewSortableListItem sortable={sortable} />
           </div>

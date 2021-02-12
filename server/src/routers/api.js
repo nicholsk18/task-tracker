@@ -38,7 +38,7 @@ router.get('/sortable/:id', (req, res) => {
 });
 
 router.post('/sortable/list', (req, res) => {
-  const list = req.body.idList;
+  const list = req.body.data;
 
   const data = list.map((id) => apiData.sortables.find((obj) => obj.id === id));
 
@@ -46,7 +46,7 @@ router.post('/sortable/list', (req, res) => {
 });
 
 router.post('/tags', (req, res) => {
-  const tagIds = req.body.tagIds;
+  const tagIds = req.body.data;
 
   const tagData = tagIds.map((tagId) =>
     apiData.tags.find((obj) => obj.id === tagId)

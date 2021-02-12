@@ -1,27 +1,39 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Card, Box } from '@material-ui/core';
-import { fetchSchedule, selectSchedule } from './scheduleSlice';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import Loading from '../../components/Loading';
+import { getSchedule } from '../../app/fetchData';
 
-export interface IUseParams {
+interface IUseParams {
   id: string;
+}
+interface ISchedule {
+  id: number;
+  sortableIds: number[];
 }
 
 const ViewSchedule: FunctionComponent = () => {
-  const dispatch = useDispatch();
-  const schedule = useSelector(selectSchedule);
+  const [schedule, setSchedule] = useState<ISchedule>()
+  const [scheduleId, setScheduleId] = useState<number>()
   const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
-    const { id } = params;
-    dispatch(fetchSchedule(id));
-  }, [params, dispatch, fetchSchedule]);
+    const id = parseInt(params.id)
+    setScheduleId(id)
+  }, [setScheduleId])
 
-  // wait till all the ids are fetched before displaying
-  if (schedule.id === 0) {
+  useEffect(() => {
+    const loadSchedule = async () => {
+      if (scheduleId) {
+        setSchedule(await getSchedule(scheduleId))
+      }
+    }
+
+    loadSchedule()
+  }, [scheduleId]);
+
+  if (!schedule) {
     return <Loading />;
   }
 

@@ -17,12 +17,12 @@ const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
   const [activity, setActivity] = useState<IActivity>();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadActivityFragment = async () => {
       setActivity(await getActivity(activityId));
     };
 
-    fetchData();
-  }, [setActivity]);
+    loadActivityFragment();
+  }, [activityId]);
 
   if (!activity) {
     return <Loading />;

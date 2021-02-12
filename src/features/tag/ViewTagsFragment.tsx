@@ -1,35 +1,38 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Card } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTags, selectTags } from './tagSlice';
+import Loading from '../../components/Loading';
+import { postTags } from '../../app/fetchData';
 
 interface IProps {
   tagIds: number[];
 }
 
-interface Tag {
+interface ITagList {
   id: number;
   name: string;
+  activityIds: number[]
 }
 
 const ViewTagsFragment: FunctionComponent<IProps> = ({ tagIds }) => {
-  const getTags = useSelector(selectTags);
-  const dispatch = useDispatch();
-  const [tags, setTags] = useState([]);
+  const [tagsList, setTagsList] = useState<ITagList[]>();
 
   useEffect(() => {
-    dispatch(fetchTags(tagIds));
-  }, [dispatch, tagIds]);
+    const loadTagsList = async () => {
+      setTagsList(await postTags(tagIds))
+    }
 
-  useEffect(() => {
-    setTags(getTags);
-  }, [setTags, getTags]);
+    loadTagsList()
+  }, []);
+
+  if (!tagsList) {
+    return <Loading />
+  }
 
   return (
     <Box m={2}>
       <h2>Tags</h2>
-      {tags.map((tag: Tag) => (
+      {tagsList.map((tag: ITagList) => (
         <Box my={3} key={tag.id}>
           <Link to={`/view/tag/${tag.id}`}>
             <Card variant='outlined'>
