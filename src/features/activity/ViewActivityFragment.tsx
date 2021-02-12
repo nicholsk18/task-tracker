@@ -10,7 +10,7 @@ interface IProps {
 interface IActivity {
   id: number;
   name: string;
-  tagIds: [];
+  tagIds: number[];
 }
 
 const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {

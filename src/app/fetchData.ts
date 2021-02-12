@@ -1,20 +1,6 @@
-// doing all this in one file and repeating in other files feels really cluttered
-interface Activity {
-  id: number;
-  name: string;
-  tagIds: [];
-}
-interface Schedule {
-  id: number;
-  sortableIds: [];
-}
-interface Tag {
-  id: number;
-  name: string;
-  activityIds: [];
-}
-
-// <!-- end -->
+import { Activity } from '../models/Activity';
+import {Schedule} from '../models/Schedule';
+import {Tag} from '../models/Tag'
 
 const getData = (urlPath: string) => {
   return fetch(`http://localhost:3001/${urlPath}`)

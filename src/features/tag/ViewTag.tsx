@@ -12,7 +12,7 @@ interface IUseParams {
 interface ITag {
   id: number;
   name: string;
-  activityIds: [];
+  activityIds: number[];
 }
 
 const ViewTag: FunctionComponent = () => {
