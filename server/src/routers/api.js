@@ -1,10 +1,10 @@
 const express = require('express');
-const jsonData = require('../data.json');
 const apiData = require('../data-api.json');
 const router = new express.Router();
 
-router.get('/', (req, res) => {
-  res.json(jsonData);
+router.get('/activities/all', (req, res) => {
+  const allActivities = apiData.activities.map(obj => obj)
+  res.send(allActivities);
 });
 
 router.get('/activity/:id', (req, res) => {

@@ -16,23 +16,16 @@ interface ITag {
 }
 const EditTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
-  const [tagId, setTagId] = useState<number>();
   const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
     const id = parseInt(params.id);
-    setTagId(id);
-  }, [tagId]);
-
-  useEffect(() => {
     const loadTag = async () => {
-      if (tagId) {
-        setTag(await getTag(tagId));
-      }
+      setTag(await getTag(id));
     };
 
     loadTag();
-  }, [tagId]);
+  }, [params]);
 
   if (!tag) {
     return <Loading />;
@@ -60,7 +53,7 @@ const EditTag: FunctionComponent = () => {
                 <Box flexGrow={1}>
                   <Button
                     component={Link}
-                    to={`/edit/tag/${tagId}`}
+                    to={`/edit/tag/${tag.id}`}
                     size='large'
                     variant='contained'
                     color='secondary'
@@ -74,12 +67,19 @@ const EditTag: FunctionComponent = () => {
             <Box m={3}>
               <Card variant='outlined'>
                 <p>No Related Activities</p>
-                <Button component={Link} to={`/add/activity/`}>
-                  Add activity
-                </Button>
               </Card>
             </Box>
           )}
+          <Box m={3}>
+            <Button
+              variant='contained'
+              color='primary'
+              component={Link}
+              to={`/add/tag/${tag.id}`}
+            >
+              Add activity
+            </Button>
+          </Box>
         </Card>
       </Box>
     </Box>
