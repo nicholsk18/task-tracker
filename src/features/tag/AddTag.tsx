@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Button, Card, TextField } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getAllActivities } from '../../app/fetchData';
 import Loading from '../../components/Loading';
 import { Activity } from '../../models/Activity';
+import ViewActivityFragment from '../activity/ViewActivityFragment';
 
 interface IUseParams {
   id: string;
@@ -50,6 +51,22 @@ const AddTag: FunctionComponent = () => {
     }
   }
 
+  function removeElement(event: any) {
+    console.log(event);
+  }
+
+  const searchBoxStyle = {
+    left:0,
+    right:0,
+    top: '-25px',
+    borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
+    borderRight: '1px solid rgba(0, 0, 0, 0.12)',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+    backgroundColor: '#f2f2f2',
+    borderBottomLeftRadius: '20px',
+    borderBottomRightRadius: '20px'
+  }
+
   if (!allActivities) {
     return <Loading />;
   }
@@ -63,28 +80,55 @@ const AddTag: FunctionComponent = () => {
             label='Search for Activity'
             type='search'
             variant='outlined'
+            style={{width: '100%'}}
             onChange={(event) => setText(event.target.value)}
           />
-          <Box my={3}>
-            {found.length !== 0 &&
-              found.map((item, index) => (
-                <Box mx={5} my={3} key={index}>
-                  <Card variant='outlined'>
-                    <Box py={3}>{item}</Box>
-                  </Card>
-                </Box>
+
+          <Box position='relative'>
+            {search.length !== 0 && (
+              <Box py={2} zIndex={1} position='absolute' style={searchBoxStyle}>
+                {search.map((name, index) => (
+                  <Box py={1} key={index}>
+                    <Button fullWidth onClick={(event) => selectItem(event)}>
+                      {name}
+                    </Button>
+                  </Box>
+                ))}
+              </Box>
+            )}
+
+            <Box my={3}>
+              {(found.length !== 0 && (
+                <Card variant='outlined'>
+                  {found.map((item, index) => (
+                    <Box my={3} display='flex' alignItems='center' key={index}>
+                      <Box flexGrow={5} ml={3}>
+                        <Card variant='outlined'>
+                          <Box py={2}>{item}</Box>
+                        </Card>
+                      </Box>
+
+                      <Box flexGrow={1}>
+                        <Button
+                          onClick={event => removeElement(event)}
+                          size='large'
+                          variant='contained'
+                          color='secondary'
+                        >
+                          X
+                        </Button>
+                      </Box>
+                    </Box>
+                  ))}
+                </Card>
               ))}
+            </Box>
             <Button variant='contained' color='primary'>
               Add
             </Button>
           </Box>
         </form>
       </Box>
-      {search.map((name, index) => (
-        <div key={index} onClick={(event) => selectItem(event)}>
-          {name}
-        </div>
-      ))}
     </Box>
   );
 };
