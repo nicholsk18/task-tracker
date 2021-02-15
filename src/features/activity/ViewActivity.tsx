@@ -1,27 +1,33 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { Card, Box } from '@material-ui/core';
-import { selectActivity, isLoading, fetchActivity } from './activitySlice';
 import Loading from '../../components/Loading';
 import ViewTagsFragment from '../tag/ViewTagsFragment';
+import { getActivity } from '../../app/fetchData';
 
 export interface IUseParams {
   id: string;
 }
+interface IActivity {
+  id: number;
+  name: string;
+  tagIds: number[];
+}
 
 const ViewActivity: FunctionComponent = () => {
-  const activity = useSelector(selectActivity);
-  const loading = useSelector(isLoading);
-  const dispatch = useDispatch();
+  const [activity, setActivity] = useState<IActivity>();
   const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
-    const { id } = params;
-    dispatch(fetchActivity(id));
-  }, [params, dispatch]);
+    const id = parseInt(params.id);
+    const loadActivity = async () => {
+      setActivity(await getActivity(id));
+    };
 
-  if (loading) {
+    loadActivity();
+  }, [params]);
+
+  if (!activity) {
     return <Loading />;
   }
   return (

@@ -12,16 +12,16 @@ interface IUseParams {
 interface ITag {
   id: number;
   name: string;
-  activityIds: [];
+  activityIds: number[];
 }
 
 const ViewTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
-  const [tagId, setTagId] = useState<string>();
+  const [tagId, setTagId] = useState<number>();
   const [params, setParams] = useState<IUseParams>(useParams()); // this feels wrong
 
   useEffect(() => {
-    const { id } = params;
+    const id = parseInt(params.id);
     setTagId(id);
   }, [setTagId]);
 

@@ -11,7 +11,7 @@ interface IProps {
 
 interface ISchedule {
   id: number;
-  sortableIds: [];
+  sortableIds: number[];
 }
 
 const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {

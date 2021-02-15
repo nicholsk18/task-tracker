@@ -1,22 +1,34 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
 import ViewActivityFragment from '../activity/ViewActivityFragment';
-import { fetchSession, selectSession, isLoading } from './sessionSlice';
 import Loading from '../../components/Loading';
+import { getSession } from '../../app/fetchData';
+
+interface ISession {
+  id: number;
+  activityId: number;
+  scheduleId: number;
+}
 
 const ViewSession: FunctionComponent = () => {
-  const session = useSelector(selectSession);
-  const loading = useSelector(isLoading);
-  const dispatch = useDispatch();
+  const [session, setSession] = useState<ISession>();
+  const [sessionId, setSessionId] = useState<number>(1);
 
   useEffect(() => {
-    dispatch(fetchSession(1));
-  }, [dispatch, fetchSession]);
+    const loadSession = async () => {
+      // keeping the pattern
+      // later it will be in params?
+      if (sessionId) {
+        setSession(await getSession(sessionId));
+      }
+    };
 
-  if (loading) {
+    loadSession();
+  }, []);
+
+  if (!session) {
     return <Loading />;
   }
 
