@@ -77,7 +77,7 @@ const EditTag: FunctionComponent = () => {
               component={Link}
               to={`/add/tag/${tag.id}`}
             >
-              Add activity
+              Add Relationship
             </Button>
           </Box>
         </Card>

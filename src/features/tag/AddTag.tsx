@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import { getAllActivities } from '../../app/fetchData';
 import Loading from '../../components/Loading';
 import { Activity } from '../../models/Activity';
-import ViewActivityFragment from '../activity/ViewActivityFragment';
 
 interface IUseParams {
   id: string;
