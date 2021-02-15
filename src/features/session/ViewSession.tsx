@@ -13,19 +13,19 @@ interface ISession {
 }
 
 const ViewSession: FunctionComponent = () => {
-  const [session, setSession] = useState<ISession>()
-  const [sessionId, setSessionId] = useState<number>(1)
+  const [session, setSession] = useState<ISession>();
+  const [sessionId, setSessionId] = useState<number>(1);
 
   useEffect(() => {
     const loadSession = async () => {
       // keeping the pattern
       // later it will be in params?
       if (sessionId) {
-        setSession(await getSession(sessionId))
+        setSession(await getSession(sessionId));
       }
-    }
+    };
 
-    loadSession()
+    loadSession();
   }, []);
 
   if (!session) {

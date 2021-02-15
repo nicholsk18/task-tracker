@@ -14,24 +14,18 @@ interface ISchedule {
 }
 
 const ViewSchedule: FunctionComponent = () => {
-  const [schedule, setSchedule] = useState<ISchedule>()
-  const [scheduleId, setScheduleId] = useState<number>()
+  const [schedule, setSchedule] = useState<ISchedule>();
   const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
-    const id = parseInt(params.id)
-    setScheduleId(id)
-  }, [setScheduleId])
+    const id = parseInt(params.id);
 
-  useEffect(() => {
     const loadSchedule = async () => {
-      if (scheduleId) {
-        setSchedule(await getSchedule(scheduleId))
-      }
-    }
+      setSchedule(await getSchedule(id));
+    };
 
-    loadSchedule()
-  }, [scheduleId]);
+    loadSchedule();
+  }, [params]);
 
   if (!schedule) {
     return <Loading />;

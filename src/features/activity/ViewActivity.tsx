@@ -15,24 +15,17 @@ interface IActivity {
 }
 
 const ViewActivity: FunctionComponent = () => {
-  const [activity, setActivity] = useState<IActivity>()
-  const [activityId, setActivityId] = useState<number>()
+  const [activity, setActivity] = useState<IActivity>();
   const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
-    const id = parseInt(params.id)
-    setActivityId(id)
-  }, [activityId])
-
-  useEffect(() => {
+    const id = parseInt(params.id);
     const loadActivity = async () => {
-      if (activityId) {
-        setActivity(await getActivity(activityId))
-      }
-    }
+      setActivity(await getActivity(id));
+    };
 
-    loadActivity()
-  }, [activityId]);
+    loadActivity();
+  }, [params]);
 
   if (!activity) {
     return <Loading />;

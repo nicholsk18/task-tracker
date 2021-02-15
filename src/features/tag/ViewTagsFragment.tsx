@@ -11,7 +11,7 @@ interface IProps {
 interface ITagList {
   id: number;
   name: string;
-  activityIds: number[]
+  activityIds: number[];
 }
 
 const ViewTagsFragment: FunctionComponent<IProps> = ({ tagIds }) => {
@@ -19,14 +19,14 @@ const ViewTagsFragment: FunctionComponent<IProps> = ({ tagIds }) => {
 
   useEffect(() => {
     const loadTagsList = async () => {
-      setTagsList(await postTags(tagIds))
-    }
+      setTagsList(await postTags(tagIds));
+    };
 
-    loadTagsList()
+    loadTagsList();
   }, []);
 
   if (!tagsList) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (

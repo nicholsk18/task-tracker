@@ -52,7 +52,7 @@ const EditTag: FunctionComponent = () => {
           <h3>Activities</h3>
           {tag.activityIds.length !== 0 ? (
             tag.activityIds.map((id) => (
-              <Box key={id} display="flex" alignItems="center">
+              <Box key={id} display='flex' alignItems='center'>
                 <Box flexGrow={5}>
                   <ViewActivityFragment activityId={id} />
                 </Box>

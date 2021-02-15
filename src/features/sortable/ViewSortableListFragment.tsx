@@ -16,27 +16,27 @@ interface ISortableList {
 const ViewSortableListFragment: FunctionComponent<IProps> = ({
   sortableIds,
 }) => {
-  const [sortableList, setSortableList] = useState<ISortableList[]>()
+  const [sortableList, setSortableList] = useState<ISortableList[]>();
 
   useEffect(() => {
     const loadSortableList = async () => {
-      setSortableList(await postSortableList(sortableIds))
-    }
+      setSortableList(await postSortableList(sortableIds));
+    };
 
-    loadSortableList()
-  }, [])
+    loadSortableList();
+  }, []);
 
-  if(!sortableList) {
-    return <Loading />
+  if (!sortableList) {
+    return <Loading />;
   }
 
   return (
     <>
       {sortableList.map((sortable: ISortableList) => (
-          <div key={sortable.id}>
-            <ViewSortableListItem sortable={sortable} />
-          </div>
-        ))}
+        <div key={sortable.id}>
+          <ViewSortableListItem sortable={sortable} />
+        </div>
+      ))}
     </>
   );
 };
