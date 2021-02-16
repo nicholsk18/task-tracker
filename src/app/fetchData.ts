@@ -35,6 +35,11 @@ export const getActivity = async (id: number): Promise<Activity> => {
   return await getData(path).then((data) => data);
 };
 
+export const getAllActivities = async () => {
+  const path = 'activities/all';
+  return await getData(path).then((data) => data);
+};
+
 export const getSchedule = async (id: number): Promise<Schedule> => {
   const path = `schedule/${id}`;
   return await getData(path).then((data) => data);
