@@ -11,7 +11,7 @@ import ViewSession from './features/session/ViewSession';
 import { Container, Box } from '@material-ui/core';
 import ViewTag from './features/tag/ViewTag';
 import EditTag from './features/tag/EditTag';
-import AddTag from './features/tag/AddTag';
+import AddTagRelationship from './features/tag/AddTagRelationship';
 
 const App: FunctionComponent = () => {
   return (
@@ -27,7 +27,7 @@ const App: FunctionComponent = () => {
             <Route path='/view/session/' component={ViewSession} />
             <Route path='/view/tag/:id' component={ViewTag} />
             <Route path='/edit/tag/:id' component={EditTag} />
-            <Route path='/add/tag/:id' component={AddTag} />
+            <Route path='/add/tag/:id' component={AddTagRelationship} />
           </Switch>
         </Router>
       </Box>
