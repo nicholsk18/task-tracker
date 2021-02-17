@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 const SearchInput: FunctionComponent = () => {
-  return <div>Search input</div>
-}
+  return <div>Search input</div>;
+};
 
-export default SearchInput
+export default SearchInput;

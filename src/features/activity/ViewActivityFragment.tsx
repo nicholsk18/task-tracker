@@ -32,7 +32,7 @@ const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
     <Box my={3} mx={3}>
       <Card variant='outlined'>
         <CardContent>
-          <h3 style={{margin: 0}}>{activity.name}</h3>
+          <h3 style={{ margin: 0 }}>{activity.name}</h3>
         </CardContent>
       </Card>
     </Box>

@@ -22,7 +22,6 @@ const AddTagRelationship: FunctionComponent = () => {
     loadAllActivities();
   }, [setAllActivities]);
 
-
   if (!allActivities) {
     return <Loading />;
   }
@@ -30,9 +29,9 @@ const AddTagRelationship: FunctionComponent = () => {
   return (
     <Box mx={5}>
       <h2>Add Tag Relationship</h2>
-      <SearchRelationship name='Tag' relationships={allActivities}/>
+      <SearchRelationship name='Tag' relationships={allActivities} />
     </Box>
   );
-}
+};
 
 export default AddTagRelationship;

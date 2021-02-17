@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Card, Box } from '@material-ui/core';
+import { Link, useParams } from 'react-router-dom';
+import { Card, Box, Button } from '@material-ui/core';
 import Loading from '../../components/Loading';
 import ViewTagsFragment from '../tag/ViewTagsFragment';
 import { getActivity } from '../../app/fetchData';
@@ -42,6 +42,18 @@ const ViewActivity: FunctionComponent = () => {
         <Card variant='outlined'>
           <ViewTagsFragment tagIds={activity.tagIds} />
         </Card>
+      </Box>
+
+      <Box my={3}>
+        <Button
+          color='primary'
+          variant='contained'
+          fullWidth={true}
+          component={Link}
+          to={`/edit/activity/${activity.id}`}
+        >
+          Edit
+        </Button>
       </Box>
     </Box>
   );
