@@ -12,6 +12,7 @@ import { Container, Box } from '@material-ui/core';
 import ViewTag from './features/tag/ViewTag';
 import EditTag from './features/tag/EditTag';
 import AddTagRelationship from './features/tag/AddTagRelationship';
+import EditActivity from './features/activity/EditActivity';
 
 const App: FunctionComponent = () => {
   return (
@@ -23,6 +24,7 @@ const App: FunctionComponent = () => {
               <Redirect to='/view/session' />
             </Route>
             <Route path='/view/Activity/:id' component={ViewActivity} />
+            <Route path='/edit/activity/:id' component={EditActivity} />
             <Route path='/view/schedule/:id' component={ViewSchedule} />
             <Route path='/view/session/' component={ViewSession} />
             <Route path='/view/tag/:id' component={ViewTag} />
