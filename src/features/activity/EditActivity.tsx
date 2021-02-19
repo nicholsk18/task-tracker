@@ -52,10 +52,11 @@ const EditActivity: FunctionComponent = () => {
               </Card>
             </Box>
           )}
-          <Box m={3}>
+          <Box m={2}>
             <Button
               variant='contained'
               color='primary'
+              fullWidth={true}
               component={Link}
               to={`/add/activity/${activity.id}`}
             >

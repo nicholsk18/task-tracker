@@ -70,7 +70,7 @@ const ViewTag: FunctionComponent = () => {
         <Button
           component={Link}
           to={`/edit/tag/${tagId}`}
-          size='large'
+          fullWidth={true}
           variant='contained'
           color='primary'
         >
