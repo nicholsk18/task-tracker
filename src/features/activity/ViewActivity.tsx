@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Card, Box, Button } from '@material-ui/core';
 import Loading from '../../components/Loading';
-import ViewTagsFragment from '../tag/ViewTagsFragment';
+import ViewTagFragment from '../tag/ViewTagFragment';
 import { getActivity } from '../../app/fetchData';
 
 export interface IUseParams {
@@ -31,16 +31,26 @@ const ViewActivity: FunctionComponent = () => {
     return <Loading />;
   }
   return (
-    <Box mx='auto' maxWidth='450px'>
+    <Box mx={3}>
       <h2>View Activity Screen</h2>
       <Box my={3}>
         <Card variant='outlined'>
           <h3>{activity.name}</h3>
         </Card>
       </Box>
+
       <Box my={3}>
         <Card variant='outlined'>
-          <ViewTagsFragment tagIds={activity.tagIds} />
+          <h3>Tags</h3>
+          {activity.tagIds.map((tagId) => (
+            <Box m={3} key={tagId}>
+              <Card variant='outlined'>
+                <Link to={`/view/tag/${tagId}`}>
+                  <ViewTagFragment tagId={tagId} />
+                </Link>
+              </Card>
+            </Box>
+          ))}
         </Card>
       </Box>
 
@@ -52,7 +62,7 @@ const ViewActivity: FunctionComponent = () => {
           component={Link}
           to={`/edit/activity/${activity.id}`}
         >
-          Edit
+          Edit Activity
         </Button>
       </Box>
     </Box>

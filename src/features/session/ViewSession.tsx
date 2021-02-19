@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box } from '@material-ui/core';
+import { Box, Card } from '@material-ui/core';
 import ViewScheduleFragment from '../schedule/ViewScheduleFragment';
 import ViewActivityFragment from '../activity/ViewActivityFragment';
 import Loading from '../../components/Loading';
@@ -14,12 +14,10 @@ interface ISession {
 
 const ViewSession: FunctionComponent = () => {
   const [session, setSession] = useState<ISession>();
-  const [sessionId, setSessionId] = useState<number>(1);
+  const [sessionId, setSessionId] = useState<number>(3);
 
   useEffect(() => {
     const loadSession = async () => {
-      // keeping the pattern
-      // later it will be in params?
       if (sessionId) {
         setSession(await getSession(sessionId));
       }
@@ -35,12 +33,18 @@ const ViewSession: FunctionComponent = () => {
   return (
     <Box>
       <h1>View Session Screen</h1>
-      <div>
-        <Link to={`/view/activity/${session.activityId}`}>
-          <ViewActivityFragment activityId={session.activityId} />
+      <Box m={3}>
+        <Card variant='outlined'>
+          <Link to={`/view/activity/${session.activityId}`}>
+            <ViewActivityFragment activityId={session.activityId} />
+          </Link>
+        </Card>
+      </Box>
+      <Box m={3}>
+        <Link to={`/view/schedule/${session.scheduleId}`}>
+          <ViewScheduleFragment scheduleId={session.scheduleId} />
         </Link>
-        <ViewScheduleFragment scheduleId={session.scheduleId} />
-      </div>
+      </Box>
     </Box>
   );
 };
