@@ -43,14 +43,16 @@ const EditTag: FunctionComponent = () => {
       <Box my={3}>
         <Card variant='outlined'>
           <h3>Activities</h3>
-          {tag.activityIds.length !== 0 ? (
-            tag.activityIds.map((id) => (
-              <Box key={id} display='flex' alignItems='center'>
-                <Box flexGrow={5}>
-                  <ViewActivityFragment activityId={id} />
-                </Box>
-
-                <Box flexGrow={1}>
+          {tag.activityIds.map((activityId) => (
+            <Box m={3} key={activityId}>
+              <Card variant='outlined'>
+                <Box
+                  px={3}
+                  display='flex'
+                  justifyContent='space-between'
+                  alignItems='center'
+                >
+                  <ViewActivityFragment activityId={activityId} />
                   <Button
                     component={Link}
                     to={`/edit/tag/${tag.id}`}
@@ -61,15 +63,9 @@ const EditTag: FunctionComponent = () => {
                     X
                   </Button>
                 </Box>
-              </Box>
-            ))
-          ) : (
-            <Box m={3}>
-              <Card variant='outlined'>
-                <p>No Related Activities</p>
               </Card>
             </Box>
-          )}
+          ))}
           <Box m={3}>
             <Button
               variant='contained'

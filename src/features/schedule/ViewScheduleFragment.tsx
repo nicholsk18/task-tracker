@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardContent, Box } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import ViewSortableListFragment from '../sortable/ViewSortableListFragment';
 import { getSchedule } from '../../app/fetchData';
 import Loading from '../../components/Loading';
@@ -30,18 +29,10 @@ const ViewScheduleFragment: FunctionComponent<IProps> = ({ scheduleId }) => {
   }
 
   return (
-    <Box mx={3} my={3}>
-      <Link to={`/view/schedule/${schedule.id}`}>
-        <Card variant='outlined'>
-          <CardContent>
-            <h3>Schedule</h3>
-            {schedule.id !== 0 && (
-              <ViewSortableListFragment sortableIds={schedule.sortableIds} />
-            )}
-          </CardContent>
-        </Card>
-      </Link>
-    </Box>
+    <Card variant='outlined'>
+      <h3>Schedule</h3>
+      <ViewSortableListFragment sortableIds={schedule.sortableIds} />
+    </Card>
   );
 };
 

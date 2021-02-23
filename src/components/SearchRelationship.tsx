@@ -5,6 +5,7 @@ import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
 import { Redirect } from 'react-router-dom';
+import { Box } from '@material-ui/core';
 
 const filter = createFilterOptions();
 
@@ -69,14 +70,16 @@ const SearchRelationship: FunctionComponent<IProps> = ({
         return option.name;
       }}
       renderOption={(option) => option.name}
-      style={{ width: 300 }}
+      style={{ width: 300, margin: 'auto' }}
       freeSolo
       renderInput={(params) => (
-        <TextField
-          {...params}
-          label='Free solo with text demo'
-          variant='outlined'
-        />
+        <Box my={3}>
+          <TextField
+            {...params}
+            label='Search Relationship'
+            variant='outlined'
+          />
+        </Box>
       )}
     />
   );

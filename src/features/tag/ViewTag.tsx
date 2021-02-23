@@ -17,23 +17,16 @@ interface ITag {
 
 const ViewTag: FunctionComponent = () => {
   const [tag, setTag] = useState<ITag>();
-  const [tagId, setTagId] = useState<number>();
-  const [params, setParams] = useState<IUseParams>(useParams()); // this feels wrong
+  const [params, setParams] = useState<IUseParams>(useParams());
 
   useEffect(() => {
     const id = parseInt(params.id);
-    setTagId(id);
-  }, [setTagId]);
-
-  useEffect(() => {
     const loadTag = async () => {
-      if (tagId) {
-        setTag(await getTag(tagId));
-      }
+      setTag(await getTag(id));
     };
 
     loadTag();
-  }, [tagId]);
+  }, [params]);
 
   if (!tag) {
     return <Loading />;
@@ -41,7 +34,7 @@ const ViewTag: FunctionComponent = () => {
 
   return (
     <Box mx={3}>
-      <h2>View Tag</h2>
+      <h2>View Tag Screen</h2>
       <Box my={3}>
         <Card variant='outlined'>
           <h3>{tag.name}</h3>
@@ -51,28 +44,24 @@ const ViewTag: FunctionComponent = () => {
       <Box my={3}>
         <Card variant='outlined'>
           <h3>Activities</h3>
-          {tag.activityIds.length !== 0 ? (
-            tag.activityIds.map((id) => (
-              <div key={id}>
-                <ViewActivityFragment activityId={id} />
-              </div>
-            ))
-          ) : (
-            <Box m={3}>
+          {tag.activityIds.map((activityId) => (
+            <Box m={3} key={activityId}>
               <Card variant='outlined'>
-                <p>No Related Activities</p>
+                <Link to={`/view/activity/${activityId}`}>
+                  <ViewActivityFragment activityId={activityId} />
+                </Link>
               </Card>
             </Box>
-          )}
+          ))}
         </Card>
       </Box>
       <Box my={3}>
         <Button
-          component={Link}
-          to={`/edit/tag/${tagId}`}
-          size='large'
-          variant='contained'
           color='primary'
+          variant='contained'
+          fullWidth={true}
+          component={Link}
+          to={`/edit/tag/${tag.id}`}
         >
           Edit Tag
         </Button>

@@ -28,15 +28,7 @@ const ViewActivityFragment: FunctionComponent<IProps> = ({ activityId }) => {
     return <Loading />;
   }
 
-  return (
-    <Box my={3} mx={3}>
-      <Card variant='outlined'>
-        <CardContent>
-          <h3 style={{ margin: 0 }}>{activity.name}</h3>
-        </CardContent>
-      </Card>
-    </Box>
-  );
+  return <Box py={3}>{activity.name}</Box>;
 };
 
 export default ViewActivityFragment;
