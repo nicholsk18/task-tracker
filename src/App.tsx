@@ -14,6 +14,7 @@ import EditTag from './features/tag/EditTag';
 import AddTagRelationship from './features/tag/AddTagRelationship';
 import AddActivityRelationship from './features/activity/AddActivityRelationship';
 import EditActivity from './features/activity/EditActivity';
+import ViewObject from './features/object/ViewObject';
 
 const App: FunctionComponent = () => {
   return (
@@ -21,9 +22,16 @@ const App: FunctionComponent = () => {
       <Box border={1} my={5} textAlign='center'>
         <Router>
           <Switch>
+            {/* New Routes */}
             <Route exact path='/'>
-              <Redirect to='/view/session' />
+              <Redirect to='/view/1' />
             </Route>
+            <Route path='/view/:id' component={ViewObject} />
+
+            {/* Old Routes */}
+            {/*<Route exact path='/'>*/}
+            {/*  <Redirect to='/view/session' />*/}
+            {/*</Route>*/}
             <Route path='/view/Activity/:id' component={ViewActivity} />
             <Route path='/edit/activity/:id' component={EditActivity} />
             <Route

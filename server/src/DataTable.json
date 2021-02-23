@@ -1,0 +1,44 @@
+{
+  "1": {
+    "type": "Activity",
+    "data": {
+      "name": "Running"
+    }
+  },
+  "2": {
+    "type": "Activity",
+    "data": {
+      "name": "Biking"
+    }
+  },
+  "3": {
+    "type": "Tag",
+    "data": {
+      "name": "Outdoors"
+    }
+  },
+  "4": {
+    "type": "Activity",
+    "data": {
+      "name": "Sleeping"
+    }
+  },
+  "5": {
+    "type": "Tag",
+    "data": {
+      "name": "Exercise"
+    }
+  },
+  "6": {
+    "type": "Activity",
+    "data": {
+      "name": "Eating"
+    }
+  },
+  "7": {
+    "type": "Tag",
+    "data": {
+      "name": "Morning"
+    }
+  }
+}
