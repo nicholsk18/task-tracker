@@ -10,11 +10,7 @@ type Relationships = {
   }
 }
 const ViewObjectFragment: FunctionComponent<Relationships> = ({ relationship }) => {
-  return (
-    <Card variant='outlined'>
-      <h4>{relationship.data.name}</h4>
-    </Card>
-  )
+  return <h4>{relationship.data.name}</h4>
 }
 
 export default ViewObjectFragment

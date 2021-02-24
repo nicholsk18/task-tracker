@@ -1,15 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Box, Button, Card } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
 import { getObjectData } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
 import ViewObjectFragment from './ViewObjectFragment';
-
-
-interface IUseParams {
-  id: string;
-}
 
 // This will go in model file
 type DataObject = {
@@ -27,7 +21,7 @@ type DataObject = {
   }]
 }
 
-const ViewObject: FunctionComponent = (props) =>{
+const ViewObject: FunctionComponent = () =>{
   const urlID = window.location.pathname.split('/').pop()
 
   const [object, setObject] = useState<DataObject>()
@@ -68,15 +62,21 @@ const ViewObject: FunctionComponent = (props) =>{
         <Card variant='outlined'>
           {/* type should be same for all relationships so this shouldnt be a problem?*/}
           <h3>{object.relationships[0].type}</h3>
-          {object.relationships.map((relationship, index) => (
-            <Box m={3} key={index}>
-              {/* Made loop here because of the links */}
-              {/* If we link fragment where links are not needed to edit screen */}
-              <Link to={`/view/${relationship.id}`}>
-                <ViewObjectFragment relationship={relationship} />
-              </Link>
-            </Box>
-          ))}
+          {object.relationships[0].data ? (
+            object.relationships.map((relationship, index) => (
+              <Box m={3} key={index}>
+                <Card variant='outlined'>
+                  {/* Made loop here because of the links */}
+                  {/* If we link fragment where links are not needed to edit screen */}
+                  <Link to={`/view/${relationship.id}`}>
+                    <ViewObjectFragment relationship={relationship} />
+                  </Link>
+                </Card>
+              </Box>
+            ))
+          ) : (
+            <div>No Relationships</div>
+          )}
         </Card>
       </Box>
 
@@ -86,7 +86,7 @@ const ViewObject: FunctionComponent = (props) =>{
           variant='contained'
           fullWidth={true}
           component={Link}
-          to={`/edit/activity/${object.id}`}
+          to={`/edit/${object.id}`}
         >
           Edit {object.type}
         </Button>
