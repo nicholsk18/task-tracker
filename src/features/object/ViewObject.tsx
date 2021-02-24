@@ -28,13 +28,18 @@ type DataObject = {
 }
 
 const ViewObject: FunctionComponent = (props) =>{
-  // const params = useParams()
+  const urlID = window.location.pathname.split('/').pop()
+
   const [object, setObject] = useState<DataObject>()
-  const [params, setParams] = useState<IUseParams>(useParams())
   const [id, setId] = useState<number>(0)
 
-  // id change does not fetch new data
-  // will fix next
+  useEffect(() => {
+    if (urlID) {
+      const intID = parseInt(urlID)
+      setId(intID);
+    }
+  }, [urlID])
+
   useEffect(() => {
     const loadObject = async () => {
       if (id !== 0) {
