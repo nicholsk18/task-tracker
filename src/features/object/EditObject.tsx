@@ -6,52 +6,58 @@ import { Link } from 'react-router-dom';
 import ViewObjectFragment from './ViewObjectFragment';
 
 type DataObject = {
-  id: number,
-  type: string,
+  id: number;
+  type: string;
   data: {
-    name: string,
-  },
-  relationships: [{
-    id: number,
-    type: string
-    data: {
-      name: string
-    },
-  }]
-}
+    name: string;
+  };
+  relationships: [
+    {
+      id: number;
+      type: string;
+      data: {
+        name: string;
+      };
+    }
+  ];
+};
 
 const EditObject: FunctionComponent = () => {
-  const urlID = window.location.pathname.split('/').pop()
+  const urlID = window.location.pathname.split('/').pop();
 
-  const [object, setObject] = useState<DataObject>()
-  const [id, setId] = useState<number>(0)
+  const [object, setObject] = useState<DataObject>();
+  const [id, setId] = useState<number>(0);
 
   useEffect(() => {
     if (urlID) {
-      const intID = parseInt(urlID)
+      const intID = parseInt(urlID);
       setId(intID);
     }
-  }, [urlID])
+  }, [urlID]);
 
   useEffect(() => {
     const loadObject = async () => {
       if (id !== 0) {
-        setObject(await getObjectData(id))
+        setObject(await getObjectData(id));
       }
-    }
+    };
 
     console.log('test');
-    loadObject()
-  }, [id])
+    loadObject();
+  }, [id]);
 
   if (!object) {
     return <Loading />;
   }
 
   // should this be here?
-  const removeRelationship = async (type:string, id:number, relID:number) => {
-    setObject(await removeObjectData({type, id, relID}))
-  }
+  const removeRelationship = async (
+    type: string,
+    id: number,
+    relID: number
+  ) => {
+    setObject(await removeObjectData({ type, id, relID }));
+  };
 
   return (
     <Box mx={3}>
@@ -81,7 +87,13 @@ const EditObject: FunctionComponent = () => {
                       size='large'
                       variant='contained'
                       color='secondary'
-                      onClick={() => removeRelationship(object.type, object.id, relationship.id)}
+                      onClick={() =>
+                        removeRelationship(
+                          object.type,
+                          object.id,
+                          relationship.id
+                        )
+                      }
                     >
                       X
                     </Button>
@@ -106,7 +118,7 @@ const EditObject: FunctionComponent = () => {
         </Card>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default EditObject
+export default EditObject;

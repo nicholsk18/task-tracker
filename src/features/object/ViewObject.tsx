@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { Box, Button, Card } from '@material-ui/core';
 import { getObjectData } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
@@ -7,42 +7,44 @@ import ViewObjectFragment from './ViewObjectFragment';
 
 // This will go in model file
 type DataObject = {
-  id: number,
-  type: string,
+  id: number;
+  type: string;
   data: {
-    name: string,
-  },
-  relationships: [{
-    id: number,
-    type: string
-    data: {
-      name: string
-    },
-  }]
-}
+    name: string;
+  };
+  relationships: [
+    {
+      id: number;
+      type: string;
+      data: {
+        name: string;
+      };
+    }
+  ];
+};
 
-const ViewObject: FunctionComponent = () =>{
-  const urlID = window.location.pathname.split('/').pop()
+const ViewObject: FunctionComponent = () => {
+  const urlID = window.location.pathname.split('/').pop();
 
-  const [object, setObject] = useState<DataObject>()
-  const [id, setId] = useState<number>(0)
+  const [object, setObject] = useState<DataObject>();
+  const [id, setId] = useState<number>(0);
 
   useEffect(() => {
     if (urlID) {
-      const intID = parseInt(urlID)
+      const intID = parseInt(urlID);
       setId(intID);
     }
-  }, [urlID])
+  }, [urlID]);
 
   useEffect(() => {
     const loadObject = async () => {
       if (id !== 0) {
-        setObject(await getObjectData(id))
+        setObject(await getObjectData(id));
       }
-    }
+    };
 
-    loadObject()
-  }, [id])
+    loadObject();
+  }, [id]);
 
   if (!object) {
     return <Loading />;
@@ -92,7 +94,7 @@ const ViewObject: FunctionComponent = () =>{
         </Button>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default ViewObject
+export default ViewObject;
