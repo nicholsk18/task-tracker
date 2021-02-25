@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Relationship } from '../../models/Relationship';
 
 type Relationships = {
-  relationship: Relationship
+  relationship: Relationship;
 };
 
 const ViewObjectFragment: FunctionComponent<Relationships> = ({

@@ -1,82 +1,63 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Card } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import { getObjectData } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
 import ViewObjectFragment from './ViewObjectFragment';
 import { DataObject } from '../../models/DataObject';
+import BoxContainer from '../../components/BoxContainer';
+import ButtonContainer from '../../components/ButtonContainer';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-
   const [object, setObject] = useState<DataObject>();
-  const [id, setId] = useState<number>(0);
-
-  useEffect(() => {
-    if (urlID) {
-      const intID = parseInt(urlID);
-      setId(intID);
-    }
-  }, [urlID]);
 
   useEffect(() => {
     const loadObject = async () => {
-      if (id !== 0) {
+      // make sure urlID exists before parsing and fetching
+      if (urlID) {
+        const id = parseInt(urlID);
         setObject(await getObjectData(id));
       }
     };
 
     loadObject();
-  }, [id]);
+  }, [urlID]);
 
   if (!object) {
     return <Loading />;
   }
 
   return (
-    <Box mx={3}>
+    <React.Fragment>
       {/* Can be removed later */}
       <h2>View {object.type} Screen</h2>
-      <Box my={3}>
-        <Card variant='outlined'>
-          <h3>{object.data.name}</h3>
-        </Card>
-      </Box>
+      <BoxContainer>
+        <h3>{object.data.name}</h3>
+      </BoxContainer>
 
-      <Box my={3}>
-        <Card variant='outlined'>
-          {/* type should be same for all relationships so this shouldnt be a problem?*/}
-          <h3>{object.relationships[0].type}</h3>
-          {object.relationships[0].data ? (
-            object.relationships.map((relationship, index) => (
-              <Box m={3} key={index}>
-                <Card variant='outlined'>
-                  {/* Made loop here because of the links */}
-                  {/* If we link fragment where links are not needed to edit screen */}
-                  <Link to={`/view/${relationship.id}`}>
-                    <ViewObjectFragment relationship={relationship} />
-                  </Link>
-                </Card>
-              </Box>
-            ))
-          ) : (
-            <div>No Relationships</div>
-          )}
-        </Card>
-      </Box>
+      <BoxContainer>
+        {/* type should be same for all relationships so this shouldnt be a problem?*/}
+        <h3>{object.relationships[0].type}</h3>
+        {object.relationships[0].data ? (
+          object.relationships.map((relationship, index) => (
+            <BoxContainer key={index}>
+              {/* Made loop here because of the links */}
+              {/* If we link fragment where links are not needed to edit screen */}
+              <Link to={`/view/${relationship.id}`}>
+                <ViewObjectFragment relationship={relationship} />
+              </Link>
+            </BoxContainer>
+          ))
+        ) : (
+          <Box my={3}>No Relationships</Box>
+        )}
+      </BoxContainer>
 
-      <Box my={3}>
-        <Button
-          color='primary'
-          variant='contained'
-          fullWidth={true}
-          component={Link}
-          to={`/edit/${object.id}`}
-        >
-          Edit {object.type}
-        </Button>
-      </Box>
-    </Box>
+      <ButtonContainer to={`/edit/${object.id}`} fullWidth={true}>
+        Edit {object.type}
+      </ButtonContainer>
+    </React.Fragment>
   );
 };
 

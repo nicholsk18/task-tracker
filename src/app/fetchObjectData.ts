@@ -23,6 +23,8 @@ export const getObjectData = async (id: number): Promise<DataObject> => {
   return await getData(path).then((data) => data);
 };
 
-export const removeObjectData = async (object: DeleteObject): Promise<DataObject> => {
+export const removeObjectData = async (
+  object: DeleteObject
+): Promise<DataObject> => {
   return await removeData(object);
 };
