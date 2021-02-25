@@ -1,8 +1,4 @@
-interface deleteObject {
-  type: string;
-  id: number;
-  relID: number;
-}
+import { DataObject, DeleteObject } from '../models/DataObject';
 
 const getData = (urlPath: string) => {
   return fetch(`http://localhost:3001/${urlPath}`)
@@ -10,7 +6,7 @@ const getData = (urlPath: string) => {
     .then((data) => data);
 };
 
-const removeData = (data: deleteObject) => {
+const removeData = (data: DeleteObject) => {
   return fetch('http://localhost:3001/remove/object/', {
     method: 'DELETE',
     headers: {
@@ -22,29 +18,11 @@ const removeData = (data: deleteObject) => {
     .then((jsonData) => jsonData);
 };
 
-// This will go in model file
-type DataObject = {
-  id: number;
-  type: string;
-  data: {
-    name: string;
-  };
-  relationships: [
-    {
-      id: number;
-      type: string;
-      data: {
-        name: string;
-      };
-    }
-  ];
-};
-
 export const getObjectData = async (id: number): Promise<DataObject> => {
   const path = `object/${id}`;
   return await getData(path).then((data) => data);
 };
 
-export const removeObjectData = async (object: deleteObject) => {
+export const removeObjectData = async (object: DeleteObject): Promise<DataObject> => {
   return await removeData(object);
 };

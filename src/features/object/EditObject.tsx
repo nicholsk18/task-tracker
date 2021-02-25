@@ -4,23 +4,7 @@ import Loading from '../../components/Loading';
 import { Box, Button, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import ViewObjectFragment from './ViewObjectFragment';
-
-type DataObject = {
-  id: number;
-  type: string;
-  data: {
-    name: string;
-  };
-  relationships: [
-    {
-      id: number;
-      type: string;
-      data: {
-        name: string;
-      };
-    }
-  ];
-};
+import { DataObject } from '../../models/DataObject';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();

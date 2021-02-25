@@ -4,24 +4,7 @@ import { Box, Button, Card } from '@material-ui/core';
 import { getObjectData } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
 import ViewObjectFragment from './ViewObjectFragment';
-
-// This will go in model file
-type DataObject = {
-  id: number;
-  type: string;
-  data: {
-    name: string;
-  };
-  relationships: [
-    {
-      id: number;
-      type: string;
-      data: {
-        name: string;
-      };
-    }
-  ];
-};
+import { DataObject } from '../../models/DataObject';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();

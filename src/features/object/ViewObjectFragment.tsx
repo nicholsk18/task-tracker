@@ -1,13 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import { Relationship } from '../../models/Relationship';
+
 type Relationships = {
-  relationship: {
-    data: {
-      name: string;
-    };
-    id: number;
-    type: string;
-  };
+  relationship: Relationship
 };
+
 const ViewObjectFragment: FunctionComponent<Relationships> = ({
   relationship,
 }) => {
