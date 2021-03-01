@@ -1,29 +1,57 @@
 /* eslint-disable no-use-before-define */
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Box } from '@material-ui/core';
+import Loading from './Loading';
+import { addRelationship, getRelationships } from '../app/fetchObjectData';
+import { Data } from '../models/Data';
 
 const filter = createFilterOptions();
 
 interface IProps {
-  name: string;
-  relationships: any[];
+  relatesTo: number;
+  type: string;
 }
 
-const SearchRelationship: FunctionComponent<IProps> = ({
-  name,
-  relationships,
-}) => {
-  const [value, setValue] = useState<{ name: string }>({ name: '' });
-  const [addNew, setAddNew] = useState(false);
+const SearchRelationship: FunctionComponent<IProps> = ({ relatesTo, type }) => {
+  const history = useHistory();
+  const [relationships, setRelationships] = useState<Data[]>();
+  const [value, setValue] = useState<any>(null);
+  const [createValue, setCreateValue] = useState<any>(null);
 
-  if (addNew) {
-    return <Redirect to='/' />;
+  useEffect(() => {
+    const loadRelationships = async () => {
+      setRelationships(await getRelationships(relatesTo, type));
+    };
+
+    loadRelationships();
+  }, [type]);
+
+  const save = async (data: any) => {
+    const { id } = await addRelationship(data);
+    history.push(`/edit/${id}`);
+  };
+
+  useEffect(() => {
+    if (value) {
+      console.log(value);
+      const data = {
+        relatesTo,
+        rel: value,
+      };
+
+      save(data);
+    }
+  }, [value]);
+
+  if (!relationships) {
+    return <Loading />;
   }
+
   return (
     <Autocomplete
       value={value}
@@ -33,8 +61,11 @@ const SearchRelationship: FunctionComponent<IProps> = ({
             name: newValue,
           });
         } else if (newValue && newValue.inputValue) {
-          // if adding new redirect to new place
-          setAddNew(true);
+          // Create a new value from the user input
+          setCreateValue({
+            id: newValue.id,
+            name: newValue.inputValue,
+          });
         } else {
           setValue(newValue);
         }
@@ -70,16 +101,14 @@ const SearchRelationship: FunctionComponent<IProps> = ({
         return option.name;
       }}
       renderOption={(option) => option.name}
-      style={{ width: 300, margin: 'auto' }}
+      style={{ width: 300, margin: '20px auto' }}
       freeSolo
       renderInput={(params) => (
-        <Box my={3}>
-          <TextField
-            {...params}
-            label='Search Relationship'
-            variant='outlined'
-          />
-        </Box>
+        <TextField
+          {...params}
+          label='Search Relationships'
+          variant='outlined'
+        />
       )}
     />
   );

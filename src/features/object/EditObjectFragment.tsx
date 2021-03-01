@@ -1,15 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
-import ViewObjectFragment from './ViewObjectFragment';
 import BoxContainer from '../../components/BoxContainer';
 import { removeObjectData } from '../../app/fetchObjectData';
 import { Relationship } from '../../models/Relationship';
+import { DataObject } from '../../models/DataObject';
+
+interface handleChange {
+  (newState: DataObject): void;
+}
 
 interface IProps {
   id: number;
   type: string;
   relationship: Relationship;
-  onChange: any; // not sure what type this should be
+  onChange: handleChange;
 }
 
 const EditObjectFragment: FunctionComponent<IProps> = ({
@@ -31,7 +35,8 @@ const EditObjectFragment: FunctionComponent<IProps> = ({
         justifyContent='space-between'
         alignItems='center'
       >
-        <ViewObjectFragment relationship={relationship} />
+        <h4>{relationship.data.name}</h4>
+
         <Button
           size='large'
           variant='contained'

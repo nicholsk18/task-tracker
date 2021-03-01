@@ -2,9 +2,9 @@ import { Relationship } from './Relationship';
 import { Data } from './Data';
 
 export type DataObject = {
+  data: Data;
   id: number;
   type: string;
-  data: Data;
   relationships: [Relationship];
 };
 
