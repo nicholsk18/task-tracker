@@ -1,0 +1,20 @@
+{
+  "type": "Activity",
+  "fields": ["name"],
+  "name": "Running",
+  "relationships": ["Tags", "anotherRelationship"],
+  "Tags": {
+    "type": "Tags",
+    "objects": [
+      {
+        "type": "Tag",
+        "fields": ["name"],
+        "name": "Outdoor",
+        "relationships": ["Activity"]
+      }
+    ]
+  },
+  "anotherRelationship": {
+
+  }
+}

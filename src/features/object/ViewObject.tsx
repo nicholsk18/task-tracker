@@ -25,6 +25,7 @@ const ViewObject: FunctionComponent = () => {
   if (!object) {
     return <Loading />;
   }
+  console.log(object)
 
   return (
     <React.Fragment>
