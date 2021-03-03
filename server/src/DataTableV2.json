@@ -1,20 +1,54 @@
-{
-  "type": "Activity",
-  "fields": ["name"],
-  "name": "Running",
-  "relationships": ["Tags", "anotherRelationship"],
-  "Tags": {
-    "type": "Tags",
-    "objects": [
+[
+  {
+    "type": "Activity",
+    "fields": ["name"],
+    "relationships": ["Tags"],
+    "references": ["Schedules", "Sessions"],
+    "name": "Running",
+    "Tags": [
       {
         "type": "Tag",
         "fields": ["name"],
-        "name": "Outdoor",
-        "relationships": ["Activity"]
+        "name": "Outdoor"
+      },
+      {
+        "type": "Tag",
+        "fields": ["name"],
+        "name": "Exercise"
+      }
+    ],
+    "Schedules": [
+      {
+        "type": "Schedule",
+        "fields": ["data"],
+        "data": {
+          "partOne": "something",
+          "partTwo": "other"
+        }
+      }
+    ],
+    "Sessions": [
+      {
+        "type": "Session",
+        "fields": ["dates"],
+        "dates": ["01/02/21", "01/03/21"]
       }
     ]
   },
-  "anotherRelationship": {
-
+  {
+    "type": "Tag",
+    "fields": ["name"],
+    "name": "Outdoor",
+    "relationships": ["Activities"],
+    "Activities": {
+      "type": "Activities",
+      "objects": [
+        {
+          "type": "Activity",
+          "fields": ["name"],
+          "name": "Running"
+        }
+      ]
+    }
   }
-}
+]

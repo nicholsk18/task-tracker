@@ -1,0 +1,83 @@
+[
+  {
+    "type": "Activity",
+    "fields": ["name"],
+    "name": "Running",
+    "relationships": ["Tags"],
+    "Tags": {
+      "type": "Tags",
+      "objects": [
+        {
+          "type": "Tag",
+          "fields": ["name"],
+          "name": "Outdoor"
+        },
+        {
+          "type": "Tag",
+          "fields": ["name"],
+          "name": "Exercise"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Tag",
+    "fields": ["name"],
+    "name": "Outdoor",
+    "relationships": ["Activities"],
+    "Activities": {
+      "type": "Activities",
+      "objects": [
+        {
+          "type": "Activity",
+          "fields": ["name"],
+          "name": "Running"
+        }
+      ]
+    }
+  },
+
+  {
+    "type": "Activity",
+    "name": "Running",
+    "relationships": [
+      {
+        "type": "Tag",
+        "name": "Outdoor"
+      },
+      {
+        "type": "Tag",
+        "name": "Exercise"
+      }
+    ],
+    "references": [
+      {
+        "type": "Schedule",
+        "soratbles": [
+          {
+            "partOne": "",
+            "partTwo": ""
+          }
+        ]
+      },
+      {
+        "type": "Session",
+        "date": "02/01/21"
+      }
+    ]
+  },
+  {
+    "type": "Tag",
+    "name": "Outdoor",
+    "relationships": [
+      {
+        "type": "Activity",
+        "name": "Running"
+      },
+      {
+        "type": "Activity",
+        "name": "Biking"
+      }
+    ]
+  }
+]
