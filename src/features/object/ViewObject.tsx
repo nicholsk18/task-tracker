@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getObjectData } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
 import MapObject from './MapObject';
+import ButtonContainer from '../../components/ButtonContainer';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -27,6 +28,10 @@ const ViewObject: FunctionComponent = () => {
     <React.Fragment>
       <MapObject object={object} fields={object.fields} />
       <MapObject object={object} fields={object.relationships} />
+
+      <ButtonContainer to={`/edit/${object.id}`} fullWidth={true}>
+        Edit {object.type}
+      </ButtonContainer>
     </React.Fragment>
   );
 };

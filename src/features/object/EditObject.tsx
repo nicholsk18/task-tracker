@@ -4,10 +4,11 @@ import Loading from '../../components/Loading';
 import { DataObject } from '../../models/DataObject';
 import BoxContainer from '../../components/BoxContainer';
 import EditListFragment from './EditListFragment';
+import MapEditObject from './MapEditObject';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<DataObject>();
+  const [object, setObject] = useState<any>();
 
   useEffect(() => {
     const loadObject = async () => {
@@ -30,13 +31,16 @@ const EditObject: FunctionComponent = () => {
 
   return (
     <React.Fragment>
-      {/* Can be removed later */}
-      <h2>Edit {object.type} Screen</h2>
-      <BoxContainer>
-        <h3>{object.data.name}</h3>
-      </BoxContainer>
+      <MapEditObject object={object} fields={object.fields} />
+      <MapEditObject object={object} fields={object.relationships} />
 
-      <EditListFragment object={object} onChange={handleChange} />
+      {/* Can be removed later */}
+      {/*<h2>Edit {object.type} Screen</h2>*/}
+      {/*<BoxContainer>*/}
+      {/*  <h3>{object.data.name}</h3>*/}
+      {/*</BoxContainer>*/}
+
+      {/*<EditListFragment object={object} onChange={handleChange} />*/}
     </React.Fragment>
   );
 };

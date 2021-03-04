@@ -7,7 +7,7 @@ const getData = (urlPath: string) => {
     .then((data) => data);
 };
 
-const removeData = (data: DeleteObject) => {
+const removeData = (data: any) => {
   return fetch('http://localhost:3001/remove/object/', {
     method: 'DELETE',
     headers: {
@@ -36,9 +36,14 @@ export const getObjectData = async (id: number): Promise<DataObject> => {
   return await getData(path).then((data) => data);
 };
 
-export const removeObjectData = async (
-  object: DeleteObject
-): Promise<DataObject> => {
+export const removeObjectData = async (id: number, relationship: any) => {
+  const object = {
+    id,
+    relationship
+  }
+
+  const test = await removeData(object)
+  console.log(test);
   return await removeData(object);
 };
 
