@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 const ViewFieldFragment: FunctionComponent = () => {
-  return <div>viewFieldFragment</div>
-}
+  return <div>viewFieldFragment</div>;
+};
 
-export default ViewFieldFragment
+export default ViewFieldFragment;

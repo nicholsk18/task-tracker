@@ -1,14 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getObjectData } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
-import { DataObject } from '../../models/DataObject';
-import BoxContainer from '../../components/BoxContainer';
-import ButtonContainer from '../../components/ButtonContainer';
-import ViewListFragment from './ViewListFragment';
+import MapObject from './MapObject';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<DataObject>();
+  const [object, setObject] = useState<any>();
 
   useEffect(() => {
     const loadObject = async () => {
@@ -25,21 +22,11 @@ const ViewObject: FunctionComponent = () => {
   if (!object) {
     return <Loading />;
   }
-  console.log(object)
 
   return (
     <React.Fragment>
-      {/* Can be removed later */}
-      <h2>View {object.type} Screen</h2>
-      <BoxContainer>
-        <h3>{object.data.name}</h3>
-      </BoxContainer>
-
-      <ViewListFragment relationships={object.relationships} />
-
-      <ButtonContainer to={`/edit/${object.id}`} fullWidth={true}>
-        Edit {object.type}
-      </ButtonContainer>
+      <MapObject object={object} fields={object.fields} />
+      <MapObject object={object} fields={object.relationships} />
     </React.Fragment>
   );
 };
