@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "type": "Activity",
     "fields": ["name"],
     "relationships": ["Tags"],
@@ -36,6 +37,45 @@
     ]
   },
   {
+    "id": 2,
+    "type": "Activity",
+    "fields": ["name"],
+    "relationships": ["Tags"],
+    "references": [],
+    "name": "Biking",
+    "Tags": [
+      {
+        "type": "Tag",
+        "fields": ["name"],
+        "name": "Outdoor"
+      },
+      {
+        "type": "Tag",
+        "fields": ["name"],
+        "name": "Exercise"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "Activity",
+    "fields": ["name"],
+    "relationships": ["Tags"],
+    "references": [],
+    "name": "Sleeping",
+    "Tags": []
+  },
+  {
+    "id": 4,
+    "type": "Activity",
+    "fields": ["name"],
+    "relationships": ["Tags"],
+    "references": ["Schedules", "Sessions"],
+    "name": "Sleeping",
+    "Tags": []
+  },
+  {
+    "id": 5,
     "type": "Tag",
     "fields": ["name"],
     "name": "Outdoor",
@@ -47,6 +87,28 @@
           "type": "Activity",
           "fields": ["name"],
           "name": "Running"
+        }
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "type": "Tag",
+    "fields": ["name"],
+    "name": "Exercise",
+    "relationships": ["Activities"],
+    "Activities": {
+      "type": "Activities",
+      "objects": [
+        {
+          "type": "Activity",
+          "fields": ["name"],
+          "name": "Running"
+        },
+        {
+          "type": "Activity",
+          "fields": ["name"],
+          "name": "Biking"
         }
       ]
     }
