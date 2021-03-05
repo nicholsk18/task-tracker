@@ -24,7 +24,7 @@ const EditObjectFragment: FunctionComponent<IProps> = ({
 }) => {
   async function removeRelationship() {
     const relID = relationship.id;
-    onChange(await removeObjectData({ type, id, relID }));
+    // onChange(await removeObjectData({ type, id, relID }));
   }
 
   return (

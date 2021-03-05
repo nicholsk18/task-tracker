@@ -5,12 +5,13 @@ import MapObject from './MapObject';
 import ButtonContainer from '../../components/ButtonContainer';
 
 const ViewObject: FunctionComponent = () => {
+  // would all this go in to menu component
+  // that calls ViewObject and passes in that object?
   const urlID = window.location.pathname.split('/').pop();
   const [object, setObject] = useState<any>();
 
   useEffect(() => {
     const loadObject = async () => {
-      // make sure urlID exists before parsing and fetching
       if (urlID) {
         const id = parseInt(urlID);
         setObject(await getObjectData(id));
@@ -26,6 +27,9 @@ const ViewObject: FunctionComponent = () => {
 
   return (
     <React.Fragment>
+      {/* its not pretty but works out better when mapping */}
+      {/* fields might be a bad prop name but helps to map over different things */}
+      {/* object.fields object.relationships and object.references or anything else we add */}
       <MapObject object={object} fields={object.fields} />
       <MapObject object={object} fields={object.relationships} />
 

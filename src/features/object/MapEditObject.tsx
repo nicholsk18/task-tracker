@@ -4,6 +4,7 @@ import ViewValueFragment from './ViewValueFragment';
 import EditRelationshipFragment from './EditRelationshipFragment';
 
 const MapEditObject: FunctionComponent<any> = ({ object, fields}) => {
+
   return (
     <React.Fragment>
       {fields.map((field: string, index: number) => {

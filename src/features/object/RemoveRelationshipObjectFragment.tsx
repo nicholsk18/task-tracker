@@ -12,7 +12,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<Relationship> = ({ rel
   const urlID = window.location.pathname.split('/').pop();
 
   async function removeRelationship (relationship: any) {
-    await removeObjectData(urlID, relationship)
+    // await removeObjectData(urlID, relationship)
   }
 
   return (
