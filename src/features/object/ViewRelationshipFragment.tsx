@@ -6,7 +6,7 @@ const ViewRelationshipFragment: FunctionComponent<any> = ({
   relationships,
 }) => {
   return (
-    <React.Fragment>
+    <>
       {relationships.map((relationship: any, index: number) => (
         <div key={index}>
           <ViewValueFragment value={relationship.to} />
@@ -14,7 +14,7 @@ const ViewRelationshipFragment: FunctionComponent<any> = ({
           <ViewRelationshipObjectFragment objects={relationship.objects} />
         </div>
       ))}
-    </React.Fragment>
+    </>
   );
 };
 

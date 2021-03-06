@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import BoxContainer from '../../components/BoxContainer';
-import ViewValueFragment from './ViewValueFragment';
 import EditRelationshipFragment from './EditRelationshipFragment';
+import ViewValueFragment from './ViewValueFragment';
 
-const MapEditObject: FunctionComponent<any> = ({ object, fields }) => {
+const EditFields: FunctionComponent<any> = ({ object }) => {
   return (
-    <React.Fragment>
-      {fields.map((field: string, index: number) => {
+    <>
+      {object.fields.map((field: any, index: number) => {
         if (typeof object[field] === 'string') {
           return (
             <BoxContainer key={index}>
@@ -18,16 +18,13 @@ const MapEditObject: FunctionComponent<any> = ({ object, fields }) => {
         if (typeof object[field] === 'object') {
           return (
             <BoxContainer key={index}>
-              <EditRelationshipFragment
-                name={field}
-                relationships={object[field]}
-              />
+              <EditRelationshipFragment relationships={object[field]} />
             </BoxContainer>
           );
         }
       })}
-    </React.Fragment>
+    </>
   );
 };
 
-export default MapEditObject;
+export default EditFields;

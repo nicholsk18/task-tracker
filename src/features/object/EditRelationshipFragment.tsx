@@ -3,18 +3,18 @@ import ViewValueFragment from './ViewValueFragment';
 import RemoveRelationshipObjectFragment from './RemoveRelationshipObjectFragment';
 
 const EditRelationshipFragment: FunctionComponent<any> = ({
-  name,
   relationships,
 }) => {
   return (
-    <React.Fragment>
-      <ViewValueFragment value={name} />
+    <>
       {relationships.map((relationship: any, index: number) => (
         <div key={index}>
-          <RemoveRelationshipObjectFragment relationship={relationship} />
+          <ViewValueFragment value={relationship.to} />
+
+          <RemoveRelationshipObjectFragment objects={relationship.objects} />
         </div>
       ))}
-    </React.Fragment>
+    </>
   );
 };
 

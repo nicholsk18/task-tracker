@@ -26,13 +26,13 @@ const ViewObject: FunctionComponent = () => {
   console.log(object);
 
   return (
-    <React.Fragment>
+    <>
       <ViewFields object={object} />
 
       <ButtonContainer to={`/edit/${object.id}`} fullWidth={true}>
         Edit {object.type}
       </ButtonContainer>
-    </React.Fragment>
+    </>
   );
 };
 

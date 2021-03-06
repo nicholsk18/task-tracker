@@ -9,7 +9,7 @@ const ViewFields: FunctionComponent<any> = ({ object }) => {
       {object.fields.map((field: any, index: number) => {
         if (typeof object[field] === 'string') {
           return (
-            <BoxContainer>
+            <BoxContainer key={index}>
               <ViewValueFragment value={object[field]} />
             </BoxContainer>
           );
@@ -17,7 +17,7 @@ const ViewFields: FunctionComponent<any> = ({ object }) => {
 
         if (typeof object[field] === 'object') {
           return (
-            <BoxContainer>
+            <BoxContainer key={index}>
               <ViewRelationshipFragment relationships={object[field]} />
             </BoxContainer>
           );

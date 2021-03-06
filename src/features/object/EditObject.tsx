@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getObjectData } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
 import { DataObject } from '../../models/DataObject';
-import MapEditObject from './MapEditObject';
+import EditFields from './EditFields';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -28,10 +28,9 @@ const EditObject: FunctionComponent = () => {
   }
 
   return (
-    <React.Fragment>
-      <MapEditObject object={object} fields={object.fields} />
-      <MapEditObject object={object} fields={object.relationships} />
-    </React.Fragment>
+    <>
+      <EditFields object={object} />
+    </>
   );
 };
 

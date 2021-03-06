@@ -1,15 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import MapEditObject from './MapEditObject';
 import { Box, Button } from '@material-ui/core';
 import BoxContainer from '../../components/BoxContainer';
-import { removeObjectData } from '../../app/fetchObjectData';
+import ViewValueFragment from './ViewValueFragment';
 
-type Relationship = {
-  relationship: any;
-};
-
-const RemoveRelationshipObjectFragment: FunctionComponent<Relationship> = ({
-  relationship,
+const RemoveRelationshipObjectFragment: FunctionComponent<{ objects: any }> = ({
+  objects,
 }) => {
   const urlID = window.location.pathname.split('/').pop();
 
@@ -18,25 +13,29 @@ const RemoveRelationshipObjectFragment: FunctionComponent<Relationship> = ({
   }
 
   return (
-    <BoxContainer>
-      <Box
-        px={3}
-        display='flex'
-        justifyContent='space-between'
-        alignItems='center'
-      >
-        <MapEditObject object={relationship} fields={relationship.fields} />
+    <>
+      {objects.map((object: any, index: number) => (
+        <BoxContainer key={index}>
+          <Box
+            px={3}
+            display='flex'
+            justifyContent='space-between'
+            alignItems='center'
+          >
+            <ViewValueFragment value={object.name} />
 
-        <Button
-          size='large'
-          variant='contained'
-          color='secondary'
-          onClick={() => removeRelationship(relationship)}
-        >
-          X
-        </Button>
-      </Box>
-    </BoxContainer>
+            <Button
+              size='large'
+              variant='contained'
+              color='secondary'
+              onClick={() => removeRelationship(object)}
+            >
+              X
+            </Button>
+          </Box>
+        </BoxContainer>
+      ))}
+    </>
   );
 };
 

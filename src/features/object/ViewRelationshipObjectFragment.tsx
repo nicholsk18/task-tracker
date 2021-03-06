@@ -6,13 +6,13 @@ const ViewRelationshipObjectFragment: FunctionComponent<{
   objects: any;
 }> = ({ objects }) => {
   return (
-    <React.Fragment>
+    <>
       {objects.map((object: any, index: number) => (
         <BoxContainer key={index}>
           <ViewValueFragment value={object.name} />
         </BoxContainer>
       ))}
-    </React.Fragment>
+    </>
   );
 };
 
