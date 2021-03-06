@@ -1,18 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import MapObject from './MapObject';
+import BoxContainer from '../../components/BoxContainer';
+import ViewValueFragment from './ViewValueFragment';
 
 const ViewRelationshipObjectFragment: FunctionComponent<{
-  object: any;
-}> = ({ object }) => {
-
-  // this makes it recursive to breaks object down to a value
-  // that will be displayed
+  objects: any;
+}> = ({ objects }) => {
   return (
     <React.Fragment>
-      {/* gets an object of an object */}
-      {/* confusing but makes it recursive */}
-      {/* to break it down to a string value */}
-      <MapObject object={object} fields={object.fields} />
+      {objects.map((object: any, index: number) => (
+        <BoxContainer key={index}>
+          <ViewValueFragment value={object.name} />
+        </BoxContainer>
+      ))}
     </React.Fragment>
   );
 };
