@@ -39,10 +39,10 @@ export const getObjectData = async (id: number): Promise<DataObject> => {
 export const removeObjectData = async (id: number, relationship: any) => {
   const object = {
     id,
-    relationship
-  }
+    relationship,
+  };
 
-  const test = await removeData(object)
+  const test = await removeData(object);
   console.log(test);
   return await removeData(object);
 };

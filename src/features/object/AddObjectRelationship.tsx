@@ -27,7 +27,8 @@ const AddObjectRelationship: FunctionComponent = () => {
   return (
     <BoxContainer>
       <h2>Add {object.type} Relationship</h2>
-      <SearchRelationship        relatesTo={object.id}
+      <SearchRelationship
+        relatesTo={object.id}
         type={object.relationships[0].type}
       />
     </BoxContainer>

@@ -3,8 +3,7 @@ import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
 import EditRelationshipFragment from './EditRelationshipFragment';
 
-const MapEditObject: FunctionComponent<any> = ({ object, fields}) => {
-
+const MapEditObject: FunctionComponent<any> = ({ object, fields }) => {
   return (
     <React.Fragment>
       {fields.map((field: string, index: number) => {
@@ -29,6 +28,6 @@ const MapEditObject: FunctionComponent<any> = ({ object, fields}) => {
       })}
     </React.Fragment>
   );
-}
+};
 
-export default MapEditObject
+export default MapEditObject;

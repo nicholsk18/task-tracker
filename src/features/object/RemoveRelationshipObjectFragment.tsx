@@ -8,10 +8,12 @@ type Relationship = {
   relationship: any;
 };
 
-const RemoveRelationshipObjectFragment: FunctionComponent<Relationship> = ({ relationship }) => {
+const RemoveRelationshipObjectFragment: FunctionComponent<Relationship> = ({
+  relationship,
+}) => {
   const urlID = window.location.pathname.split('/').pop();
 
-  async function removeRelationship (relationship: any) {
+  async function removeRelationship(relationship: any) {
     // await removeObjectData(urlID, relationship)
   }
 
@@ -35,7 +37,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<Relationship> = ({ rel
         </Button>
       </Box>
     </BoxContainer>
-  )
-}
+  );
+};
 
-export default RemoveRelationshipObjectFragment
+export default RemoveRelationshipObjectFragment;

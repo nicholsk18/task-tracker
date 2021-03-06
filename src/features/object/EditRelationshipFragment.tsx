@@ -2,7 +2,10 @@ import React, { FunctionComponent } from 'react';
 import ViewValueFragment from './ViewValueFragment';
 import RemoveRelationshipObjectFragment from './RemoveRelationshipObjectFragment';
 
-const EditRelationshipFragment: FunctionComponent<any> = ({ name, relationships }) => {
+const EditRelationshipFragment: FunctionComponent<any> = ({
+  name,
+  relationships,
+}) => {
   return (
     <React.Fragment>
       <ViewValueFragment value={name} />
@@ -12,7 +15,7 @@ const EditRelationshipFragment: FunctionComponent<any> = ({ name, relationships 
         </div>
       ))}
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default EditRelationshipFragment
+export default EditRelationshipFragment;
