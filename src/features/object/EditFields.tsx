@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
 import ViewValueFragment from './ViewValueFragment';
+import ButtonContainer from '../../components/ButtonContainer';
 
 const EditFields: FunctionComponent<any> = ({ object }) => {
   return (
@@ -19,6 +20,10 @@ const EditFields: FunctionComponent<any> = ({ object }) => {
           return (
             <BoxContainer key={index}>
               <EditRelationshipFragment relationships={object[field]} />
+
+              <ButtonContainer to={`/add/${object.id}`} fullWidth={true}>
+                Add Relationship
+              </ButtonContainer>
             </BoxContainer>
           );
         }

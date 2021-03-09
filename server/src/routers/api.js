@@ -1,10 +1,10 @@
 const express = require('express')
-const DataTableV2 = require('../DataTableV2.json')
+const DataTable = require('../DataTable.json')
 const router = new express.Router()
 
 router.get('/object/:id', (req, res) => {
   const id = parseInt(req.params.id)
-  const dataObject = DataTableV2.find(obj => obj.id === id)
+  const dataObject = DataTable.find(obj => obj.id === id)
   res.send(dataObject)
 })
 
@@ -14,7 +14,7 @@ router.delete('/remove/object', (req, res) => {
   const type = relationship.type
   const name = relationship.name
 
-  const object = DataTableV2.find(obj => obj.id === id)
+  const object = DataTable.find(obj => obj.id === id)
   object[type + 's'] = object[type + 's'].filter(obj => obj.name !== name)
 
   res.send(object)
@@ -36,6 +36,26 @@ router.post('/get/type', (req, res) => {
   }
 
   res.send(relationships)
+})
+
+router.post('/get/relationships', (req, res) => {
+  const type = req.body.data
+  const relationships = []
+
+  for (const prop in DataTable){
+    /**
+     * DataTable returns undefined sometimes
+     */
+    if (type === 'Tag' && DataTable[prop].type === 'Activity') {
+      const relObj = DataTable[prop]
+      console.log(relObj.Relationships);
+      // if (relObj.length > 0) {
+      //   relationships.push(relObj[0].objects);
+      // }
+    }
+  }
+
+  console.log(relationships);
 })
 
 router.post('/add/relationship', (req, res) => {

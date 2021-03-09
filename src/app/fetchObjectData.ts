@@ -47,15 +47,9 @@ export const removeObjectData = async (id: number, relationship: any) => {
   return await removeData(object);
 };
 
-export const getRelationships = async (
-  relatesTo: number,
-  type: string
-): Promise<Data[]> => {
-  const path = `get/type`;
-  const obj = {
-    relatesTo,
-    type,
-  };
+export const getRelationships = async (data: string) => {
+  const path = `get/relationships`;
+  const obj = data
   return await postData(path, obj).then((data) => data);
 };
 

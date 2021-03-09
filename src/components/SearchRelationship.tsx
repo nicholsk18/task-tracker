@@ -12,41 +12,38 @@ import { Data } from '../models/Data';
 
 const filter = createFilterOptions();
 
-interface IProps {
-  relatesTo: number;
-  type: string;
-}
 
-const SearchRelationship: FunctionComponent<IProps> = ({ relatesTo, type }) => {
+const SearchRelationship: FunctionComponent<any> = ({ object }) => {
   const history = useHistory();
-  const [relationships, setRelationships] = useState<Data[]>();
+  const [relationships, setRelationships] = useState<any>(object.Relationships[0].objects);
   const [value, setValue] = useState<any>(null);
   const [createValue, setCreateValue] = useState<any>(null);
 
   useEffect(() => {
     const loadRelationships = async () => {
-      setRelationships(await getRelationships(relatesTo, type));
+      console.log(object.type);
+      setRelationships(await getRelationships(object.type));
     };
 
     loadRelationships();
-  }, [type]);
+  }, []);
 
-  const save = async (data: any) => {
-    const { id } = await addRelationship(data);
-    history.push(`/edit/${id}`);
-  };
-
-  useEffect(() => {
-    if (value) {
-      console.log(value);
-      const data = {
-        relatesTo,
-        rel: value,
-      };
-
-      save(data);
-    }
-  }, [value]);
+  // const save = async (data: any) => {
+  //   const { id } = await addRelationship(data);
+  //   history.push(`/edit/${id}`);
+  // };
+  //
+  // useEffect(() => {
+  //   if (value) {
+  //     console.log(value);
+  //     const data = {
+  //       relatesTo,
+  //       rel: value,
+  //     };
+  //
+  //     save(data);
+  //   }
+  // }, [value]);
 
   if (!relationships) {
     return <Loading />;

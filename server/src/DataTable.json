@@ -1,44 +1,100 @@
-{
-  "1": {
+[
+  {
+    "id": 1,
     "type": "Activity",
-    "data": {
-      "name": "Running"
-    }
+    "fields": ["name", "Relationships"],
+    "name": "Running",
+    "Relationships": [
+      {
+        "to": "Tags",
+        "objects": [
+          {
+            "id": 5,
+            "name": "Outdoor"
+          },
+          {
+            "id": 6,
+            "name": "Exercise"
+          }
+        ]
+      }
+    ]
   },
-  "2": {
+  {
+    "id": 2,
     "type": "Activity",
-    "data": {
-      "name": "Biking"
-    }
+    "fields": ["name", "Relationships"],
+    "name": "Biking",
+    "Relationships": [
+      {
+        "to": "Tags",
+        "objects": [
+          {
+            "id": 5,
+            "name": "Outdoor"
+          },
+          {
+            "id": 6,
+            "name": "Exercise"
+          }
+        ]
+      }
+    ]
   },
-  "3": {
+  {
+    "id": 3,
+    "type": "Activity",
+    "fields": ["name", "Relationships"],
+    "name": "Sleeping",
+    "Relationships": []
+  },
+  {
+    "id": 4,
+    "type": "Activity",
+    "fields": ["name", "Relationships"],
+    "name": "Sleeping",
+    "Relationshiops": []
+  },
+  {
+    "id": 5,
     "type": "Tag",
-    "data": {
-      "name": "Outdoors"
-    }
+    "fields": ["name", "Relationships"],
+    "name": "Outdoor",
+    "Relationships": [
+      {
+        "to": "Activities",
+        "objects": [
+          {
+            "id": 1,
+            "name": "Running"
+          },
+          {
+            "id": 2,
+            "name": "Biking"
+          }
+        ]
+      }
+    ]
   },
-  "4": {
-    "type": "Activity",
-    "data": {
-      "name": "Sleeping"
-    }
-  },
-  "5": {
+  {
+    "id": 6,
     "type": "Tag",
-    "data": {
-      "name": "Exercise"
-    }
-  },
-  "6": {
-    "type": "Activity",
-    "data": {
-      "name": "Eating"
-    }
-  },
-  "7": {
-    "type": "Tag",
-    "data": {
-      "name": "Morning"
-    }
+    "fields": ["name", "Relationships"],
+    "name": "Exercise",
+    "Relationships": [
+      {
+        "to": "Activities",
+        "objects": [
+          {
+            "id": 1,
+            "name": "Running"
+          },
+          {
+            "id": 2,
+            "name": "Biking"
+          }
+        ]
+      }
+    ]
   }
-}
+]
