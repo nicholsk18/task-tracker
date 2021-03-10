@@ -1,30 +1,39 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
-import ViewValueFragment from './ViewValueFragment';
 import ButtonContainer from '../../components/ButtonContainer';
+import EditValueFragment from './EditValueFragment';
 
 const EditFields: FunctionComponent<any> = ({ object }) => {
+  const [value, setValue] = useState<string>("")
+
   return (
     <>
       {object.fields.map((field: any, index: number) => {
         if (typeof object[field] === 'string') {
+
           return (
             <BoxContainer key={index}>
-              <ViewValueFragment value={object[field]} />
+              <EditValueFragment value={object[field]} />
             </BoxContainer>
           );
         }
 
         if (typeof object[field] === 'object') {
           return (
-            <BoxContainer key={index}>
-              <EditRelationshipFragment relationships={object[field]} />
+            <>
+              <BoxContainer key={index}>
+                <EditRelationshipFragment relationships={object[field]} />
+
+                <ButtonContainer to={`/add/${object.id}`} fullWidth={false}>
+                  Add Relationship
+                </ButtonContainer>
+              </BoxContainer>
 
               <ButtonContainer to={`/add/${object.id}`} fullWidth={true}>
-                Add Relationship
+                Save {object.type}
               </ButtonContainer>
-            </BoxContainer>
+            </>
           );
         }
       })}
