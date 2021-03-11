@@ -26,10 +26,18 @@ const EditObject: FunctionComponent = () => {
   function handleChange(newState: DataObject) {
     setObject(newState);
   }
+  
+  //okay I'm doing this horribly
+  //but you get the idea?
+  function editObject(value: any, field: any) {
+    const newObject = {...object};
+    newObject[field] = value;
+    setObject(newObject);
+  }
 
   return (
     <>
-      <EditFields object={object} />
+      <EditFields object={object} editObject={editObject}/>
     </>
   );
 };
