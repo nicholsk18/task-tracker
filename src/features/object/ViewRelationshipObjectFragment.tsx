@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
 

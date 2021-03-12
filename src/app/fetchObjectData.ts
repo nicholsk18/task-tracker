@@ -49,7 +49,7 @@ export const removeObjectData = async (id: number, relationship: any) => {
 
 export const getRelationships = async (data: string) => {
   const path = `get/relationships`;
-  const obj = data
+  const obj = data;
   return await postData(path, obj).then((data) => data);
 };
 
@@ -57,6 +57,12 @@ export const addRelationship = async (
   data: string
 ): Promise<{ id: number }> => {
   const path = `add/relationship`;
+  const obj = data;
+  return await postData(path, obj).then((data) => data);
+};
+
+export const updateObject = async (data: any) => {
+  const path = 'save/object';
   const obj = data;
   return await postData(path, obj).then((data) => data);
 };

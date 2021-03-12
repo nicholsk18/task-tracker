@@ -14,10 +14,13 @@ const EditFields: FunctionComponent<any> = ({ object, editObject }) => {
     <>
       {object.fields.map((field: any, index: number) => {
         if (typeof object[field] === 'string') {
-
           return (
             <BoxContainer key={index}>
-              <EditValueFragment value={object[field]} field={field} editObject={editObject} />
+              <EditValueFragment
+                value={object[field]}
+                field={field}
+                editObject={editObject}
+              />
             </BoxContainer>
           );
         }
@@ -32,10 +35,6 @@ const EditFields: FunctionComponent<any> = ({ object, editObject }) => {
                   Add Relationship
                 </ButtonContainer>
               </BoxContainer>
-
-              <ButtonContainer to={`/add/${object.id}`} fullWidth={true}>
-                Save {object.type}
-              </ButtonContainer>
             </>
           );
         }

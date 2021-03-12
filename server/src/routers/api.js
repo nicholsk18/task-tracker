@@ -78,4 +78,16 @@ router.post('/add/relationship', (req, res) => {
   res.send({id: relatesTo})
 })
 
+router.post('/save/object', (req, res) => {
+  const objUpdateID = req.body.data.id
+  const newObject = req.body.data
+
+  for (const prop in DataTable) {
+
+    if (DataTable[prop].id === objUpdateID) {
+      DataTable[prop] = newObject
+    }
+  }
+})
+
 module.exports = router

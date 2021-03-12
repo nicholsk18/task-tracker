@@ -23,8 +23,6 @@ const ViewObject: FunctionComponent = () => {
     return <Loading />;
   }
 
-  console.log(object);
-
   return (
     <>
       <ViewFields object={object} />

@@ -1,8 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { getObjectData } from '../../app/fetchObjectData';
+import { Redirect } from 'react-router-dom';
+import { Box, Button } from '@material-ui/core';
+import { getObjectData, updateObject } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
 import { DataObject } from '../../models/DataObject';
 import EditFields from './EditFields';
+import ButtonContainer from '../../components/ButtonContainer';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -23,21 +26,33 @@ const EditObject: FunctionComponent = () => {
     return <Loading />;
   }
 
-  function handleChange(newState: DataObject) {
-    setObject(newState);
-  }
-  
   //okay I'm doing this horribly
   //but you get the idea?
   function editObject(value: any, field: any) {
-    const newObject = {...object};
+    const newObject = { ...object };
     newObject[field] = value;
     setObject(newObject);
   }
 
+  async function saveObject() {
+    const test = await updateObject(object);
+  }
+
   return (
     <>
-      <EditFields object={object} editObject={editObject}/>
+      <EditFields object={object} editObject={editObject} />
+
+      <Box m={3}>
+        <Button
+          href={`/view/${object.id}`}
+          variant='contained'
+          color='primary'
+          fullWidth={true}
+          onClick={saveObject}
+        >
+          Save {object.type}
+        </Button>
+      </Box>
     </>
   );
 };

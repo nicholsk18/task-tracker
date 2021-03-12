@@ -12,10 +12,11 @@ import { Data } from '../models/Data';
 
 const filter = createFilterOptions();
 
-
 const SearchRelationship: FunctionComponent<any> = ({ object }) => {
   const history = useHistory();
-  const [relationships, setRelationships] = useState<any>(object.Relationships[0].objects);
+  const [relationships, setRelationships] = useState<any>(
+    object.Relationships[0].objects
+  );
   const [value, setValue] = useState<any>(null);
   const [createValue, setCreateValue] = useState<any>(null);
 
