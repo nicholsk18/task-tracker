@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
 import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
-import { log } from 'util';
 
 const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
   objects,
