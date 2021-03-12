@@ -1,11 +1,8 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { Box, Button } from '@material-ui/core';
 import { getObjectData, updateObject } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
-import { DataObject } from '../../models/DataObject';
 import EditFields from './EditFields';
-import ButtonContainer from '../../components/ButtonContainer';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -26,24 +23,49 @@ const EditObject: FunctionComponent = () => {
     return <Loading />;
   }
 
-  //okay I'm doing this horribly
-  //but you get the idea?
-  function editObject(value: any, field: any) {
+  function editObject(value: any, objectKey: any) {
+    // key is better
+    // after all it is the key in the object
+
     const newObject = { ...object };
-    newObject[field] = value;
+    newObject[objectKey] = value;
     setObject(newObject);
   }
 
+  function removeRelationship(objectKey: any, removedObject: any) {
+    const tempObject = { ...object };
+
+    const newRelObjects = tempObject[objectKey][0].objects.filter(
+      (object: any) => object.id !== removedObject.id
+    );
+
+    // might be a better way to do this
+    // but idea is it only saves removed relationships
+    // when user saves
+    // other option is
+    // to remove on X click
+    // that two would need to propagete up as well
+    // otherwise we would have to do a hard reload from remove component
+    tempObject[objectKey][0].objects = newRelObjects;
+    setObject(tempObject);
+  }
+
   async function saveObject() {
-    const test = await updateObject(object);
+    await updateObject(object);
   }
 
   return (
     <>
-      <EditFields object={object} editObject={editObject} />
+      <EditFields
+        object={object}
+        editObject={editObject}
+        removeRelationship={removeRelationship}
+      />
 
       <Box m={3}>
         <Button
+          // href is temporary
+          // otherwise on error its still redirect
           href={`/view/${object.id}`}
           variant='contained'
           color='primary'

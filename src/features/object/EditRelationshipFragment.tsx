@@ -4,6 +4,8 @@ import RemoveRelationshipObjectFragment from './RemoveRelationshipObjectFragment
 
 const EditRelationshipFragment: FunctionComponent<any> = ({
   relationships,
+  objectKey,
+  removeRelationship,
 }) => {
   return (
     <>
@@ -11,7 +13,11 @@ const EditRelationshipFragment: FunctionComponent<any> = ({
         <div key={index}>
           <ViewValueFragment value={relationship.to} />
 
-          <RemoveRelationshipObjectFragment objects={relationship.objects} />
+          <RemoveRelationshipObjectFragment
+            objects={relationship.objects}
+            objectKey={objectKey}
+            removeRelationship={removeRelationship}
+          />
         </div>
       ))}
     </>

@@ -88,6 +88,10 @@ router.post('/save/object', (req, res) => {
       DataTable[prop] = newObject
     }
   }
+
+  // some kind of error handling
+  // will go here and we will send code back?
+  res.send({"status": "success"})
 })
 
 module.exports = router

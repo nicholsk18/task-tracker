@@ -2,92 +2,90 @@
   {
     "id": 1,
     "type": "Activity",
+    "contains": ["name", "Relationships"],
     "name": "Running",
     "Relationships": [
       {
         "to": "Tags",
-        "objects": [
-          {
-            "id": 5,
+        "objects": {
+          "5": {
             "name": "Outdoor"
           },
-          {
-            "id": 6,
+          "6": {
             "name": "Exercise"
           }
-        ]
+        }
       }
     ]
   },
   {
     "id": 2,
     "type": "Activity",
+    "contains": ["name", "Relationships"],
     "name": "Biking",
     "Relationships": [
       {
         "to": "Tags",
-        "objects": [
-          {
-            "id": 5,
+        "objects": {
+          "5": {
             "name": "Outdoor"
           },
-          {
-            "id": 6,
+          "6": {
             "name": "Exercise"
           }
-        ]
+        }
       }
     ]
   },
   {
     "id": 3,
     "type": "Activity",
+    "contains": ["name", "Relationships"],
     "name": "Sleeping",
     "Relationships": []
   },
   {
     "id": 4,
     "type": "Activity",
+    "contains": ["name", "Relationships"],
     "name": "Sleeping",
-    "Relationships": []
+    "Relationshiops": []
   },
   {
     "id": 5,
     "type": "Tag",
+    "contains": ["name", "Relationships"],
     "name": "Outdoor",
     "Relationships": [
       {
         "to": "Activities",
-        "objects": [
-          {
-            "id": 1,
+        "objects": {
+          "1": {
             "name": "Running"
           },
-          {
-            "id": 2,
+          "2": {
             "name": "Biking"
           }
-        ]
+        }
       }
     ]
   },
   {
     "id": 6,
     "type": "Tag",
+    "contains": ["name", "Relationships"],
     "name": "Exercise",
     "Relationships": [
       {
         "to": "Activities",
-        "objects": [
-          {
-            "id": 1,
+        "objects": {
+          "1": {
             "name": "Running"
           },
-          {
-            "id": 2,
+          "2": {
             "name": "Biking"
           }
-        ]
+        }
       }
     ]
   }

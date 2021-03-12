@@ -2,16 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
 import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
+import { log } from 'util';
 
-const RemoveRelationshipObjectFragment: FunctionComponent<{ objects: any }> = ({
+const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
   objects,
+  objectKey,
+  removeRelationship,
 }) => {
-  const urlID = window.location.pathname.split('/').pop();
-
-  async function removeRelationship(relationship: any) {
-    // await removeObjectData(urlID, relationship)
-  }
-
   return (
     <>
       {objects.map((object: any, index: number) => (
@@ -28,7 +25,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<{ objects: any }> = ({
               size='large'
               variant='contained'
               color='secondary'
-              onClick={() => removeRelationship(object)}
+              onClick={() => removeRelationship(objectKey, object)}
             >
               X
             </Button>

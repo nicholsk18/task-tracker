@@ -6,19 +6,24 @@ import ViewValueFragment from './ViewValueFragment';
 const ViewFields: FunctionComponent<any> = ({ object }) => {
   return (
     <>
-      {object.fields.map((field: any, index: number) => {
-        if (typeof object[field] === 'string') {
+      {Object.keys(object).map((objectKey: any, index: number) => {
+        // I feel like this is a better way
+        // if name show value
+        // if relationships do relationship thing
+        // if schedule do schedule stuff...
+
+        if (objectKey === 'name') {
           return (
             <BoxContainer key={index}>
-              <ViewValueFragment value={object[field]} />
+              <ViewValueFragment value={object[objectKey]} />
             </BoxContainer>
           );
         }
 
-        if (typeof object[field] === 'object') {
+        if (objectKey === 'Relationships') {
           return (
             <BoxContainer key={index}>
-              <ViewRelationshipFragment relationships={object[field]} />
+              <ViewRelationshipFragment relationships={object[objectKey]} />
             </BoxContainer>
           );
         }
