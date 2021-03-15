@@ -1,65 +1,87 @@
-const express = require('express');
-const apiData = require('../data-api.json');
-const router = new express.Router();
+const express = require('express')
+const DataTable = require('../DataTable.json')
+const getRelationships = require('../helpers/getRelationships')
+const router = new express.Router()
 
-router.get('/activities/all', (req, res) => {
-  const allActivities = apiData.activities.map(obj => obj)
-  res.send(allActivities);
-});
+router.get('/object/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  const dataObject = DataTable.find(obj => obj.id === id)
+  res.send(dataObject)
+})
 
-router.get('/activity/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const activityData = apiData.activities.find((obj) => obj.id === id);
+router.delete('/remove/object', (req, res) => {
+  const id = parseInt(req.body.id);
+  const relationship = req.body.relationship
+  const type = relationship.type
+  const name = relationship.name
 
-  res.send(activityData);
-});
+  const object = DataTable.find(obj => obj.id === id)
+  object[type + 's'] = object[type + 's'].filter(obj => obj.name !== name)
 
-router.get('/session/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const sesssionData = apiData.sessions.find((obj) => obj.id === id);
+  res.send(object)
+})
 
-  res.send(sesssionData);
-});
+router.post('/get/type', (req, res) => {
+  const { relatesTo, type } = req.body.data
+  const relationships = []
 
-router.get('/schedule/:id', (req, res) => {
-  const id = parseInt(req.params.id);
+  for (const prop in DataTable) {
+    if (DataTable[prop].type === type) {
+      const obj = {
+        "id": prop,
+        "type": type,
+        "name": DataTable[prop].data.name
+      }
+      relationships.push(obj)
+    }
+  }
 
-  const scheduleData = apiData.schedules.find((obj) => obj.id === id);
+  res.send(relationships)
+})
 
-  res.send(scheduleData);
-});
+router.post('/get/relationships', (req, res) => {
+  const type = req.body.data
+  let relationships = []
 
-router.get('/sortable/:id', (req, res) => {
-  const id = parseInt(req.params.id);
+  if(type === 'Activity') {
+    relationships = getRelationships('Tag')
+  }
+  if(type === 'Tag') {
+    relationships = getRelationships('Activity')
+  }
 
-  const sortableData = apiData.sortables.find((obj) => obj.id === id);
+  res.send(relationships)
+})
 
-  res.send(sortableData);
-});
+router.post('/add/relationship', (req, res) => {
+  const obj = req.body.data
+  let respondID = 0
+  for(const prop in DataTable) {
+    if (DataTable[prop].id === obj.toID) {
+      respondID = DataTable[prop].id
+      DataTable[prop].Relationships[0].objects.push(obj.rel)
+    }
+  }
 
-router.post('/sortable/list', (req, res) => {
-  const list = req.body.data;
+  res.send({ id: respondID })
+})
 
-  const data = list.map((id) => apiData.sortables.find((obj) => obj.id === id));
+router.post('/save/object', (req, res) => {
+  const objUpdateID = req.body.data.id
+  const newObject = req.body.data
 
-  res.send(data);
-});
+  for (const prop in DataTable) {
 
-router.post('/tags', (req, res) => {
-  const tagIds = req.body.data;
+    // match id to object being updated
+    // and replace it with new object
+    if (DataTable[prop].id === objUpdateID) {
+      DataTable[prop] = newObject
+    }
+  }
 
-  const tagData = tagIds.map((tagId) =>
-    apiData.tags.find((obj) => obj.id === tagId)
-  );
+  // some kind of error handling
+  // will go here and we will send code back?
+  res.send({"status": "success"})
+})
 
-  res.send(tagData);
-});
-
-router.get('/tag/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const tag = apiData.tags.find((obj) => obj.id === id);
-
-  res.send(tag);
-});
-
-module.exports = router;
+module.exports = router

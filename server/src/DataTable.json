@@ -1,0 +1,94 @@
+[
+  {
+    "id": 1,
+    "type": "Activity",
+    "name": "Running",
+    "Relationships": [
+      {
+        "to": "Tags",
+        "objects": [
+          {
+            "id": 5,
+            "name": "Outdoor"
+          },
+          {
+            "id": 6,
+            "name": "Exercise"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "type": "Activity",
+    "name": "Biking",
+    "Relationships": [
+      {
+        "to": "Tags",
+        "objects": [
+          {
+            "id": 5,
+            "name": "Outdoor"
+          },
+          {
+            "id": 6,
+            "name": "Exercise"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "Activity",
+    "name": "Sleeping",
+    "Relationships": []
+  },
+  {
+    "id": 4,
+    "type": "Activity",
+    "name": "Sleeping",
+    "Relationships": []
+  },
+  {
+    "id": 5,
+    "type": "Tag",
+    "name": "Outdoor",
+    "Relationships": [
+      {
+        "to": "Activities",
+        "objects": [
+          {
+            "id": 1,
+            "name": "Running"
+          },
+          {
+            "id": 2,
+            "name": "Biking"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "type": "Tag",
+    "name": "Exercise",
+    "Relationships": [
+      {
+        "to": "Activities",
+        "objects": [
+          {
+            "id": 1,
+            "name": "Running"
+          },
+          {
+            "id": 2,
+            "name": "Biking"
+          }
+        ]
+      }
+    ]
+  }
+]
