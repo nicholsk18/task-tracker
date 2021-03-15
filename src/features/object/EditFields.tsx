@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
 import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
 import ButtonContainer from '../../components/ButtonContainer';
@@ -8,7 +7,7 @@ import EditValueFragment from './EditValueFragment';
 const EditFields: FunctionComponent<any> = ({
   object,
   editObject,
-  addRelationship,
+  addRelationship, // how I want to do this
   removeRelationship,
 }) => {
   return (
@@ -35,6 +34,7 @@ const EditFields: FunctionComponent<any> = ({
                 removeRelationship={removeRelationship}
               />
 
+              {/* than somewhere here pass the addRelationship callback */}
               <ButtonContainer to={`/add/${object.id}`} fullWidth={false}>
                 Add Relationship
               </ButtonContainer>

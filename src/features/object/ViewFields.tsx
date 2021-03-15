@@ -7,11 +7,6 @@ const ViewFields: FunctionComponent<any> = ({ object }) => {
   return (
     <>
       {Object.keys(object).map((objectKey: any, index: number) => {
-        // I feel like this is a better way
-        // if name show value
-        // if relationships do relationship thing
-        // if schedule do schedule stuff...
-
         if (objectKey === 'name') {
           return (
             <BoxContainer key={index}>

@@ -39,21 +39,13 @@ const EditObject: FunctionComponent = () => {
       (object: any) => object.id !== removedObject.id
     );
 
-    // might be a better way to do this
-    // but idea is it only saves removed relationships
-    // when user saves
-    // other option is
-    // to remove on X click
-    // that two would need to propagete up as well
-    // otherwise we would have to do a hard reload from remove component
     tempObject[objectKey][0].objects = newRelObjects;
     setObject(tempObject);
   }
 
   function addRelationship(objectKey: any, newObject: any) {
     const tempObject = { ...object };
-    // console.log(tempObject);
-    // console.log(newObject);
+    // add relationship here
     console.log('add rel');
   }
 
