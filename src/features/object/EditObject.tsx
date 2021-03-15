@@ -50,6 +50,13 @@ const EditObject: FunctionComponent = () => {
     setObject(tempObject);
   }
 
+  function addRelationship(objectKey: any, newObject: any) {
+    const tempObject = { ...object };
+    // console.log(tempObject);
+    // console.log(newObject);
+    console.log('add rel');
+  }
+
   async function saveObject() {
     await updateObject(object);
   }
@@ -59,6 +66,7 @@ const EditObject: FunctionComponent = () => {
       <EditFields
         object={object}
         editObject={editObject}
+        addRelationship={addRelationship}
         removeRelationship={removeRelationship}
       />
 

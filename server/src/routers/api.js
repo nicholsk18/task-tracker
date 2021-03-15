@@ -1,5 +1,6 @@
 const express = require('express')
 const DataTable = require('../DataTable.json')
+const getRelationships = require('../helpers/getRelationships')
 const router = new express.Router()
 
 router.get('/object/:id', (req, res) => {
@@ -40,42 +41,29 @@ router.post('/get/type', (req, res) => {
 
 router.post('/get/relationships', (req, res) => {
   const type = req.body.data
-  const relationships = []
+  let relationships = []
 
-  for (const prop in DataTable){
-    /**
-     * DataTable returns undefined sometimes
-     */
-    if (type === 'Tag' && DataTable[prop].type === 'Activity') {
-      const relObj = DataTable[prop]
-      console.log(relObj.Relationships);
-      // if (relObj.length > 0) {
-      //   relationships.push(relObj[0].objects);
-      // }
-    }
+  if(type === 'Activity') {
+    relationships = getRelationships('Tag')
+  }
+  if(type === 'Tag') {
+    relationships = getRelationships('Activity')
   }
 
-  console.log(relationships);
+  res.send(relationships)
 })
 
 router.post('/add/relationship', (req, res) => {
-  const { relatesTo, rel } = req.body.data
-
-  const fromID = relatesTo.toString()
-  const toID = rel.id.toString()
-
-  const keys = Object.keys(Relationships)
-  const lastID = parseInt(keys[keys.length-1])
-  const newID = lastID + 1
-
-  if (rel.type == 'Activity') {
-    Relationships[newID] = { "fromID": toID, "toID": fromID }
-  }
-  if (rel.type == 'Tag') {
-    Relationships[newID] = { "fromID": fromID, "toID": toID }
+  const obj = req.body.data
+  let respondID = 0
+  for(const prop in DataTable) {
+    if (DataTable[prop].id === obj.toID) {
+      respondID = DataTable[prop].id
+      DataTable[prop].Relationships[0].objects.push(obj.rel)
+    }
   }
 
-  res.send({id: relatesTo})
+  res.send({ id: respondID })
 })
 
 router.post('/save/object', (req, res) => {
@@ -84,6 +72,8 @@ router.post('/save/object', (req, res) => {
 
   for (const prop in DataTable) {
 
+    // match id to object being updated
+    // and replace it with new object
     if (DataTable[prop].id === objUpdateID) {
       DataTable[prop] = newObject
     }

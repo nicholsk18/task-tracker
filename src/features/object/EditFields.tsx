@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
 import ButtonContainer from '../../components/ButtonContainer';
@@ -7,6 +8,7 @@ import EditValueFragment from './EditValueFragment';
 const EditFields: FunctionComponent<any> = ({
   object,
   editObject,
+  addRelationship,
   removeRelationship,
 }) => {
   return (

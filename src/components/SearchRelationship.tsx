@@ -14,37 +14,32 @@ const filter = createFilterOptions();
 
 const SearchRelationship: FunctionComponent<any> = ({ object }) => {
   const history = useHistory();
-  const [relationships, setRelationships] = useState<any>(
-    object.Relationships[0].objects
-  );
+  const [relationships, setRelationships] = useState<any>();
   const [value, setValue] = useState<any>(null);
   const [createValue, setCreateValue] = useState<any>(null);
 
   useEffect(() => {
     const loadRelationships = async () => {
-      console.log(object.type);
       setRelationships(await getRelationships(object.type));
     };
 
     loadRelationships();
   }, []);
 
-  // const save = async (data: any) => {
-  //   const { id } = await addRelationship(data);
-  //   history.push(`/edit/${id}`);
-  // };
-  //
-  // useEffect(() => {
-  //   if (value) {
-  //     console.log(value);
-  //     const data = {
-  //       relatesTo,
-  //       rel: value,
-  //     };
-  //
-  //     save(data);
-  //   }
-  // }, [value]);
+  const save = async (data: any) => {
+    const obj = {
+      toID: object.id,
+      rel: data,
+    };
+    const { id } = await addRelationship(obj);
+    history.push(`/edit/${id}`);
+  };
+
+  useEffect(() => {
+    if (value) {
+      save(value);
+    }
+  }, [value]);
 
   if (!relationships) {
     return <Loading />;

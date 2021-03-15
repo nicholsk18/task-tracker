@@ -53,12 +53,9 @@ export const getRelationships = async (data: string) => {
   return await postData(path, obj).then((data) => data);
 };
 
-export const addRelationship = async (
-  data: string
-): Promise<{ id: number }> => {
+export const addRelationship = async (data: any): Promise<{ id: number }> => {
   const path = `add/relationship`;
-  const obj = data;
-  return await postData(path, obj).then((data) => data);
+  return await postData(path, data).then((data) => data);
 };
 
 export const updateObject = async (data: any) => {
