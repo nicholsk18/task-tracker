@@ -12,10 +12,13 @@ import { Data } from '../models/Data';
 
 const filter = createFilterOptions();
 
-const SearchRelationship: FunctionComponent<any> = ({ object }) => {
-  const history = useHistory();
+const SearchRelationship: FunctionComponent<any> = ({
+  object,
+  addRelationship,
+}) => {
   const [relationships, setRelationships] = useState<any>();
   const [value, setValue] = useState<any>(null);
+  // will be used when I add ability to create a new relationship
   const [createValue, setCreateValue] = useState<any>(null);
 
   useEffect(() => {
@@ -26,18 +29,9 @@ const SearchRelationship: FunctionComponent<any> = ({ object }) => {
     loadRelationships();
   }, []);
 
-  const save = async (data: any) => {
-    const obj = {
-      toID: object.id,
-      rel: data,
-    };
-    const { id } = await addRelationship(obj);
-    history.push(`/edit/${id}`);
-  };
-
   useEffect(() => {
     if (value) {
-      save(value);
+      addRelationship(value);
     }
   }, [value]);
 

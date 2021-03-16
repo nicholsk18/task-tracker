@@ -43,10 +43,11 @@ const EditObject: FunctionComponent = () => {
     setObject(tempObject);
   }
 
-  function addRelationship(objectKey: any, newObject: any) {
+  function addRelationship(newRelationship: any) {
     const tempObject = { ...object };
-    // add relationship here
-    console.log('add rel');
+
+    tempObject['Relationships'][0].objects.push(newRelationship);
+    setObject(tempObject);
   }
 
   async function saveObject() {

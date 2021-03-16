@@ -1,33 +1,15 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { DataObject } from '../../models/DataObject';
-import { getObjectData } from '../../app/fetchObjectData';
-import Loading from '../../components/Loading';
+import React, { FunctionComponent } from 'react';
 import SearchRelationship from '../../components/SearchRelationship';
 import BoxContainer from '../../components/BoxContainer';
 
-const AddObjectRelationship: FunctionComponent = () => {
-  const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<DataObject>();
-
-  useEffect(() => {
-    const loadObject = async () => {
-      if (urlID) {
-        const id = parseInt(urlID);
-        setObject(await getObjectData(id));
-      }
-    };
-
-    loadObject();
-  }, [urlID]);
-
-  if (!object) {
-    return <Loading />;
-  }
-
+const AddObjectRelationship: FunctionComponent<any> = ({
+  object,
+  addRelationship,
+}) => {
   return (
     <BoxContainer>
       <h2>Add {object.type} Relationship</h2>
-      <SearchRelationship object={object} />
+      <SearchRelationship object={object} addRelationship={addRelationship} />
     </BoxContainer>
   );
 };

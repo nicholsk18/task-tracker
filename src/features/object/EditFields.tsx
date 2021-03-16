@@ -1,15 +1,27 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
-import ButtonContainer from '../../components/ButtonContainer';
 import EditValueFragment from './EditValueFragment';
+import { Button, Box } from '@material-ui/core';
+import AddObjectRelationship from './AddObjectRelationship';
 
 const EditFields: FunctionComponent<any> = ({
   object,
   editObject,
-  addRelationship, // how I want to do this
+  addRelationship,
   removeRelationship,
 }) => {
+  const [addRelState, setAddRelState] = useState<any>(false);
+
+  if (addRelState) {
+    return (
+      <AddObjectRelationship
+        object={object}
+        addRelationship={addRelationship}
+      />
+    );
+  }
+
   return (
     <>
       {Object.keys(object).map((objectKey: string, index: number) => {
@@ -34,10 +46,15 @@ const EditFields: FunctionComponent<any> = ({
                 removeRelationship={removeRelationship}
               />
 
-              {/* than somewhere here pass the addRelationship callback */}
-              <ButtonContainer to={`/add/${object.id}`} fullWidth={false}>
-                Add Relationship
-              </ButtonContainer>
+              <Box my={3}>
+                <Button
+                  onClick={() => setAddRelState(true)}
+                  variant='contained'
+                  color='primary'
+                >
+                  Add Relationship
+                </Button>
+              </Box>
             </BoxContainer>
           );
         }
