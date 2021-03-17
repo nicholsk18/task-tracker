@@ -1,8 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import ViewValueFragment from './ViewValueFragment';
 import RemoveRelationshipObjectFragment from './RemoveRelationshipObjectFragment';
+import { Relationships } from '../../models/Relationships';
+import { Relationship } from '../../models/Relationship';
 
-const EditRelationshipFragment: FunctionComponent<any> = ({
+interface IProps {
+  relationships: Relationships[];
+  objectKey: string;
+  removeRelationship: { (objectKey: string, removeObject: Relationship): void };
+}
+
+const EditRelationshipFragment: FunctionComponent<IProps> = ({
   relationships,
   objectKey,
   removeRelationship,

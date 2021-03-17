@@ -4,20 +4,23 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
-import { useHistory } from 'react-router-dom';
-import { Box } from '@material-ui/core';
 import Loading from './Loading';
-import { addRelationship, getRelationships } from '../app/fetchObjectData';
-import { Data } from '../models/Data';
+import { getRelationships } from '../app/fetchObjectData';
+import { DataObject } from '../models/DataObject';
+import { Relationship } from '../models/Relationship';
 
 const filter = createFilterOptions();
 
-const SearchRelationship: FunctionComponent<any> = ({
+interface IProps {
+  object: DataObject;
+  addRelationship: { (newRelationship: Relationship): void };
+}
+const SearchRelationship: FunctionComponent<IProps> = ({
   object,
   addRelationship,
 }) => {
-  const [relationships, setRelationships] = useState<any>();
-  const [value, setValue] = useState<any>(null);
+  const [relationships, setRelationships] = useState<Relationship[]>();
+  const [value, setValue] = useState<Relationship | null>(null);
   // will be used when I add ability to create a new relationship
   const [createValue, setCreateValue] = useState<any>(null);
 
@@ -42,9 +45,10 @@ const SearchRelationship: FunctionComponent<any> = ({
   return (
     <Autocomplete
       value={value}
-      onChange={(event, newValue) => {
+      onChange={(event, newValue: Relationship | any) => {
         if (typeof newValue === 'string') {
           setValue({
+            id: 0,
             name: newValue,
           });
         } else if (newValue && newValue.inputValue) {

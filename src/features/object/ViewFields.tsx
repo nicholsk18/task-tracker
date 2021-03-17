@@ -2,11 +2,12 @@ import React, { FunctionComponent } from 'react';
 import BoxContainer from '../../components/BoxContainer';
 import ViewRelationshipFragment from './ViewRelationshipFragment';
 import ViewValueFragment from './ViewValueFragment';
+import { DataObject } from '../../models/DataObject';
 
-const ViewFields: FunctionComponent<any> = ({ object }) => {
+const ViewFields: FunctionComponent<{ object: DataObject }> = ({ object }) => {
   return (
     <>
-      {Object.keys(object).map((objectKey: any, index: number) => {
+      {Object.keys(object).map((objectKey: string, index: number) => {
         if (objectKey === 'name') {
           return (
             <BoxContainer key={index}>

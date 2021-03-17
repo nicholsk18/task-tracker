@@ -1,15 +1,8 @@
-import { Relationship } from './Relationship';
-import { Data } from './Data';
+import { Relationships } from './Relationships';
 
 export type DataObject = {
-  data: Data;
+  Relationships: Relationships[];
   id: number;
+  name: string;
   type: string;
-  relationships: [Relationship];
-};
-
-export type DeleteObject = {
-  type: string;
-  id: number;
-  relID: number;
 };

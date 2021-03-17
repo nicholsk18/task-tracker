@@ -3,10 +3,12 @@ import { Box, Button } from '@material-ui/core';
 import { getObjectData, updateObject } from '../../app/fetchObjectData';
 import Loading from '../../components/Loading';
 import EditFields from './EditFields';
+import { DataObject } from '../../models/DataObject';
+import { Relationship } from '../../models/Relationship';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<any>();
+  const [object, setObject] = useState<DataObject>();
 
   useEffect(() => {
     const loadObject = async () => {
@@ -23,17 +25,17 @@ const EditObject: FunctionComponent = () => {
     return <Loading />;
   }
 
-  function editObject(value: any, objectKey: any) {
+  function editObject(value: string, objectKey: string) {
     // key is better
     // after all it is the key in the object
 
-    const newObject = { ...object };
+    const newObject: any = { ...object };
     newObject[objectKey] = value;
     setObject(newObject);
   }
 
-  function removeRelationship(objectKey: any, removedObject: any) {
-    const tempObject = { ...object };
+  function removeRelationship(objectKey: string, removedObject: Relationship) {
+    const tempObject: any = { ...object };
 
     const newRelObjects = tempObject[objectKey][0].objects.filter(
       (object: any) => object.id !== removedObject.id
@@ -43,15 +45,17 @@ const EditObject: FunctionComponent = () => {
     setObject(tempObject);
   }
 
-  function addRelationship(newRelationship: any) {
-    const tempObject = { ...object };
+  function addRelationship(newRelationship: string) {
+    const tempObject: any = { ...object };
 
     tempObject['Relationships'][0].objects.push(newRelationship);
     setObject(tempObject);
   }
 
   async function saveObject() {
-    await updateObject(object);
+    if (object) {
+      await updateObject(object);
+    }
   }
 
   return (
@@ -67,7 +71,7 @@ const EditObject: FunctionComponent = () => {
         <Button
           // href is temporary
           // otherwise on error its still redirect
-          href={`/view/${object.id}`}
+          // href={`/view/${object.id}`}
           variant='contained'
           color='primary'
           fullWidth={true}

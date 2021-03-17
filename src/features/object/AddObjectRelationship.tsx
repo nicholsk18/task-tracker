@@ -1,8 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import SearchRelationship from '../../components/SearchRelationship';
 import BoxContainer from '../../components/BoxContainer';
+import { DataObject } from '../../models/DataObject';
+import { Relationship } from '../../models/Relationship';
 
-const AddObjectRelationship: FunctionComponent<any> = ({
+interface IProps {
+  object: DataObject;
+  addRelationship: { (newRelationship: Relationship): void };
+}
+
+const AddObjectRelationship: FunctionComponent<IProps> = ({
   object,
   addRelationship,
 }) => {

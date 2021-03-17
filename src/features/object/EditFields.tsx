@@ -4,14 +4,25 @@ import EditRelationshipFragment from './EditRelationshipFragment';
 import EditValueFragment from './EditValueFragment';
 import { Button, Box } from '@material-ui/core';
 import AddObjectRelationship from './AddObjectRelationship';
+import { DataObject } from '../../models/DataObject';
+import { Relationship } from '../../models/Relationship';
 
-const EditFields: FunctionComponent<any> = ({
+interface IProps {
+  object: DataObject;
+  editObject: { (value: string, objectKey: string): void };
+  addRelationship: { (newRelationship: string): void };
+  removeRelationship: {
+    (objectKey: string, removedObject: Relationship): void;
+  };
+}
+
+const EditFields: FunctionComponent<IProps> = ({
   object,
   editObject,
   addRelationship,
   removeRelationship,
 }) => {
-  const [addRelState, setAddRelState] = useState<any>(false);
+  const [addRelState, setAddRelState] = useState<boolean>(false);
 
   if (addRelState) {
     return (
