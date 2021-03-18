@@ -22,7 +22,7 @@ const SearchRelationship: FunctionComponent<IProps> = ({
   const [relationships, setRelationships] = useState<Relationship[]>();
   const [value, setValue] = useState<Relationship | null>(null);
   // will be used when I add ability to create a new relationship
-  const [createValue, setCreateValue] = useState<any>(null);
+  const [createValue, setCreateValue] = useState<Relationship | null>(null);
 
   useEffect(() => {
     const loadRelationships = async () => {
@@ -45,6 +45,7 @@ const SearchRelationship: FunctionComponent<IProps> = ({
   return (
     <Autocomplete
       value={value}
+      // this any will change once I finish with the create new relationship
       onChange={(event, newValue: Relationship | any) => {
         if (typeof newValue === 'string') {
           setValue({

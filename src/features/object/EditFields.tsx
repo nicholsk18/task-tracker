@@ -10,7 +10,7 @@ import { Relationship } from '../../models/Relationship';
 interface IProps {
   object: DataObject;
   editObject: { (value: string, objectKey: string): void };
-  addRelationship: { (newRelationship: string): void };
+  addRelationship: { (newRelationship: Relationship): void };
   removeRelationship: {
     (objectKey: string, removedObject: Relationship): void;
   };

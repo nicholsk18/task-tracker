@@ -17,7 +17,7 @@ const EditRelationshipFragment: FunctionComponent<IProps> = ({
 }) => {
   return (
     <>
-      {relationships.map((relationship: any, index: number) => (
+      {relationships.map((relationship: Relationships, index: number) => (
         <div key={index}>
           <ViewValueFragment value={relationship.to} />
 

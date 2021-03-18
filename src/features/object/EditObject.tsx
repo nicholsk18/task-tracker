@@ -28,7 +28,6 @@ const EditObject: FunctionComponent = () => {
   function editObject(value: string, objectKey: string) {
     // key is better
     // after all it is the key in the object
-
     const newObject: any = { ...object };
     newObject[objectKey] = value;
     setObject(newObject);
@@ -38,14 +37,14 @@ const EditObject: FunctionComponent = () => {
     const tempObject: any = { ...object };
 
     const newRelObjects = tempObject[objectKey][0].objects.filter(
-      (object: any) => object.id !== removedObject.id
+      (object: Relationship) => object.id !== removedObject.id
     );
 
     tempObject[objectKey][0].objects = newRelObjects;
     setObject(tempObject);
   }
 
-  function addRelationship(newRelationship: string) {
+  function addRelationship(newRelationship: Relationship) {
     const tempObject: any = { ...object };
 
     tempObject['Relationships'][0].objects.push(newRelationship);
