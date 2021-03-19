@@ -5,7 +5,7 @@ import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
 import Loading from './Loading';
-import { getRelationships } from '../app/fetchObjectData';
+import { getRelationships } from '../dataLayer/fetchData';
 import { DataObject } from '../models/DataObject';
 import { Relationship } from '../models/Relationship';
 

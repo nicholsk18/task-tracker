@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Button } from '@material-ui/core';
-import { getObjectData, updateObject } from '../../app/fetchObjectData';
-import Loading from '../../components/Loading';
-import EditFields from './EditFields';
-import { DataObject } from '../../models/DataObject';
-import { Relationship } from '../../models/Relationship';
+import { getObjectData } from '../dataLayer/fetchData';
+import { updateObject } from '../dataLayer/updateData';
+import Loading from '../components/Loading';
+import EditFields from './fragments/EditFields';
+import { DataObject } from '../models/DataObject';
+import { Relationship } from '../models/Relationship';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
