@@ -1,5 +1,5 @@
 import { DataObject } from '../models/DataObject';
-import { postData} from './dataHelper';
+import { postData } from './dataHelper';
 
 export const updateObject = async (data: DataObject): Promise<DataObject> => {
   const path = 'save/object';

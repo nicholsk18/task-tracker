@@ -1,6 +1,6 @@
 import { DataObject } from '../models/DataObject';
 
-export const getData = (urlPath: string) => {
+export const getData = (urlPath: string): Promise<DataObject> => {
   return fetch(`http://localhost:3001/${urlPath}`)
     .then((res) => res.json())
     .then((data) => data);

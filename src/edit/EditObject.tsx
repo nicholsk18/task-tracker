@@ -71,7 +71,7 @@ const EditObject: FunctionComponent = () => {
         <Button
           // href is temporary
           // otherwise on error its still redirect
-          // href={`/view/${object.id}`}
+          href={`/view/${object.id}`}
           variant='contained'
           color='primary'
           fullWidth={true}
