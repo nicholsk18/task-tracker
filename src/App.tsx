@@ -6,9 +6,9 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { Container, Box } from '@material-ui/core';
-import ViewObject from './features/object/ViewObject';
-import EditObject from './features/object/EditObject';
-import AddObjectRelationship from './features/object/AddObjectRelationship';
+import ViewObject from './view/ViewObject';
+import EditObject from './edit/EditObject';
+import AddObjectRelationship from './view/fragments/AddObjectRelationship';
 
 const App: FunctionComponent = () => {
   return (
@@ -23,7 +23,7 @@ const App: FunctionComponent = () => {
             {/* end init */}
             <Route path='/view/:id' component={ViewObject} />
             <Route path='/edit/:id' component={EditObject} />
-            <Route path='/add/:id' component={AddObjectRelationship} />
+            {/*<Route path='/add/:id' component={AddObjectRelationship} />*/}
           </Switch>
         </Router>
       </Box>

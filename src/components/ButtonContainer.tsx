@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactChildren } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 

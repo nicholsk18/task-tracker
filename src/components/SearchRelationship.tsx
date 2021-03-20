@@ -4,19 +4,25 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
-import { useHistory } from 'react-router-dom';
-import { Box } from '@material-ui/core';
 import Loading from './Loading';
-import { addRelationship, getRelationships } from '../app/fetchObjectData';
-import { Data } from '../models/Data';
+import { getRelationships } from '../dataLayer/fetchData';
+import { DataObject } from '../models/DataObject';
+import { Relationship } from '../models/Relationship';
 
 const filter = createFilterOptions();
 
-const SearchRelationship: FunctionComponent<any> = ({ object }) => {
-  const history = useHistory();
-  const [relationships, setRelationships] = useState<any>();
-  const [value, setValue] = useState<any>(null);
-  const [createValue, setCreateValue] = useState<any>(null);
+interface IProps {
+  object: DataObject;
+  addRelationship: { (newRelationship: Relationship): void };
+}
+const SearchRelationship: FunctionComponent<IProps> = ({
+  object,
+  addRelationship,
+}) => {
+  const [relationships, setRelationships] = useState<Relationship[]>();
+  const [value, setValue] = useState<Relationship | null>(null);
+  // will be used when I add ability to create a new relationship
+  const [createValue, setCreateValue] = useState<Relationship | null>(null);
 
   useEffect(() => {
     const loadRelationships = async () => {
@@ -26,18 +32,9 @@ const SearchRelationship: FunctionComponent<any> = ({ object }) => {
     loadRelationships();
   }, []);
 
-  const save = async (data: any) => {
-    const obj = {
-      toID: object.id,
-      rel: data,
-    };
-    const { id } = await addRelationship(obj);
-    history.push(`/edit/${id}`);
-  };
-
   useEffect(() => {
     if (value) {
-      save(value);
+      addRelationship(value);
     }
   }, [value]);
 
@@ -48,9 +45,11 @@ const SearchRelationship: FunctionComponent<any> = ({ object }) => {
   return (
     <Autocomplete
       value={value}
-      onChange={(event, newValue) => {
+      // this any will change once I finish with the create new relationship
+      onChange={(event, newValue: Relationship | any) => {
         if (typeof newValue === 'string') {
           setValue({
+            id: 0,
             name: newValue,
           });
         } else if (newValue && newValue.inputValue) {

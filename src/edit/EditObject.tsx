@@ -1,12 +1,15 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Button } from '@material-ui/core';
-import { getObjectData, updateObject } from '../../app/fetchObjectData';
-import Loading from '../../components/Loading';
-import EditFields from './EditFields';
+import { getObjectData } from '../dataLayer/fetchData';
+import { updateObject } from '../dataLayer/updateData';
+import Loading from '../components/Loading';
+import EditFields from './fragments/EditFields';
+import { DataObject } from '../models/DataObject';
+import { Relationship } from '../models/Relationship';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<any>();
+  const [object, setObject] = useState<DataObject>();
 
   useEffect(() => {
     const loadObject = async () => {
@@ -23,34 +26,36 @@ const EditObject: FunctionComponent = () => {
     return <Loading />;
   }
 
-  function editObject(value: any, objectKey: any) {
+  function editObject(value: string, objectKey: string) {
     // key is better
     // after all it is the key in the object
-
-    const newObject = { ...object };
+    const newObject: any = { ...object };
     newObject[objectKey] = value;
     setObject(newObject);
   }
 
-  function removeRelationship(objectKey: any, removedObject: any) {
-    const tempObject = { ...object };
+  function removeRelationship(objectKey: string, removedObject: Relationship) {
+    const tempObject: any = { ...object };
 
     const newRelObjects = tempObject[objectKey][0].objects.filter(
-      (object: any) => object.id !== removedObject.id
+      (object: Relationship) => object.id !== removedObject.id
     );
 
     tempObject[objectKey][0].objects = newRelObjects;
     setObject(tempObject);
   }
 
-  function addRelationship(objectKey: any, newObject: any) {
-    const tempObject = { ...object };
-    // add relationship here
-    console.log('add rel');
+  function addRelationship(newRelationship: Relationship) {
+    const tempObject: any = { ...object };
+
+    tempObject['Relationships'][0].objects.push(newRelationship);
+    setObject(tempObject);
   }
 
   async function saveObject() {
-    await updateObject(object);
+    if (object) {
+      await updateObject(object);
+    }
   }
 
   return (

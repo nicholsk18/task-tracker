@@ -1,92 +1,60 @@
 [
   {
     "id": 1,
-    "type": "Activity",
-    "contains": ["name", "Relationships"],
-    "name": "Running",
-    "Relationships": [
+    "Template": [
       {
+        "type": "Activity",
+        "fields": ["name"],
+        "relationships": ["Tags"] // if relationship is a Tags we iterate over a tag using tag object model
+      }
+    ],
+    "fields": [
+      {
+        // this has to as well that way we can have more than one field
+        // so if to is date than we will know value is a date format
+        "to": "Name",
+        "value": "Running"
+      }
+    ],
+    "relationships": [
+      {
+        // this would be same model in frontend so we know how to loop
         "to": "Tags",
-        "objects": {
-          "5": {
+        "objects": [
+          {
+            "id": 5,
             "name": "Outdoor"
-          },
-          "6": {
-            "name": "Exercise"
           }
-        }
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "type": "Activity",
-    "contains": ["name", "Relationships"],
-    "name": "Biking",
-    "Relationships": [
-      {
-        "to": "Tags",
-        "objects": {
-          "5": {
-            "name": "Outdoor"
-          },
-          "6": {
-            "name": "Exercise"
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "type": "Activity",
-    "contains": ["name", "Relationships"],
-    "name": "Sleeping",
-    "Relationships": []
-  },
-  {
-    "id": 4,
-    "type": "Activity",
-    "contains": ["name", "Relationships"],
-    "name": "Sleeping",
-    "Relationshiops": []
-  },
-  {
-    "id": 5,
-    "type": "Tag",
-    "contains": ["name", "Relationships"],
-    "name": "Outdoor",
-    "Relationships": [
-      {
-        "to": "Activities",
-        "objects": {
-          "1": {
-            "name": "Running"
-          },
-          "2": {
-            "name": "Biking"
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "type": "Tag",
-    "contains": ["name", "Relationships"],
-    "name": "Exercise",
-    "Relationships": [
-      {
-        "to": "Activities",
-        "objects": {
-          "1": {
-            "name": "Running"
-          },
-          "2": {
-            "name": "Biking"
-          }
-        }
+        ]
       }
     ]
   }
 ]
+
+{
+  "id": 1,
+  "Template": [
+    {
+      "type": "Activity",
+      "fields": ["name"],
+      "relationships": ["Tags"] // if relationship is a Tags we iterate over a tag using tag object model
+    }
+  ],
+  "fields": [
+    {
+      "name": "Running"
+    }
+  ],
+  "relationships": [
+    {
+      "Tags": [
+        //Do we need this to be a bigger object?
+        //I wouldn't try to make this the same as the main view object though
+        {
+          "id": 5,
+          "name": "Outdoor"
+        }
+      ]
+    }
+  ]
+}

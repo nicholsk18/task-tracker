@@ -1,6 +1,12 @@
 import React, { FunctionComponent } from 'react';
 
-const EditValueFragment: FunctionComponent<any> = ({
+interface IProps {
+  value: string;
+  objectKey: string;
+  editObject: { (value: string, objectKey: string): void };
+}
+
+const EditValueFragment: FunctionComponent<IProps> = ({
   value,
   objectKey,
   editObject,

@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { getObjectData } from '../../app/fetchObjectData';
-import Loading from '../../components/Loading';
-import ButtonContainer from '../../components/ButtonContainer';
-import ViewFields from './ViewFields';
+import { getObjectData } from '../dataLayer/fetchData';
+import Loading from '../components/Loading';
+import ButtonContainer from '../components/ButtonContainer';
+import ViewFields from './fragments/ViewFields';
+import { DataObject } from '../models/DataObject';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<any>();
+  const [object, setObject] = useState<DataObject>();
 
   useEffect(() => {
     const loadObject = async () => {
