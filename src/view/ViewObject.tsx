@@ -3,11 +3,10 @@ import { getObjectData } from '../dataLayer/fetchData';
 import Loading from '../components/Loading';
 import ButtonContainer from '../components/ButtonContainer';
 import ViewFields from './fragments/ViewFields';
-import { DataObject } from '../models/DataObject';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<DataObject>();
+  const [object, setObject] = useState<any>();
 
   useEffect(() => {
     const loadObject = async () => {

@@ -2,26 +2,38 @@ import React, { FunctionComponent } from 'react';
 import BoxContainer from '../../components/BoxContainer';
 import ViewRelationshipFragment from './ViewRelationshipFragment';
 import ViewValueFragment from './ViewValueFragment';
-import { DataObject } from '../../models/DataObject';
 
-const ViewFields: FunctionComponent<{ object: DataObject }> = ({ object }) => {
+const ViewFields: FunctionComponent<{ object: any }> = ({ object }) => {
   return (
     <>
-      {Object.keys(object).map((objectKey: string, index: number) => {
+      {object.Template.fields.map((objectKey: string, index: number) => {
+        // if (typeof object.fields[objectKey] === 'string') { // one option or
+        // match specificly
         if (objectKey === 'name') {
           return (
             <BoxContainer key={index}>
-              <ViewValueFragment value={object[objectKey]} />
+              <ViewValueFragment value={object.fields[objectKey]} />
             </BoxContainer>
           );
         }
+        // other if() checks for any other fields data we add later
+      })}
 
-        if (objectKey === 'Relationships') {
-          return (
-            <BoxContainer key={index}>
-              <ViewRelationshipFragment relationships={object[objectKey]} />
-            </BoxContainer>
-          );
+      {object.Template.relationships.map((objectKey: string, index: number) => {
+        if (objectKey === 'Tags') {
+          // show Tags fragment
+          // for refrence
+          // return (
+          //   <BoxContainer key={index}>
+          //     <ViewRelationshipFragment
+          //       relationships={object.relationships[objectKey]}
+          //     />
+          //   </BoxContainer>
+          // );
+        }
+
+        if (objectKey === 'Activities') {
+          // show Activity fragment
         }
       })}
     </>
