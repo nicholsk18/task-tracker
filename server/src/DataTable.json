@@ -6,25 +6,21 @@
       "fields": ["name"],
       "relationships": ["Tags"]
     },
-    "fields": [
-      {
-        "name": "Running"
-      }
-    ],
-    "relationships": [
-      {
-        "Tags": [
-          {
-            "id": 5,
-            "name": "Outdoor"
-          },
-          {
-            "id": 6,
-            "name": "Exercise"
-          }
-        ]
-      }
-    ]
+    "fields": {
+      "name": "Running"
+    },
+    "relationships": {
+      "Tags": [
+        {
+          "id": 5,
+          "name": "Outdoor"
+        },
+        {
+          "id": 6,
+          "name": "Exercise"
+        }
+      ]
+    }
   },
   {
     "id": 2,
@@ -33,25 +29,21 @@
       "fields": ["name"],
       "relationships": ["Tags"]
     },
-    "fields": [
-      {
-        "name": "Biking"
-      }
-    ],
-    "relationships": [
-      {
-        "Tags": [
-          {
-            "id": 5,
-            "name": "Outdoor"
-          },
-          {
-            "id": 6,
-            "name": "Exercise"
-          }
-        ]
-      }
-    ]
+    "fields": {
+      "name": "Biking"
+    },
+    "relationships": {
+      "Tags": [
+        {
+          "id": 5,
+          "name": "Outdoor"
+        },
+        {
+          "id": 6,
+          "name": "Exercise"
+        }
+      ]
+    }
   },
   {
     "id": 3,
@@ -60,16 +52,12 @@
       "fields": ["name"],
       "relationships": ["Tags"]
     },
-    "fields": [
-      {
-        "name": "Sleeping"
-      }
-    ],
-    "relationships": [
-      {
-        "Tags": []
-      }
-    ]
+    "fields": {
+      "name": "Sleeping"
+    },
+    "relationships": {
+      "Tags": []
+    }
   },
   {
     "id": 4,
@@ -78,16 +66,12 @@
       "fields": ["name"],
       "relationships": ["Tags"]
     },
-    "fields": [
-      {
-        "name": "Eating"
-      }
-    ],
-    "relationships": [
-      {
-        "Tags": []
-      }
-    ]
+    "fields": {
+      "name": "Eating"
+    },
+    "relationships": {
+      "Tags": []
+    }
   },
   {
     "id": 5,
@@ -96,25 +80,21 @@
       "fields": ["name"],
       "relationships": ["Activities"]
     },
-    "fields": [
-      {
-        "name": "Outdoor"
-      }
-    ],
-    "relationships": [
-      {
-        "Activities": [
-          {
-            "id": 1,
-            "name": "Running"
-          },
-          {
-            "id": 2,
-            "name": "Biking"
-          }
-        ]
-      }
-    ]
+    "fields": {
+      "name": "Outdoor"
+    },
+    "relationships": {
+      "Activities": [
+        {
+          "id": 1,
+          "name": "Running"
+        },
+        {
+          "id": 2,
+          "name": "Biking"
+        }
+      ]
+    }
   },
   {
     "id": 6,
@@ -123,24 +103,20 @@
       "fields": ["name"],
       "relationships": ["Activities"]
     },
-    "fields": [
-      {
-        "name": "Exercise"
-      }
-    ],
-    "relationships": [
-      {
-        "Activities": [
-          {
-            "id": 1,
-            "name": "Running"
-          },
-          {
-            "id": 2,
-            "name": "Biking"
-          }
-        ]
-      }
-    ]
+    "fields": {
+      "name": "Exercise"
+    },
+    "relationships": {
+      "Activities": [
+        {
+          "id": 1,
+          "name": "Running"
+        },
+        {
+          "id": 2,
+          "name": "Biking"
+        }
+      ]
+    }
   }
 ]
