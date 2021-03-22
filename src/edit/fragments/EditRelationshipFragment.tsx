@@ -10,21 +10,23 @@ interface IProps {
   removeRelationship: { (objectKey: string, removeObject: Relationship): void };
 }
 
-const EditRelationshipFragment: FunctionComponent<IProps> = ({
+const EditRelationshipFragment: FunctionComponent<any> = ({
   relationships,
   objectKey,
   removeRelationship,
+  editObject,
+  field,
 }) => {
   return (
     <>
       {relationships.map((relationship: Relationships, index: number) => (
         <div key={index}>
-          <ViewValueFragment value={relationship.to} />
-
           <RemoveRelationshipObjectFragment
-            objects={relationship.objects}
+            relationshipObject={relationship}
             objectKey={objectKey}
             removeRelationship={removeRelationship}
+            editObject={editObject}
+            field={field}
           />
         </div>
       ))}

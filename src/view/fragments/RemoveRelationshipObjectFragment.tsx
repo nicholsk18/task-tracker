@@ -3,6 +3,7 @@ import { Box, Button } from '@material-ui/core';
 import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
 import { Relationship } from '../../models/Relationship';
+import EditValueFragment from '../../edit/fragments/EditValueFragment';
 
 interface IProps {
   objects: Relationship[];
@@ -12,34 +13,39 @@ interface IProps {
   };
 }
 
-const RemoveRelationshipObjectFragment: FunctionComponent<IProps> = ({
-  objects,
+const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
+  relationshipObject,
   objectKey,
   removeRelationship,
+  editObject,
+  field,
 }) => {
   return (
     <>
-      {objects.map((object: Relationship, index: number) => (
-        <BoxContainer key={index}>
-          <Box
-            px={3}
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-          >
-            <ViewValueFragment value={object.name} />
+      <BoxContainer>
+        <Box
+          px={3}
+          display='flex'
+          justifyContent='space-between'
+          alignItems='center'
+        >
+          <EditValueFragment
+            object={relationshipObject}
+            objectKey={objectKey}
+            editObject={editObject}
+            field={field}
+          />
 
-            <Button
-              size='large'
-              variant='contained'
-              color='secondary'
-              onClick={() => removeRelationship(objectKey, object)}
-            >
-              X
-            </Button>
-          </Box>
-        </BoxContainer>
-      ))}
+          <Button
+            size='large'
+            variant='contained'
+            color='secondary'
+            onClick={() => removeRelationship(objectKey, relationshipObject)}
+          >
+            X
+          </Button>
+        </Box>
+      </BoxContainer>
     </>
   );
 };

@@ -26,29 +26,52 @@ const EditObject: FunctionComponent = () => {
     return <Loading />;
   }
 
-  function editObject(value: string, objectKey: string) {
-    // key is better
-    // after all it is the key in the object
+  // edit object could edit name relationship and remove relationship
+  // or break it up to having editName editRelationship removeRelationships
+  function editObject(
+    value: string,
+    objectKey: string,
+    field: string,
+    id: any
+  ) {
     const newObject: any = { ...object };
-    newObject[objectKey] = value;
+
+    // has to be checked
+    // new object have id of 0
+    if (id !== undefined) {
+      newObject[field][objectKey].map((relationshipObject: any) => {
+        if (relationshipObject.id === id) {
+          relationshipObject.name = value;
+        }
+      });
+    } else {
+      newObject[field][objectKey] = value;
+    }
     setObject(newObject);
   }
 
-  function removeRelationship(objectKey: string, removedObject: Relationship) {
+  function removeRelationship(objectKey: string, removedObject: any) {
     const tempObject: any = { ...object };
 
-    const newRelObjects = tempObject[objectKey][0].objects.filter(
-      (object: Relationship) => object.id !== removedObject.id
+    // return everything but the matched object
+    const newObject = tempObject.relationships[objectKey].filter(
+      (relationshipObject: any) => removedObject.id !== relationshipObject.id
     );
-
-    tempObject[objectKey][0].objects = newRelObjects;
+    // insert the change
+    tempObject.relationships[objectKey] = newObject;
     setObject(tempObject);
   }
 
-  function addRelationship(newRelationship: Relationship) {
+  // still need to add logic on server side
+  // to save new relationship object
+  function addRelationship(relationshipKey: any) {
     const tempObject: any = { ...object };
 
-    tempObject['Relationships'][0].objects.push(newRelationship);
+    // better than using push()?
+    tempObject.relationships[relationshipKey] = [
+      ...tempObject.relationships[relationshipKey],
+      { id: 0, name: '' },
+    ];
     setObject(tempObject);
   }
 

@@ -7,9 +7,7 @@ const ViewFields: FunctionComponent<{ object: any }> = ({ object }) => {
   return (
     <>
       {object.Template.fields.map((objectKey: string, index: number) => {
-        // if (typeof object.fields[objectKey] === 'string') { // one option or
-        // match specificly
-        if (objectKey === 'name') {
+        if (typeof object.fields[objectKey] === 'string') {
           return (
             <BoxContainer key={index}>
               <ViewValueFragment value={object.fields[objectKey]} />
@@ -20,20 +18,17 @@ const ViewFields: FunctionComponent<{ object: any }> = ({ object }) => {
       })}
 
       {object.Template.relationships.map((objectKey: string, index: number) => {
-        if (objectKey === 'Tags') {
-          // show Tags fragment
-          // for refrence
-          // return (
-          //   <BoxContainer key={index}>
-          //     <ViewRelationshipFragment
-          //       relationships={object.relationships[objectKey]}
-          //     />
-          //   </BoxContainer>
-          // );
-        }
+        if (typeof object.relationships[objectKey] === 'object') {
+          return (
+            <BoxContainer key={index}>
+              {/* how it relates */}
+              <ViewValueFragment value={objectKey} />
 
-        if (objectKey === 'Activities') {
-          // show Activity fragment
+              <ViewRelationshipFragment
+                relationships={object.relationships[objectKey]}
+              />
+            </BoxContainer>
+          );
         }
       })}
     </>
