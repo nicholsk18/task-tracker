@@ -9,14 +9,13 @@ interface IProps {
   addRelationship: { (newRelationship: Relationship): void };
 }
 
-const AddObjectRelationship: FunctionComponent<IProps> = ({
+const AddObjectRelationship: FunctionComponent<any> = ({
   object,
-  addRelationship,
+  relationshipType,
 }) => {
   return (
     <BoxContainer>
-      <h2>Add {object.type} Relationship</h2>
-      <SearchRelationship object={object} addRelationship={addRelationship} />
+      <SearchRelationship object={object} addRelationship={relationshipType} />
     </BoxContainer>
   );
 };

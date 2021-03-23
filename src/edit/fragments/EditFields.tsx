@@ -51,8 +51,7 @@ const EditFields: FunctionComponent<any> = ({
                   relationships={object.relationships[objectKey]}
                   objectKey={objectKey}
                   removeRelationship={removeRelationship}
-                  editObject={editObject}
-                  field={'relationships'}
+                  addRelationship={addRelationship}
                 />
 
                 <Box my={3}>

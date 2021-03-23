@@ -118,5 +118,19 @@
         }
       ]
     }
+  },
+  {
+    "id": 7,
+    "Template": {
+      "type": "Tag",
+      "fields": ["name"],
+      "relationships": ["Activities"]
+    },
+    "fields": {
+      "name": "Healthy"
+    },
+    "relationships": {
+      "Activities": []
+    }
   }
 ]

@@ -14,8 +14,7 @@ const EditRelationshipFragment: FunctionComponent<any> = ({
   relationships,
   objectKey,
   removeRelationship,
-  editObject,
-  field,
+  addRelationship,
 }) => {
   return (
     <>
@@ -25,8 +24,7 @@ const EditRelationshipFragment: FunctionComponent<any> = ({
             relationshipObject={relationship}
             objectKey={objectKey}
             removeRelationship={removeRelationship}
-            editObject={editObject}
-            field={field}
+            addRelationship={addRelationship}
           />
         </div>
       ))}

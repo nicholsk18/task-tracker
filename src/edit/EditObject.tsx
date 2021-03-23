@@ -64,14 +64,21 @@ const EditObject: FunctionComponent = () => {
 
   // still need to add logic on server side
   // to save new relationship object
-  function addRelationship(relationshipKey: any) {
+  function addRelationship(relationshipKey: any, id = 0, name = '') {
     const tempObject: any = { ...object };
 
-    // better than using push()?
+    const newInputBox = { id: 0, name: '' };
+
+    // filter out id 0 when adding a new exsiting object
+    // might not work once I add new object
+    tempObject.relationships[relationshipKey] = tempObject.relationships[
+      relationshipKey
+    ].filter((relationship: any) => relationship.id !== 0);
     tempObject.relationships[relationshipKey] = [
       ...tempObject.relationships[relationshipKey],
-      { id: 0, name: '' },
+      { id, name },
     ];
+
     setObject(tempObject);
   }
 

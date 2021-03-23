@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface IProps {
   value: string;
@@ -11,7 +11,6 @@ const EditValueFragment: FunctionComponent<any> = ({
   objectKey,
   editObject,
   field,
-  isRelationship,
 }) => {
   return (
     <div style={{ padding: '10px 0' }}>

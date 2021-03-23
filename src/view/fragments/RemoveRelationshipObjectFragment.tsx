@@ -4,6 +4,9 @@ import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
 import { Relationship } from '../../models/Relationship';
 import EditValueFragment from '../../edit/fragments/EditValueFragment';
+import { Link } from 'react-router-dom';
+import AddObjectRelationship from './AddObjectRelationship';
+import SearchRelationship from '../../components/SearchRelationship';
 
 interface IProps {
   objects: Relationship[];
@@ -17,8 +20,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
   relationshipObject,
   objectKey,
   removeRelationship,
-  editObject,
-  field,
+  addRelationship,
 }) => {
   return (
     <>
@@ -29,12 +31,20 @@ const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
           justifyContent='space-between'
           alignItems='center'
         >
-          <EditValueFragment
-            object={relationshipObject}
-            objectKey={objectKey}
-            editObject={editObject}
-            field={field}
-          />
+          {/* is this new relationship? */}
+          {relationshipObject.id === 0 ? (
+            <SearchRelationship
+              relationshipType={objectKey}
+              addRelationship={addRelationship}
+            />
+          ) : (
+            // no? link it to place we can edit
+            <div style={{ padding: '20px 0' }}>
+              <Link to={`/edit/relationshipObject.id`}>
+                {relationshipObject.name}
+              </Link>
+            </div>
+          )}
 
           <Button
             size='large'

@@ -43,10 +43,10 @@ router.post('/get/relationships', (req, res) => {
   const type = req.body.data
   let relationships = []
 
-  if(type === 'Activity') {
+  if (type === 'Tags') {
     relationships = getRelationships('Tag')
   }
-  if(type === 'Tag') {
+  if (type === 'Activities') {
     relationships = getRelationships('Activity')
   }
 
