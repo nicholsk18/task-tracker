@@ -5,7 +5,6 @@ import ViewValueFragment from './ViewValueFragment';
 import { Relationship } from '../../models/Relationship';
 import EditValueFragment from '../../edit/fragments/EditValueFragment';
 import { Link } from 'react-router-dom';
-import AddObjectRelationship from './AddObjectRelationship';
 import SearchRelationship from '../../components/SearchRelationship';
 
 interface IProps {

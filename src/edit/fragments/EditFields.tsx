@@ -3,7 +3,6 @@ import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
 import EditValueFragment from './EditValueFragment';
 import { Button, Box } from '@material-ui/core';
-import AddObjectRelationship from '../../view/fragments/AddObjectRelationship';
 import { DataObject } from '../../models/DataObject';
 import { Relationship } from '../../models/Relationship';
 import ViewValueFragment from '../../view/fragments/ViewValueFragment';
