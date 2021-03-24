@@ -10,7 +10,6 @@ interface IProps {
 const ViewRelationshipFragment: FunctionComponent<any> = ({
   relationships,
 }) => {
-  console.log(relationships);
   return (
     <>
       {relationships.length > 0 ? (

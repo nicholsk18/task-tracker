@@ -38,12 +38,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
               addRelationship={addRelationship}
             />
           ) : (
-            // no? link it to place we can edit
-            <div style={{ padding: '20px 0' }}>
-              <Link to={`/edit/relationshipObject.id`}>
-                {relationshipObject.name}
-              </Link>
-            </div>
+              <ViewValueFragment value={relationshipObject.name} />
           )}
 
           <Button
