@@ -2,9 +2,13 @@ const express = require('express')
 const DataTable = require('../DataTable.json')
 const getRelationships = require('../helpers/getRelationships')
 const router = new express.Router()
+const { getObjectData } = require('../helpers/database_helper')
 
 router.get('/object/:id', (req, res) => {
   const id = parseInt(req.params.id)
+  getObjectData()
+
+
   const dataObject = DataTable.find(obj => obj.id === id)
   res.send(dataObject)
 })
