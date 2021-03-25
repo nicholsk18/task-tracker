@@ -3,6 +3,9 @@ import { Box, Button } from '@material-ui/core';
 import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
 import { Relationship } from '../../models/Relationship';
+import EditValueFragment from '../../edit/fragments/EditValueFragment';
+import { Link } from 'react-router-dom';
+import SearchRelationship from '../../components/SearchRelationship';
 
 interface IProps {
   objects: Relationship[];
@@ -12,34 +15,41 @@ interface IProps {
   };
 }
 
-const RemoveRelationshipObjectFragment: FunctionComponent<IProps> = ({
-  objects,
+const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
+  relationshipObject,
   objectKey,
   removeRelationship,
+  addRelationship,
 }) => {
   return (
     <>
-      {objects.map((object: Relationship, index: number) => (
-        <BoxContainer key={index}>
-          <Box
-            px={3}
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-          >
-            <ViewValueFragment value={object.name} />
+      <BoxContainer>
+        <Box
+          px={3}
+          display='flex'
+          justifyContent='space-between'
+          alignItems='center'
+        >
+          {/* is this new relationship? */}
+          {relationshipObject.id === 0 ? (
+            <SearchRelationship
+              relationshipType={objectKey}
+              addRelationship={addRelationship}
+            />
+          ) : (
+              <ViewValueFragment value={relationshipObject.name} />
+          )}
 
-            <Button
-              size='large'
-              variant='contained'
-              color='secondary'
-              onClick={() => removeRelationship(objectKey, object)}
-            >
-              X
-            </Button>
-          </Box>
-        </BoxContainer>
-      ))}
+          <Button
+            size='large'
+            variant='contained'
+            color='secondary'
+            onClick={() => removeRelationship(objectKey, relationshipObject)}
+          >
+            X
+          </Button>
+        </Box>
+      </BoxContainer>
     </>
   );
 };

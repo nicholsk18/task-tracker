@@ -6,27 +6,25 @@ import Autocomplete, {
 } from '@material-ui/lab/Autocomplete';
 import Loading from './Loading';
 import { getRelationships } from '../dataLayer/fetchData';
-import { DataObject } from '../models/DataObject';
-import { Relationship } from '../models/Relationship';
 
 const filter = createFilterOptions();
 
-interface IProps {
-  object: DataObject;
-  addRelationship: { (newRelationship: Relationship): void };
-}
-const SearchRelationship: FunctionComponent<IProps> = ({
-  object,
+// interface IProps {
+//   object: DataObject;
+//   addRelationship: { (newRelationship: Relationship): void };
+// }
+const SearchRelationship: FunctionComponent<any> = ({
+  relationshipType,
   addRelationship,
 }) => {
-  const [relationships, setRelationships] = useState<Relationship[]>();
-  const [value, setValue] = useState<Relationship | null>(null);
+  const [relationships, setRelationships] = useState<any>();
+  const [value, setValue] = useState<any>(null);
   // will be used when I add ability to create a new relationship
-  const [createValue, setCreateValue] = useState<Relationship | null>(null);
+  const [createValue, setCreateValue] = useState<any>(null);
 
   useEffect(() => {
     const loadRelationships = async () => {
-      setRelationships(await getRelationships(object.type));
+      setRelationships(await getRelationships(relationshipType));
     };
 
     loadRelationships();
@@ -34,7 +32,7 @@ const SearchRelationship: FunctionComponent<IProps> = ({
 
   useEffect(() => {
     if (value) {
-      addRelationship(value);
+      addRelationship(relationshipType, value.id, value.name);
     }
   }, [value]);
 
@@ -46,7 +44,7 @@ const SearchRelationship: FunctionComponent<IProps> = ({
     <Autocomplete
       value={value}
       // this any will change once I finish with the create new relationship
-      onChange={(event, newValue: Relationship | any) => {
+      onChange={(event, newValue: any) => {
         if (typeof newValue === 'string') {
           setValue({
             id: 0,
@@ -93,7 +91,7 @@ const SearchRelationship: FunctionComponent<IProps> = ({
         return option.name;
       }}
       renderOption={(option) => option.name}
-      style={{ width: 300, margin: '20px auto' }}
+      style={{ width: 300, margin: '20px 0' }}
       freeSolo
       renderInput={(params) => (
         <TextField

@@ -8,7 +8,6 @@ import {
 import { Container, Box } from '@material-ui/core';
 import ViewObject from './view/ViewObject';
 import EditObject from './edit/EditObject';
-import AddObjectRelationship from './view/fragments/AddObjectRelationship';
 
 const App: FunctionComponent = () => {
   return (

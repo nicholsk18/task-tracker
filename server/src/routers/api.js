@@ -2,9 +2,13 @@ const express = require('express')
 const DataTable = require('../DataTable.json')
 const getRelationships = require('../helpers/getRelationships')
 const router = new express.Router()
+const { getObjectData } = require('../helpers/database_helper')
 
 router.get('/object/:id', (req, res) => {
   const id = parseInt(req.params.id)
+  getObjectData()
+
+
   const dataObject = DataTable.find(obj => obj.id === id)
   res.send(dataObject)
 })
@@ -43,10 +47,10 @@ router.post('/get/relationships', (req, res) => {
   const type = req.body.data
   let relationships = []
 
-  if(type === 'Activity') {
+  if (type === 'Tags') {
     relationships = getRelationships('Tag')
   }
-  if(type === 'Tag') {
+  if (type === 'Activities') {
     relationships = getRelationships('Activity')
   }
 

@@ -3,9 +3,9 @@ import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
 import EditValueFragment from './EditValueFragment';
 import { Button, Box } from '@material-ui/core';
-import AddObjectRelationship from '../../view/fragments/AddObjectRelationship';
 import { DataObject } from '../../models/DataObject';
 import { Relationship } from '../../models/Relationship';
+import ViewValueFragment from '../../view/fragments/ViewValueFragment';
 
 interface IProps {
   object: DataObject;
@@ -16,57 +16,54 @@ interface IProps {
   };
 }
 
-const EditFields: FunctionComponent<IProps> = ({
+const EditFields: FunctionComponent<any> = ({
   object,
   editObject,
   addRelationship,
   removeRelationship,
 }) => {
-  const [addRelState, setAddRelState] = useState<boolean>(false);
-
-  if (addRelState) {
-    return (
-      <AddObjectRelationship
-        object={object}
-        addRelationship={addRelationship}
-      />
-    );
-  }
-
   return (
     <>
-      {Object.keys(object).map((objectKey: string, index: number) => {
-        if (objectKey === 'name') {
+      {object.Template.fields.map((objectKey: string, index: number) => {
+        if (typeof object.fields[objectKey] === 'string') {
           return (
             <BoxContainer key={index}>
               <EditValueFragment
-                value={object[objectKey]}
+                object={object.fields}
                 objectKey={objectKey}
                 editObject={editObject}
+                field={'fields'}
               />
             </BoxContainer>
           );
         }
+      })}
 
-        if (objectKey === 'Relationships') {
+      {object.Template.relationships.map((objectKey: string, index: number) => {
+        if (typeof object.relationships[objectKey] === 'object') {
           return (
-            <BoxContainer key={index}>
-              <EditRelationshipFragment
-                relationships={object[objectKey]}
-                objectKey={objectKey}
-                removeRelationship={removeRelationship}
-              />
+            <div key={index}>
+              <BoxContainer>
+                <ViewValueFragment value={objectKey} />
 
-              <Box my={3}>
-                <Button
-                  onClick={() => setAddRelState(true)}
-                  variant='contained'
-                  color='primary'
-                >
-                  Add Relationship
-                </Button>
-              </Box>
-            </BoxContainer>
+                <EditRelationshipFragment
+                  relationships={object.relationships[objectKey]}
+                  objectKey={objectKey}
+                  removeRelationship={removeRelationship}
+                  addRelationship={addRelationship}
+                />
+
+                <Box my={3}>
+                  <Button
+                    onClick={() => addRelationship(objectKey)}
+                    variant='contained'
+                    color='primary'
+                  >
+                    Add Relationship
+                  </Button>
+                </Box>
+              </BoxContainer>
+            </div>
           );
         }
       })}
