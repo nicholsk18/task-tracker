@@ -37,7 +37,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
               addRelationship={addRelationship}
             />
           ) : (
-              <ViewValueFragment value={relationshipObject.name} />
+            <ViewValueFragment value={relationshipObject.name} />
           )}
 
           <Button
