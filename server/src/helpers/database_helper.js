@@ -5,6 +5,7 @@ databaseData = new TinyDB('./database.db');
 // func to get the _guid id
 // so we can use gloab tinyDB functions
 const getGuidId = (id) => {
+  // populate()
   let guid;
   databaseData.forEach((err, object) => {
     if (object.id === id) {
@@ -69,5 +70,6 @@ module.exports = {
 const populate = () => {
   DataTable.forEach((object) => {
     databaseData.insertItem(object);
+    databaseData.flush()
   });
 };
