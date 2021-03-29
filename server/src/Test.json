@@ -1,0 +1,46 @@
+// this is how it starts of in tinyDB data: [] insert all data in there
+"data": [
+  "objects": [
+  {
+    "id": 1,
+    "Template": {
+      "type": "Activity",
+      "fields": ["name"], // dont understand the need for this just make a name in the object
+      "relationships": ["Tags"]
+    },
+    "fields": {
+      "name": "Running"
+    },
+  }
+  {
+    "id": 2,
+    "Template": {
+      "type": "Tag",
+      "fields": ["name"], // dont understand the need for this
+      "relationships": ["Activities"]
+    },
+    "fields": {
+      "name": "Outdoor"
+    },
+  },
+  {
+    "id": 3,
+    "Template": {
+      "type": "Activity",
+      "fields": ["name"], // dont understand the need for this
+      "relationships": ["Tags"]
+    },
+    "fields": {
+      "name": "Exercises"
+    },
+  }],
+  "relationships": [
+  {
+    "fromID": 1,
+    "toID": 2
+  },
+  {
+    "fromID": 1
+    "toID": 3
+  }]
+]
