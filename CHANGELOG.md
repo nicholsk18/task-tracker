@@ -26,3 +26,8 @@
   - kept DataTable.json to easily recreate data if needed
   - removed getRelationship helper
   
+### 4/1/2021
+- created new initSetup.json file to insert initial data to db if none is present
+- created helper functions to build out the object
+- created the actual method to put everything together and return to front-end
+  

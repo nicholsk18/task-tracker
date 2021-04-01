@@ -1,0 +1,68 @@
+[
+  {
+    "Templates": {
+      "Activity": {
+        "fields": [
+          "name"
+        ],
+        "relationships": {
+          "to": "Tag"
+        }
+      },
+      "Tag": {
+        "fields": [
+          "name"
+        ],
+        "relationships": {
+          "to": "Activity"
+        }
+      }
+    }
+  },
+  {
+    "objects": [
+      {
+        "id": 1,
+        "type": "Activity",
+        "name": "Running",
+        "relationships": [5, 6]
+      },
+      {
+        "id": 2,
+        "type": "Activity",
+        "name": "Biking",
+        "relationships": [5, 6]
+      },
+      {
+        "id": 3,
+        "type": "Activity",
+        "name": "Sleeping",
+        "relationships": []
+      },
+      {
+        "id": 4,
+        "type": "Activity",
+        "name": "Eating",
+        "relationships": [7]
+      },
+      {
+        "id": 5,
+        "type": "Tag",
+        "name": "Outdoor",
+        "relationships": [1, 2]
+      },
+      {
+        "id": 6,
+        "type": "Tag",
+        "name": "Exercise",
+        "relationships": [1, 2]
+      },
+      {
+        "id": 7,
+        "type": "Tag",
+        "name": "Healthy",
+        "relationships": [4]
+      }
+    ]
+  }
+]

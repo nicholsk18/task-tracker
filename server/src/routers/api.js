@@ -1,14 +1,14 @@
 const express = require('express');
 const router = new express.Router();
 const {
-  getObjectData,
+  getObject,
   getRelationships,
   saveObject,
 } = require('../helpers/database_helper');
 
 router.get('/object/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const dataObject = getObjectData(id);
+  const dataObject = getObject(id);
   res.send(dataObject);
 });
 
