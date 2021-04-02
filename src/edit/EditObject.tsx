@@ -4,12 +4,10 @@ import { getObjectData } from '../dataLayer/fetchData';
 import { updateObject } from '../dataLayer/updateData';
 import Loading from '../components/Loading';
 import EditFields from './fragments/EditFields';
-import { DataObject } from '../models/DataObject';
-import { Relationship } from '../models/Relationship';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<DataObject>();
+  const [object, setObject] = useState<any>();
 
   useEffect(() => {
     const loadObject = async () => {
@@ -31,34 +29,22 @@ const EditObject: FunctionComponent = () => {
   function editObject(
     value: string,
     objectKey: string,
-    field: string,
-    id: any
+    id: any // leaving for now in case need it later
   ) {
     const newObject: any = { ...object };
-
-    // has to be checked
-    // new object have id of 0
-    if (id !== undefined) {
-      newObject[field][objectKey].map((relationshipObject: any) => {
-        if (relationshipObject.id === id) {
-          relationshipObject.name = value;
-        }
-      });
-    } else {
-      newObject[field][objectKey] = value;
-    }
+    newObject.data[objectKey] = value;
     setObject(newObject);
   }
 
   function removeRelationship(objectKey: string, removedObject: any) {
     const tempObject: any = { ...object };
-
-    // return everything but the matched object
-    const newObject = tempObject.relationships[objectKey].filter(
-      (relationshipObject: any) => removedObject.id !== relationshipObject.id
+    const relationships = tempObject.data[objectKey].filter(
+      (relationshipObject: any) => relationshipObject.id !== removedObject.id
     );
-    // insert the change
-    tempObject.relationships[objectKey] = newObject;
+    const { id, type, name } = tempObject.data;
+
+    // dont really like mutation but will work for now
+    tempObject.data = { id, type, name, relationships };
     setObject(tempObject);
   }
 
@@ -101,13 +87,13 @@ const EditObject: FunctionComponent = () => {
         <Button
           // href is temporary
           // otherwise on error its still redirect
-          href={`/view/${object.id}`}
+          href={`/view/${object.data.id}`}
           variant='contained'
           color='primary'
           fullWidth={true}
           onClick={saveObject}
         >
-          Save {object.type}
+          Save {object.data.type}
         </Button>
       </Box>
     </>

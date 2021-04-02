@@ -27,8 +27,8 @@ const ViewObject: FunctionComponent = () => {
     <>
       <ViewFields object={object} />
 
-      <ButtonContainer to={`/edit/${object.id}`} fullWidth={true}>
-        Edit {object.type}
+      <ButtonContainer to={`/edit/${object.data.id}`} fullWidth={true}>
+        Edit {object.data.type}
       </ButtonContainer>
     </>
   );

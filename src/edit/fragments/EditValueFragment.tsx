@@ -10,7 +10,6 @@ const EditValueFragment: FunctionComponent<any> = ({
   object,
   objectKey,
   editObject,
-  field,
 }) => {
   return (
     <div style={{ padding: '10px 0' }}>
@@ -18,9 +17,7 @@ const EditValueFragment: FunctionComponent<any> = ({
         style={{ padding: '10px 20px' }}
         type='text'
         value={object.name}
-        onChange={(e) =>
-          editObject(e.target.value, objectKey, field, object.id)
-        }
+        onChange={(e) => editObject(e.target.value, objectKey, object.id)}
       />
     </div>
   );

@@ -7,29 +7,27 @@ const ViewFields: FunctionComponent<{ object: any }> = ({ object }) => {
   return (
     <>
       {object.Template.fields.map((objectKey: string, index: number) => {
-        if (typeof object.fields[objectKey] === 'string') {
+        if (typeof object.data[objectKey] === 'string') {
           return (
             <BoxContainer key={index}>
-              <ViewValueFragment value={object.fields[objectKey]} />
+              <ViewValueFragment value={object.data[objectKey]} />
             </BoxContainer>
           );
         }
-        // other if() checks for any other fields data we add later
-      })}
 
-      {object.Template.relationships.map((objectKey: string, index: number) => {
-        if (typeof object.relationships[objectKey] === 'object') {
+        if (typeof object.data[objectKey] === 'object') {
           return (
             <BoxContainer key={index}>
               {/* how it relates */}
               <ViewValueFragment value={objectKey} />
 
               <ViewRelationshipFragment
-                relationships={object.relationships[objectKey]}
+                relationships={object.data[objectKey]}
               />
             </BoxContainer>
           );
         }
+        // other if() checks for any other fields data we add later
       })}
     </>
   );
