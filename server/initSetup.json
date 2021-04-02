@@ -1,9 +1,11 @@
 [
   {
     "Templates": {
+      "type": "Template",
       "Activity": {
         "fields": [
-          "name"
+          "name",
+          "relationships"
         ],
         "relationships": {
           "to": "Tag"
@@ -11,7 +13,8 @@
       },
       "Tag": {
         "fields": [
-          "name"
+          "name",
+          "relationships"
         ],
         "relationships": {
           "to": "Activity"
