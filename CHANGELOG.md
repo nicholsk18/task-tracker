@@ -31,3 +31,14 @@
 - created helper functions to build out the object
 - created the actual method to put everything together and return to front-end
   
+### 4/2/2021
+- change so that getObject only sends back the correct template with return object
+- converted ViewFields to work with new object
+- simplified ViewFields since the object is simpler now
+- added relationships to the templates fields
+- changed edit link to use new format
+- can remove relationship and edit name
+- changed how data is saved in db
+  - now everything is save as object with _id so we can use tinydb functions
+  - template has `"type": "Template"` to show differents
+- we can get objects and save objects. still need to add the `Add` method
