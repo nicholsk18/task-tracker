@@ -3,17 +3,13 @@ const TinyDB = require('tinydb');
 databaseData = new TinyDB('./database.db');
 
 // right now either template or objects
-const getPart = (objectName) => {
-  return databaseData._data.data.find((object) => object.type === objectName);
+const getRelationshipObjectByType = (type) => {
+  return databaseData._data.data.filter((object) => object.type === type);
 };
 
 // return just the template object data
 const getObjectTemplate = () => {
   return databaseData._data.data.find((object) => object.type === 'Template');
-};
-
-const getAllObjectIDs = () => {
-  return getPart('objects').map((object) => object.id);
 };
 
 // return object based on ID
@@ -54,6 +50,10 @@ const getObject = (id) => {
   return { Template: templatePart, data: readyObject };
 };
 
+const getRelationships = (type) => {
+  return getRelationshipObjectByType(type);
+};
+
 const saveObject = (object) => {
   // lets rebuild the object with just relationship ids
   const relationships = object.data.relationships.map((object) => object.id);
@@ -67,7 +67,7 @@ const saveObject = (object) => {
 
 module.exports = {
   getObject,
-  // getRelationships,
+  getRelationships,
   saveObject,
 };
 

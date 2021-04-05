@@ -52,7 +52,9 @@ const EditFields: FunctionComponent<any> = ({
 
                 <Box my={3}>
                   <Button
-                    onClick={() => addRelationship(objectKey)}
+                    onClick={() =>
+                      addRelationship(object.Template.relationships.to)
+                    }
                     variant='contained'
                     color='primary'
                   >

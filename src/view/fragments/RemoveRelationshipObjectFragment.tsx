@@ -33,7 +33,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
           {/* is this new relationship? */}
           {relationshipObject.id === 0 ? (
             <SearchRelationship
-              relationshipType={objectKey}
+              relationshipType={relationshipObject.type}
               addRelationship={addRelationship}
             />
           ) : (

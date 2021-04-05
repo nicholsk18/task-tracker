@@ -50,16 +50,27 @@ const EditObject: FunctionComponent = () => {
 
   // still need to add logic on server side
   // to save new relationship object
-  function addRelationship(relationshipKey: any, id = 0, name = '') {
+  function addRelationship(type: any, objID = 0, name = '') {
     const tempObject: any = { ...object };
 
-    const type = tempObject.Template[relationshipKey].to;
+    // only do this if its not new object
+    if (objID !== 0) {
+      const isDuplicate = tempObject.data.relationships.find(
+        ({ id }: any) => id === objID
+      );
+
+      if (isDuplicate) {
+        alert('No need to duplicate');
+        return;
+      }
+    }
+    console.log('why');
     const newRelationship = {
-      id,
+      id: objID,
       type,
       name,
     };
-    tempObject.data[relationshipKey].push(newRelationship);
+    tempObject.data.relationships.push(newRelationship);
     setObject(tempObject);
   }
 
