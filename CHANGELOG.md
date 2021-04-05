@@ -42,3 +42,11 @@
   - now everything is save as object with _id so we can use tinydb functions
   - template has `"type": "Template"` to show differents
 - we can get objects and save objects. still need to add the `Add` method
+
+### 4/5/2021
+- worked on ability to add new relationships
+- now you are able to save relationships
+- if relationship already exist it will block it from being added
+- started working on creating new types from relationships
+- solved issue where it was adding new object with same id everytime you removed relationship
+- final note: we can get/create/update/delete relationships
