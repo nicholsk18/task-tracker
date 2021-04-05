@@ -4,6 +4,7 @@ const {
   getObject,
   getRelationships,
   saveObject,
+  createObject,
 } = require('../helpers/database_helper');
 
 router.get('/object/:id', (req, res) => {
@@ -26,5 +27,11 @@ router.post('/save/object', (req, res) => {
 
   res.send({ status: 'success' });
 });
+
+router.post('/create/object', (req, res) => {
+  const obj = req.body.data
+  const newObj = createObject(obj)
+  res.send(newObj)
+})
 
 module.exports = router;

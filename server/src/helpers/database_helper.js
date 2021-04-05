@@ -4,7 +4,14 @@ databaseData = new TinyDB('./database.db');
 
 // right now either template or objects
 const getRelationshipObjectByType = (type) => {
-  return databaseData._data.data.filter((object) => object.type === type);
+  const relationships = []
+  databaseData._data.data.forEach((object) => {
+    if (object.type === type) {
+      const newRel = { id: object.id, type: object.type, name: object.name, _id: object._id }
+      relationships.push(newRel)
+    }
+  });
+  return relationships
 };
 
 // return just the template object data
@@ -26,7 +33,7 @@ const getRelationshipObjects = (ids) => {
   });
 };
 
-const buildObject = (object, template) => {
+const buildObject = (object) => {
   // object relationship ids
   const relationshipIDs = object['relationships'];
   // lets get all the relationships
@@ -42,9 +49,12 @@ const buildObject = (object, template) => {
  */
 
 const getObject = (id) => {
+  // for recreation
+  // populate()
+
   const template = getObjectTemplate();
   const object = getObjectById(id);
-  const readyObject = buildObject(object, template);
+  const readyObject = buildObject(object);
   // send object and template
   const templatePart = template[readyObject.type];
   return { Template: templatePart, data: readyObject };
@@ -57,18 +67,38 @@ const getRelationships = (type) => {
 const saveObject = (object) => {
   // lets rebuild the object with just relationship ids
   const relationships = object.data.relationships.map((object) => object.id);
-  const newObject = { ...object.data };
-  newObject.relationships = relationships;
-  const id = newObject._id;
-  databaseData.findByIdAndRemove(id);
 
-  databaseData.insertItem(newObject);
+  databaseData.findById(object.data._id, (err, item) => {
+    if (err) {
+      console.log(err);
+    }
+
+    item.relationships = relationships
+  })
 };
+
+const createObject = (object) => {
+  // lets find the last id
+  let lastID = object.id
+  databaseData.forEach((err, item) => {
+    if (item.id > lastID) {
+      lastID = item.id
+    }
+  })
+  const newID = lastID + 1
+  object.id = newID
+  // this object does not have relationships yet
+  // bet we need to make sure field is there
+  object.relationships = []
+  databaseData.appendItem(object)
+  return getObjectById(object.id)
+}
 
 module.exports = {
   getObject,
   getRelationships,
   saveObject,
+  createObject
 };
 
 // way for me to recreate data if needed
