@@ -53,18 +53,13 @@ const EditObject: FunctionComponent = () => {
   function addRelationship(relationshipKey: any, id = 0, name = '') {
     const tempObject: any = { ...object };
 
-    const newInputBox = { id: 0, name: '' };
-
-    // filter out id 0 when adding a new exsiting object
-    // might not work once I add new object
-    tempObject.relationships[relationshipKey] = tempObject.relationships[
-      relationshipKey
-    ].filter((relationship: any) => relationship.id !== 0);
-    tempObject.relationships[relationshipKey] = [
-      ...tempObject.relationships[relationshipKey],
-      { id, name },
-    ];
-
+    const type = tempObject.Template[relationshipKey].to;
+    const newRelationship = {
+      id,
+      type,
+      name,
+    };
+    tempObject.data[relationshipKey].push(newRelationship);
     setObject(tempObject);
   }
 
