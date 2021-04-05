@@ -6,6 +6,7 @@ import Autocomplete, {
 } from '@material-ui/lab/Autocomplete';
 import Loading from './Loading';
 import { getRelationships } from '../dataLayer/fetchData';
+import { createNewObject } from '../dataLayer/updateData';
 
 const filter = createFilterOptions();
 
@@ -32,9 +33,20 @@ const SearchRelationship: FunctionComponent<any> = ({
 
   useEffect(() => {
     if (value) {
-      addRelationship(relationshipType, value.id, value.name);
+      addRelationship(relationshipType, value.id, value.name, value._id);
     }
   }, [value]);
+
+  useEffect(() => {
+    if (createValue){
+      const createObject = async () => {
+        const { id, type, name, _id} = await createNewObject(createValue)
+        addRelationship(type, id, name, _id)
+      }
+
+      createObject()
+    }
+  }, [createValue])
 
   if (!relationships) {
     return <Loading />;
@@ -55,6 +67,7 @@ const SearchRelationship: FunctionComponent<any> = ({
           setCreateValue({
             id: newValue.id,
             name: newValue.inputValue,
+            type: newValue.type
           });
         } else {
           setValue(newValue);
@@ -68,6 +81,8 @@ const SearchRelationship: FunctionComponent<any> = ({
           filtered.push({
             inputValue: params.inputValue,
             name: `Add "${params.inputValue}"`,
+            id: 0,
+            type: relationships[0].type
           });
         }
 
@@ -91,7 +106,7 @@ const SearchRelationship: FunctionComponent<any> = ({
         return option.name;
       }}
       renderOption={(option) => option.name}
-      style={{ width: 300, margin: '20px 0' }}
+      style={{ width: 300, margin: '20px auto' }}
       freeSolo
       renderInput={(params) => (
         <TextField

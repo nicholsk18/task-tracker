@@ -3,6 +3,7 @@ import ViewValueFragment from '../../view/fragments/ViewValueFragment';
 import RemoveRelationshipObjectFragment from '../../view/fragments/RemoveRelationshipObjectFragment';
 import { Relationships } from '../../models/Relationships';
 import { Relationship } from '../../models/Relationship';
+import SearchRelationship from '../../components/SearchRelationship';
 
 interface IProps {
   relationships: Relationships[];
@@ -18,14 +19,20 @@ const EditRelationshipFragment: FunctionComponent<any> = ({
 }) => {
   return (
     <>
-      {relationships.map((relationship: Relationships, index: number) => (
+      {relationships.map((relationship: any, index: number) => (
         <div key={index}>
-          <RemoveRelationshipObjectFragment
-            relationshipObject={relationship}
-            objectKey={objectKey}
-            removeRelationship={removeRelationship}
-            addRelationship={addRelationship}
-          />
+          {relationship.id === 0 ? (
+            <SearchRelationship
+              relationshipType={relationship.type}
+              addRelationship={addRelationship}
+            />
+          ) : (
+            <RemoveRelationshipObjectFragment
+              relationshipObject={relationship}
+              objectKey={objectKey}
+              removeRelationship={removeRelationship}
+            />
+          )}
         </div>
       ))}
     </>

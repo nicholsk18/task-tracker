@@ -41,16 +41,16 @@ const EditObject: FunctionComponent = () => {
     const relationships = tempObject.data[objectKey].filter(
       (relationshipObject: any) => relationshipObject.id !== removedObject.id
     );
-    const { id, type, name } = tempObject.data;
+    const { id, type, name, _id } = tempObject.data;
 
     // dont really like mutation but will work for now
-    tempObject.data = { id, type, name, relationships };
+    tempObject.data = { id, type, name, relationships, _id };
     setObject(tempObject);
   }
 
   // still need to add logic on server side
   // to save new relationship object
-  function addRelationship(type: any, objID = 0, name = '') {
+  function addRelationship(type: any, objID = 0, name = '', _id: 0) {
     const tempObject: any = { ...object };
 
     // only do this if its not new object
@@ -59,17 +59,25 @@ const EditObject: FunctionComponent = () => {
         ({ id }: any) => id === objID
       );
 
+      // no need add duplicate relationships
       if (isDuplicate) {
         alert('No need to duplicate');
+        // need to clear box after this
         return;
       }
+
+      // now that we know what relationship user wanted
+      // remove the last relationship object
+      // it should always be 0
+      tempObject.data.relationships.pop()
     }
-    console.log('why');
+
     const newRelationship = {
       id: objID,
       type,
       name,
     };
+
     tempObject.data.relationships.push(newRelationship);
     setObject(tempObject);
   }
