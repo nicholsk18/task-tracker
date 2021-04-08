@@ -15,7 +15,7 @@ interface IProps {
 const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
   relationshipObject,
   objectKey,
-  removeRelationship
+  removeRelationship,
 }) => {
   return (
     <>

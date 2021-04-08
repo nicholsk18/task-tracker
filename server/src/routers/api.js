@@ -29,9 +29,9 @@ router.post('/save/object', (req, res) => {
 });
 
 router.post('/create/object', (req, res) => {
-  const obj = req.body.data
-  const newObj = createObject(obj)
-  res.send(newObj)
-})
+  const obj = req.body.data;
+  const newObj = createObject(obj);
+  res.send(newObj);
+});
 
 module.exports = router;

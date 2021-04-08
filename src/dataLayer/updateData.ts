@@ -8,6 +8,6 @@ export const updateObject = async (data: DataObject): Promise<DataObject> => {
 };
 
 export const createNewObject = async (object: any) => {
-  const path = 'create/object'
-  return await postData(path, object)
-}
+  const path = 'create/object';
+  return await postData(path, object);
+};

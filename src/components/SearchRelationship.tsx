@@ -38,15 +38,15 @@ const SearchRelationship: FunctionComponent<any> = ({
   }, [value]);
 
   useEffect(() => {
-    if (createValue){
+    if (createValue) {
       const createObject = async () => {
-        const { id, type, name, _id} = await createNewObject(createValue)
-        addRelationship(type, id, name, _id)
-      }
+        const { id, type, name, _id } = await createNewObject(createValue);
+        addRelationship(type, id, name, _id);
+      };
 
-      createObject()
+      createObject();
     }
-  }, [createValue])
+  }, [createValue]);
 
   if (!relationships) {
     return <Loading />;
@@ -67,7 +67,7 @@ const SearchRelationship: FunctionComponent<any> = ({
           setCreateValue({
             id: newValue.id,
             name: newValue.inputValue,
-            type: newValue.type
+            type: newValue.type,
           });
         } else {
           setValue(newValue);
@@ -82,7 +82,7 @@ const SearchRelationship: FunctionComponent<any> = ({
             inputValue: params.inputValue,
             name: `Add "${params.inputValue}"`,
             id: 0,
-            type: relationships[0].type
+            type: relationships[0].type,
           });
         }
 

@@ -69,7 +69,7 @@ const EditObject: FunctionComponent = () => {
       // now that we know what relationship user wanted
       // remove the last relationship object
       // it should always be 0
-      tempObject.data.relationships.pop()
+      tempObject.data.relationships.pop();
     }
 
     const newRelationship = {
