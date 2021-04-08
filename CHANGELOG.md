@@ -50,3 +50,7 @@
 - started working on creating new types from relationships
 - solved issue where it was adding new object with same id everytime you removed relationship
 - final note: we can get/create/update/delete relationships
+
+### 4/8/2021
+- added types to view and edit
+- added text in front of title to let users know what field that is like in figma
