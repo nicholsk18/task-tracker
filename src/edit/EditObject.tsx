@@ -93,7 +93,7 @@ const EditObject: FunctionComponent = () => {
     <>
       {/* show type your viewing */}
       <ViewValueFragment value={`Edit ${object.data.type}`} />
-      <hr/>
+      <hr />
 
       <EditFields
         object={object}

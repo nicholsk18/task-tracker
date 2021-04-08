@@ -10,14 +10,22 @@ const ViewObject: FunctionComponent = () => {
   const [object, setObject] = useState<any>();
 
   useEffect(() => {
-    const loadObject = async () => {
-      if (urlID) {
+    if (urlID) {
+      // maybe better than before
+      (async () => {
         const id = parseInt(urlID);
         setObject(await getObjectData(id));
-      }
-    };
+      })();
+    }
 
-    loadObject();
+    // old way
+    // const loadObject = async () => {
+    //   if (urlID) {
+    //     const id = parseInt(urlID);
+    //     setObject(await getObjectData(id));
+    //   }
+    // };
+    // loadObject();
   }, [urlID]);
 
   if (!object) {
@@ -28,7 +36,7 @@ const ViewObject: FunctionComponent = () => {
     <>
       {/* show type your viewing */}
       <ViewValueFragment value={`View ${object.data.type}`} />
-      <hr/>
+      <hr />
 
       <ViewFields object={object} />
 

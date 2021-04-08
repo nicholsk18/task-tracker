@@ -7,6 +7,8 @@ export const getObjectData = async (id: number): Promise<DataObject> => {
   return await getData(path).then((data) => data);
 };
 
+// This is to fetch relationships
+// they will show up in autocomplete
 export const getRelationships = async (
   type: string
 ): Promise<Relationship[]> => {
