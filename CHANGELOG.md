@@ -54,3 +54,4 @@
 ### 4/8/2021
 - added types to view and edit
 - added text in front of title to let users know what field that is like in figma
+- added new page to create new objects. (v1) Currently  does not save and needs refactoring
