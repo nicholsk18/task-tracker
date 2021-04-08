@@ -1,0 +1,48 @@
+// this is how it starts of in tinyDB data: [] insert all data in there
+"data": [
+  "Template": {
+    // we could do types as keys in template
+    // so if we need template for something else just add it in here
+    "Activity" :{
+      "fields": ["name"]
+      // key is to match to id
+      // relationship is what we looking for?
+      "relationships": {
+        "key": "fromID",
+        "relationship": "toID"
+      }
+    },
+    "Tag": {
+      "fields": ["name"],
+      "relationships": {
+        "key": "toID",
+        "relationship": "fromID"
+      }
+    },
+  },
+  "objects": [
+  {
+    "id": 1,
+    "type": "Activity",
+    "name": "Running"
+  }
+  {
+    "id": 2,
+    "type": "Tag",
+    "name": "Outdoor"
+  },
+  {
+    "id": 3,
+    "type": "Activity",
+    "name": "Tag"
+  }],
+  "relationships": [
+  {
+    "fromID": 1,
+    "toID": 2
+  },
+  {
+    "fromID": 1
+    "toID": 3
+  }]
+]

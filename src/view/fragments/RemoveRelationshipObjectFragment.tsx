@@ -3,9 +3,6 @@ import { Box, Button } from '@material-ui/core';
 import BoxContainer from '../../components/BoxContainer';
 import ViewValueFragment from './ViewValueFragment';
 import { Relationship } from '../../models/Relationship';
-import EditValueFragment from '../../edit/fragments/EditValueFragment';
-import { Link } from 'react-router-dom';
-import SearchRelationship from '../../components/SearchRelationship';
 
 interface IProps {
   objects: Relationship[];
@@ -19,7 +16,6 @@ const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
   relationshipObject,
   objectKey,
   removeRelationship,
-  addRelationship,
 }) => {
   return (
     <>
@@ -30,15 +26,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
           justifyContent='space-between'
           alignItems='center'
         >
-          {/* is this new relationship? */}
-          {relationshipObject.id === 0 ? (
-            <SearchRelationship
-              relationshipType={objectKey}
-              addRelationship={addRelationship}
-            />
-          ) : (
-              <ViewValueFragment value={relationshipObject.name} />
-          )}
+          <ViewValueFragment value={relationshipObject.name} />
 
           <Button
             size='large'

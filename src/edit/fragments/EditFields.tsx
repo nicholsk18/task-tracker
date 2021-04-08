@@ -25,29 +25,26 @@ const EditFields: FunctionComponent<any> = ({
   return (
     <>
       {object.Template.fields.map((objectKey: string, index: number) => {
-        if (typeof object.fields[objectKey] === 'string') {
+        if (typeof object.data[objectKey] === 'string') {
           return (
             <BoxContainer key={index}>
               <EditValueFragment
-                object={object.fields}
+                object={object.data}
                 objectKey={objectKey}
                 editObject={editObject}
-                field={'fields'}
               />
             </BoxContainer>
           );
         }
-      })}
 
-      {object.Template.relationships.map((objectKey: string, index: number) => {
-        if (typeof object.relationships[objectKey] === 'object') {
+        if (typeof object.data[objectKey] === 'object') {
           return (
             <div key={index}>
               <BoxContainer>
                 <ViewValueFragment value={objectKey} />
 
                 <EditRelationshipFragment
-                  relationships={object.relationships[objectKey]}
+                  relationships={object.data[objectKey]}
                   objectKey={objectKey}
                   removeRelationship={removeRelationship}
                   addRelationship={addRelationship}
@@ -55,7 +52,9 @@ const EditFields: FunctionComponent<any> = ({
 
                 <Box my={3}>
                   <Button
-                    onClick={() => addRelationship(objectKey)}
+                    onClick={() =>
+                      addRelationship(object.Template.relationships.to)
+                    }
                     variant='contained'
                     color='primary'
                   >
