@@ -30,6 +30,7 @@ router.post('/save/object', (req, res) => {
 
 router.post('/create/object', (req, res) => {
   const obj = req.body.data;
+  console.log(obj);
   const newObj = createObject(obj);
   res.send(newObj);
 });

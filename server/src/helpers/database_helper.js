@@ -55,6 +55,7 @@ const buildObject = (object) => {
 
 const getObject = (id) => {
   // to recreate data if none is present
+  databaseData.flush();
   if (databaseData._data.data.length === 0) {
     populate();
   }
@@ -73,6 +74,7 @@ const getRelationships = (type) => {
 
 const saveObject = (object) => {
   // lets rebuild the object with just relationship ids
+  const name = object.data.name;
   const relationships = object.data.relationships.map((object) => object.id);
 
   databaseData.findById(object.data._id, (err, item) => {
@@ -80,6 +82,7 @@ const saveObject = (object) => {
       console.log(err);
     }
 
+    item.name = name;
     item.relationships = relationships;
   });
   databaseData.flush();

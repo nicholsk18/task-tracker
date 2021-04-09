@@ -11,14 +11,13 @@ const EditObject: FunctionComponent = () => {
   const [object, setObject] = useState<any>();
 
   useEffect(() => {
-    const loadObject = async () => {
-      if (urlID) {
-        const id = parseInt(urlID);
-        setObject(await getObjectData(id));
-      }
-    };
+    if (urlID) {
+      const id = parseInt(urlID);
 
-    loadObject();
+      (async () => {
+        setObject(await getObjectData(id));
+      })();
+    }
   }, [urlID]);
 
   if (!object) {
@@ -84,9 +83,14 @@ const EditObject: FunctionComponent = () => {
   }
 
   async function saveObject() {
-    if (object) {
-      await updateObject(object);
+    if (object.data.name === '') {
+      // maybe a modal here?
+      alert('Need a name');
+      return;
     }
+
+    // need error handling
+    await updateObject(object);
   }
 
   return (

@@ -23,7 +23,7 @@ const App: FunctionComponent = () => {
             {/* end init */}
             <Route path='/view/:id' component={ViewObject} />
             <Route path='/edit/:id' component={EditObject} />
-            <Route path='/add/:id' component={AddObject} />
+            <Route path='/add' component={AddObject} />
           </Switch>
         </Router>
       </Box>

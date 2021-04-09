@@ -17,21 +17,11 @@ const ViewObject: FunctionComponent = () => {
         setObject(await getObjectData(id));
       })();
     }
-
-    // old way
-    // const loadObject = async () => {
-    //   if (urlID) {
-    //     const id = parseInt(urlID);
-    //     setObject(await getObjectData(id));
-    //   }
-    // };
-    // loadObject();
   }, [urlID]);
 
   if (!object) {
     return <Loading />;
   }
-  console.log(object);
 
   return (
     <>
@@ -43,6 +33,10 @@ const ViewObject: FunctionComponent = () => {
 
       <ButtonContainer to={`/edit/${object.data.id}`} fullWidth={true}>
         Edit {object.data.type}
+      </ButtonContainer>
+
+      <ButtonContainer to={`/add`} fullWidth={true}>
+        Create New Object
       </ButtonContainer>
     </>
   );
