@@ -55,3 +55,9 @@
 - added types to view and edit
 - added text in front of title to let users know what field that is like in figma
 - added new page to create new objects. (v1) Currently  does not save and needs refactoring
+
+### 4/9/2021
+- add page v2
+- remade add page to only show type
+- edit page will no longer allow blank title
+- add page reuses the `createNewObject()` helper function that searchRelationships uses to create new object
