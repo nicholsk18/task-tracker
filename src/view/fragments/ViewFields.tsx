@@ -10,6 +10,7 @@ const ViewFields: FunctionComponent<{ object: any }> = ({ object }) => {
         if (typeof object.data[objectKey] === 'string') {
           return (
             <BoxContainer key={index}>
+              <span>Activity title:</span>
               <ViewValueFragment value={object.data[objectKey]} />
             </BoxContainer>
           );

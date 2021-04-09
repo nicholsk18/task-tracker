@@ -4,6 +4,7 @@ import { getObjectData } from '../dataLayer/fetchData';
 import { updateObject } from '../dataLayer/updateData';
 import Loading from '../components/Loading';
 import EditFields from './fragments/EditFields';
+import ViewValueFragment from '../view/fragments/ViewValueFragment';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -90,6 +91,10 @@ const EditObject: FunctionComponent = () => {
 
   return (
     <>
+      {/* show type your viewing */}
+      <ViewValueFragment value={`Edit ${object.data.type}`} />
+      <hr />
+
       <EditFields
         object={object}
         editObject={editObject}

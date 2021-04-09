@@ -54,8 +54,10 @@ const buildObject = (object) => {
  */
 
 const getObject = (id) => {
-  // for recreation
-  // populate()
+  // to recreate data if none is present
+  if (databaseData._data.data.length === 0) {
+    populate();
+  }
 
   const template = getObjectTemplate();
   const object = getObjectById(id);
@@ -80,6 +82,7 @@ const saveObject = (object) => {
 
     item.relationships = relationships;
   });
+  databaseData.flush();
 };
 
 const createObject = (object) => {
@@ -96,6 +99,7 @@ const createObject = (object) => {
   // bet we need to make sure field is there
   object.relationships = [];
   databaseData.appendItem(object);
+  databaseData.flush();
   return getObjectById(object.id);
 };
 

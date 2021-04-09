@@ -13,8 +13,10 @@ const EditValueFragment: FunctionComponent<any> = ({
 }) => {
   return (
     <div style={{ padding: '10px 0' }}>
+      <span>{object.type} title: </span>
+
       <input
-        style={{ padding: '10px 20px' }}
+        style={{ padding: '5px 10px' }}
         type='text'
         value={object.name}
         onChange={(e) => editObject(e.target.value, objectKey, object.id)}
