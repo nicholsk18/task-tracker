@@ -1,6 +1,6 @@
 const initData = require('../../initSetup.json');
 const TinyDB = require('tinydb');
-databaseData = new TinyDB('./database.db');
+const databaseData = new TinyDB('./database.db');
 
 // right now either template or objects
 const getRelationshipObjectByType = (type) => {
@@ -72,10 +72,26 @@ const getRelationships = (type) => {
   return getRelationshipObjectByType(type);
 };
 
+// update related relashinships
+const updateRelationships = (object, updateID) => {
+  const { _id } = getObjectById(object.id);
+  databaseData.findById(_id, (err, item) => {
+    const isMatch = item.relationships.find((relID) => relID === updateID);
+    if (!isMatch) {
+      item.relationships.push(updateID);
+    }
+  });
+
+  databaseData.flush();
+};
+
 const saveObject = (object) => {
   // lets rebuild the object with just relationship ids
-  const name = object.data.name;
-  const relationships = object.data.relationships.map((object) => object.id);
+  const { id, name } = object.data;
+  const relationships = object.data.relationships.map((object) => {
+    updateRelationships(object, id);
+    return object.id;
+  });
 
   databaseData.findById(object.data._id, (err, item) => {
     if (err) {
