@@ -55,9 +55,10 @@ const buildObject = (object) => {
 
 const getObject = (id) => {
   // to recreate data if none is present
-  databaseData.flush();
   if (databaseData._data.data.length === 0) {
-    populate();
+    databaseData.flush(); // flush data to file
+    databaseData._data.data = []; // clear it since we know it was already cleared
+    populate(); // remake from init file
   }
 
   const template = getObjectTemplate();
@@ -70,6 +71,11 @@ const getObject = (id) => {
 
 const getRelationships = (type) => {
   return getRelationshipObjectByType(type);
+};
+
+const getTemplate = (type) => {
+  const template = getObjectTemplate();
+  return template[type];
 };
 
 // update related relashinships
@@ -86,22 +92,33 @@ const updateRelationships = (object, updateID) => {
 };
 
 const saveObject = (object) => {
-  // lets rebuild the object with just relationship ids
-  const { id, name } = object.data;
-  const relationships = object.data.relationships.map((object) => {
+  const tempObject = { ...object };
+  let { id, name, relationships, _id } = tempObject.data;
+
+  // if id is zero we need to create new object first
+  if (id === 0) {
+    const newObject = createObject(object.data);
+    id = newObject.id;
+    _id = newObject._id;
+  }
+
+  // get relationship ids from relationships
+  const relationshipsIDs = relationships.map((object) => {
     updateRelationships(object, id);
     return object.id;
   });
 
-  databaseData.findById(object.data._id, (err, item) => {
+  databaseData.findById(_id, (err, item) => {
     if (err) {
       console.log(err);
     }
 
     item.name = name;
-    item.relationships = relationships;
+    item.relationships = relationshipsIDs;
   });
   databaseData.flush();
+
+  return { Template: tempObject.Template, data: tempObject.data };
 };
 
 const createObject = (object) => {
@@ -114,8 +131,8 @@ const createObject = (object) => {
   });
   const newID = lastID + 1;
   object.id = newID;
-  // this object does not have relationships yet
-  // bet we need to make sure field is there
+
+  // new obj do not have rel yet so we need to set a blank one
   object.relationships = [];
   databaseData.appendItem(object);
   databaseData.flush();
@@ -127,6 +144,7 @@ module.exports = {
   getRelationships,
   saveObject,
   createObject,
+  getTemplate,
 };
 
 // way for me to recreate data if needed

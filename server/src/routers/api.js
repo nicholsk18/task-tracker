@@ -5,6 +5,7 @@ const {
   getRelationships,
   saveObject,
   createObject,
+  getTemplate,
 } = require('../helpers/database_helper');
 
 router.get('/object/:id', (req, res) => {
@@ -20,12 +21,19 @@ router.post('/get/relationships', (req, res) => {
   res.send(relationships);
 });
 
+router.post('/get/template', (req, res) => {
+  const type = req.body.data;
+  const template = getTemplate(type);
+
+  res.send(template);
+});
+
 router.post('/save/object', (req, res) => {
   const newObject = req.body.data;
 
-  saveObject(newObject);
+  const obj = saveObject(newObject);
 
-  res.send({ status: 'success' });
+  res.send(obj);
 });
 
 router.post('/create/object', (req, res) => {

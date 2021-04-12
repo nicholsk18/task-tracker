@@ -73,6 +73,11 @@
 - edit page will no longer allow blank title
 - add page reuses the `createNewObject()` helper function that searchRelationships uses to create new object
 
-### 4/10/2021S
+### 4/10/2021
 
 - added update relationship server method that updates new relationships with current object as relashinship.
+
+### 4/12/2021
+- changed the way new object is created. Now instead of having a new page, it uses `id: 0` to create new object server side. When creating new object from relationships field, everything stayed the same.
+- small bug (not updating relationships) was fixed 
+- worked a little on cleaning the codebase

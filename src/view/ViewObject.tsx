@@ -35,7 +35,7 @@ const ViewObject: FunctionComponent = () => {
         Edit {object.data.type}
       </ButtonContainer>
 
-      <ButtonContainer to={`/add`} fullWidth={true}>
+      <ButtonContainer to={`/edit/0`} fullWidth={true}>
         Create New Object
       </ButtonContainer>
     </>

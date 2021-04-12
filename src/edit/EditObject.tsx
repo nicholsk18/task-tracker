@@ -1,18 +1,54 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Box, Button } from '@material-ui/core';
-import { getObjectData } from '../dataLayer/fetchData';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from '@material-ui/core';
+import {
+  getNewObject,
+  getObjectData,
+  getTemplate,
+} from '../dataLayer/fetchData';
 import { updateObject } from '../dataLayer/updateData';
 import Loading from '../components/Loading';
 import EditFields from './fragments/EditFields';
 import ViewValueFragment from '../view/fragments/ViewValueFragment';
+import { useHistory } from 'react-router-dom';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
+  const history = useHistory();
+
   const [object, setObject] = useState<any>();
+  const [type, setType] = useState<any>('Activity');
+
+  const handleChange = async (event: any) => {
+    const newType = event.target.value;
+    setType(newType);
+    const template = await getTemplate(newType);
+    // have to update the relationships we can add
+
+    const tempObj = { ...object };
+    tempObj.data.type = newType;
+    tempObj.Template = template;
+    setObject(tempObj);
+  };
 
   useEffect(() => {
     if (urlID) {
       const id = parseInt(urlID);
+      if (id === 0) {
+        (async () => {
+          const objectData = await getNewObject(type);
+          setObject(objectData);
+          setType(objectData.data.type);
+        })();
+        return;
+      }
 
       (async () => {
         setObject(await getObjectData(id));
@@ -90,14 +126,40 @@ const EditObject: FunctionComponent = () => {
     }
 
     // need error handling
-    await updateObject(object);
+    const obj = await updateObject(object);
+    history.push(`/view/${obj.data.id}`);
   }
 
   return (
     <>
       {/* show type your viewing */}
-      <ViewValueFragment value={`Edit ${object.data.type}`} />
+      <ViewValueFragment value={`Edit ${type}`} />
       <hr />
+
+      {object.data.id === 0 ? (
+        <Box mx={4} my={2}>
+          <Box>
+            <h2>Pick Object Type</h2>
+          </Box>
+
+          <FormControl component='fieldset'>
+            <FormLabel component='legend'>type</FormLabel>
+            <RadioGroup
+              aria-label='gender'
+              name='gender1'
+              value={type}
+              onChange={handleChange}
+            >
+              <FormControlLabel
+                value='Activity'
+                control={<Radio />}
+                label='Activity'
+              />
+              <FormControlLabel value='Tag' control={<Radio />} label='Tag' />
+            </RadioGroup>
+          </FormControl>
+        </Box>
+      ) : null}
 
       <EditFields
         object={object}
@@ -108,9 +170,6 @@ const EditObject: FunctionComponent = () => {
 
       <Box m={3}>
         <Button
-          // href is temporary
-          // otherwise on error its still redirect
-          href={`/view/${object.data.id}`}
           variant='contained'
           color='primary'
           fullWidth={true}
