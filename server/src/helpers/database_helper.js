@@ -139,16 +139,47 @@ const createObject = (object) => {
   return getObjectById(object.id);
 };
 
+const deleteObject = (_id) => {
+  const obj = databaseData.findById(_id, (err, item) => {
+    if (err) {
+      console.log(err);
+    }
+    return item;
+  });
+  obj.relationships.forEach((id) => {
+    const relObj = getObjectById(id);
+    databaseData.findById(relObj._id, (err, item) => {
+      if (err) {
+        console.log(err);
+      }
+
+      item.relationships = item.relationships.filter(
+        (relID) => relID !== obj.id
+      );
+    });
+  });
+
+  databaseData.findByIdAndRemove(_id, (err, item) => {
+    if (err) {
+      console.log(err);
+    }
+
+    return item;
+  });
+};
+
 module.exports = {
   getObject,
   getRelationships,
   saveObject,
   createObject,
   getTemplate,
+  deleteObject,
 };
 
 // way for me to recreate data if needed
 const populate = () => {
+  databaseData.flush();
   databaseData.insertItem(initData[0]['Templates']);
   initData[1]['objects'].forEach((object) => {
     databaseData.insertItem(object);

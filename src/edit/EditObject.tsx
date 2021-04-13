@@ -18,6 +18,7 @@ import Loading from '../components/Loading';
 import EditFields from './fragments/EditFields';
 import ViewValueFragment from '../view/fragments/ViewValueFragment';
 import { useHistory } from 'react-router-dom';
+import { deleteObjectById } from '../dataLayer/deleteData';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -130,6 +131,13 @@ const EditObject: FunctionComponent = () => {
     history.push(`/view/${obj.data.id}`);
   }
 
+  async function deleteObject() {
+    await deleteObjectById(object.data._id);
+
+    const newID = object.data.id + 1;
+    history.push(`/view/${newID}`);
+  }
+
   return (
     <>
       {/* show type your viewing */}
@@ -176,6 +184,17 @@ const EditObject: FunctionComponent = () => {
           onClick={saveObject}
         >
           Save {object.data.type}
+        </Button>
+      </Box>
+
+      <Box m={3}>
+        <Button
+          variant='contained'
+          color='secondary'
+          fullWidth={true}
+          onClick={deleteObject}
+        >
+          Delete {object.data.type}
         </Button>
       </Box>
     </>

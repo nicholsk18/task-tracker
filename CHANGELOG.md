@@ -1,5 +1,8 @@
 # Changelog
 
+### 4/13/2021
+- added delete ability
+
 ### 4/12/2021
 - changed the way new object is created. Now instead of having a new page, it uses `id: 0` to create new object server side. When creating new object from relationships field, everything stayed the same.
 - small bug (not updating relationships) was fixed

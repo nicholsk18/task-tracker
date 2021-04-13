@@ -6,6 +6,7 @@ const {
   saveObject,
   createObject,
   getTemplate,
+  deleteObject,
 } = require('../helpers/database_helper');
 
 router.get('/object/:id', (req, res) => {
@@ -41,6 +42,18 @@ router.post('/create/object', (req, res) => {
   console.log(obj);
   const newObj = createObject(obj);
   res.send(newObj);
+});
+
+router.delete('/delete/object', (req, res) => {
+  const _id = req.body.data;
+  const isDeleted = deleteObject(_id);
+  console.log(isDeleted);
+  // when its undefined it succeeded need to double check
+  if (isDeleted) {
+    // return error
+  }
+
+  res.status(200);
 });
 
 module.exports = router;
