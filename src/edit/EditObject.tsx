@@ -183,27 +183,45 @@ const EditObject: FunctionComponent = () => {
         removeRelationship={removeRelationship}
       />
 
-      <Box m={3}>
+      <Box
+        m={3}
+        display='flex'
+        flexDirection='row'
+        justifyContent='space-around'
+      >
         <Button
+          href={`/view/${object.data.id}`}
+          style={{ padding: '10px 40px' }}
           variant='contained'
           color='primary'
-          fullWidth={true}
+          fullWidth={false}
+        >
+          View {object.data.type}
+        </Button>
+
+        <Button
+          style={{ padding: '10px 40px' }}
+          variant='contained'
+          color='primary'
+          fullWidth={false}
           onClick={saveObject}
         >
           Save {object.data.type}
         </Button>
       </Box>
 
-      <Box m={3}>
-        <Button
-          variant='contained'
-          color='secondary'
-          fullWidth={true}
-          onClick={deleteObject}
-        >
-          Delete {object.data.type}
-        </Button>
-      </Box>
+      {object.data.id !== 0 ? (
+        <Box m={3}>
+          <Button
+            variant='contained'
+            color='secondary'
+            fullWidth={true}
+            onClick={deleteObject}
+          >
+            Delete {object.data.type}
+          </Button>
+        </Box>
+      ) : null}
     </>
   );
 };
