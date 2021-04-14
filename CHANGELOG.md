@@ -2,6 +2,7 @@
 
 ### 4/14/2021
 - finished delete page. We will need to rework after we have parent pages
+- added back button so if you do not want to save changes you can go back to view
 
 ### 4/13/2021
 - added delete ability
