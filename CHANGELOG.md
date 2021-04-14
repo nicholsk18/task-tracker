@@ -1,5 +1,8 @@
 # Changelog
 
+### 4/14/2021
+- finished delete page. We will need to rework after we have parent pages
+
 ### 4/13/2021
 - added delete ability
 

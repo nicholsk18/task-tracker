@@ -139,13 +139,7 @@ const createObject = (object) => {
   return getObjectById(object.id);
 };
 
-const deleteObject = (_id) => {
-  const obj = databaseData.findById(_id, (err, item) => {
-    if (err) {
-      console.log(err);
-    }
-    return item;
-  });
+const removeRelationships = (obj) => {
   obj.relationships.forEach((id) => {
     const relObj = getObjectById(id);
     databaseData.findById(relObj._id, (err, item) => {
@@ -158,14 +152,27 @@ const deleteObject = (_id) => {
       );
     });
   });
+};
 
-  databaseData.findByIdAndRemove(_id, (err, item) => {
+const deleteObject = (_id) => {
+  const obj = databaseData.findById(_id, (err, item) => {
     if (err) {
       console.log(err);
     }
-
     return item;
   });
+
+  removeRelationships(obj);
+
+  const throwError = databaseData.findByIdAndRemove(_id, (err, item) => {
+    if (err) {
+      return err;
+    }
+  });
+
+  // if delete return true
+  // otherwise false
+  return throwError ? throwError : null;
 };
 
 module.exports = {
@@ -180,6 +187,7 @@ module.exports = {
 // way for me to recreate data if needed
 const populate = () => {
   databaseData.flush();
+
   databaseData.insertItem(initData[0]['Templates']);
   initData[1]['objects'].forEach((object) => {
     databaseData.insertItem(object);

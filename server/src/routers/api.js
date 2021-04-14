@@ -46,14 +46,9 @@ router.post('/create/object', (req, res) => {
 
 router.delete('/delete/object', (req, res) => {
   const _id = req.body.data;
-  const isDeleted = deleteObject(_id);
-  console.log(isDeleted);
-  // when its undefined it succeeded need to double check
-  if (isDeleted) {
-    // return error
-  }
+  const err = deleteObject(_id);
 
-  res.status(200);
+  res.send({ error: err });
 });
 
 module.exports = router;

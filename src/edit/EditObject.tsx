@@ -132,8 +132,15 @@ const EditObject: FunctionComponent = () => {
   }
 
   async function deleteObject() {
-    await deleteObjectById(object.data._id);
+    const status = await deleteObjectById(object.data._id);
 
+    if (status.error) {
+      alert(status.error);
+      return;
+    }
+
+    // redirect to next page
+    // we will need to fix this later
     const newID = object.data.id + 1;
     history.push(`/view/${newID}`);
   }
