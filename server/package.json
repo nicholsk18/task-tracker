@@ -4,6 +4,7 @@
   "description": "test server",
   "main": "src/index.js",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
   "author": "Karson Nichols",

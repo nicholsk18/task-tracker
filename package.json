@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "yarn server & react-scripts start",
-    "server": "yarn --cwd ./server/ add & yarn --cwd ./server/ dev",
+    "server": "yarn --cwd ./server/ add & yarn --cwd ./server/ start",
     "build": "yarn server & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
