@@ -23,7 +23,8 @@
     "typescript": "^4.1.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "yarn server & react-scripts start",
+    "server": "yarn --cwd ./server/ add & yarn --cwd ./server/ dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
