@@ -1,5 +1,9 @@
 # Changelog
 
+### 4/15/2021
+- fixed a bug that showed activity title when you are viewing a tag title
+- merged everything to master
+
 ### 4/14/2021
 - finished delete page. We will need to rework after we have parent pages
 - added back button so if you do not want to save changes you can go back to view
