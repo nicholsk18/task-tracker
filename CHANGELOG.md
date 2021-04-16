@@ -1,17 +1,26 @@
 # Changelog
 
+### 4/16/2021
+
+- file cleanup
+- added types
+
 ### 4/15/2021
+
 - fixed a bug that showed activity title when you are viewing a tag title
 - merged everything to master
 
 ### 4/14/2021
+
 - finished delete page. We will need to rework after we have parent pages
 - added back button so if you do not want to save changes you can go back to view
 
 ### 4/13/2021
+
 - added delete ability
 
 ### 4/12/2021
+
 - changed the way new object is created. Now instead of having a new page, it uses `id: 0` to create new object server side. When creating new object from relationships field, everything stayed the same.
 - small bug (not updating relationships) was fixed
 - worked a little on cleaning the codebase

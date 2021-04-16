@@ -7,19 +7,20 @@ import Autocomplete, {
 import Loading from './Loading';
 import { getRelationships } from '../dataLayer/fetchData';
 import { createNewObject } from '../dataLayer/updateData';
+import { Relationship } from '../models/Relationship';
 
 const filter = createFilterOptions();
 
-// interface IProps {
-//   object: DataObject;
-//   addRelationship: { (newRelationship: Relationship): void };
-// }
-const SearchRelationship: FunctionComponent<any> = ({
+interface IProps {
+  relationshipType: string
+  addRelationship: { (type: string, objectID: number, name: string, _id: string): void };
+}
+const SearchRelationship: FunctionComponent<IProps> = ({
   relationshipType,
   addRelationship,
 }) => {
-  const [relationships, setRelationships] = useState<any>();
-  const [value, setValue] = useState<any>(null);
+  const [relationships, setRelationships] = useState<Relationship[]>();
+  const [value, setValue] = useState<Relationship | null>(null);
   // will be used when I add ability to create a new relationship
   const [createValue, setCreateValue] = useState<any>(null);
 
@@ -61,6 +62,8 @@ const SearchRelationship: FunctionComponent<any> = ({
           setValue({
             id: 0,
             name: newValue,
+            type: '',
+            _id: ''
           });
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
@@ -68,6 +71,7 @@ const SearchRelationship: FunctionComponent<any> = ({
             id: newValue.id,
             name: newValue.inputValue,
             type: newValue.type,
+            _id: ''
           });
         } else {
           setValue(newValue);

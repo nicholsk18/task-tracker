@@ -1,22 +1,22 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import BoxContainer from '../../components/BoxContainer';
 import EditRelationshipFragment from './EditRelationshipFragment';
 import EditValueFragment from './EditValueFragment';
 import { Button, Box } from '@material-ui/core';
-import { DataObject } from '../../models/DataObject';
 import { Relationship } from '../../models/Relationship';
 import ViewValueFragment from '../../view/fragments/ViewValueFragment';
+import { DataModal } from '../../models/DataModal';
 
 interface IProps {
-  object: DataObject;
-  editObject: { (value: string, objectKey: string): void };
-  addRelationship: { (newRelationship: Relationship): void };
+  object: DataModal;
+  editObject: { (value: string, objectKey: string, id: number): void };
+  addRelationship: { (type: string, objectID: number, name: string, _id: string): void };
   removeRelationship: {
     (objectKey: string, removedObject: Relationship): void;
   };
 }
 
-const EditFields: FunctionComponent<any> = ({
+const EditFields: FunctionComponent<IProps> = ({
   object,
   editObject,
   addRelationship,
@@ -53,7 +53,7 @@ const EditFields: FunctionComponent<any> = ({
                 <Box my={3}>
                   <Button
                     onClick={() =>
-                      addRelationship(object.Template.relationships.to)
+                      addRelationship(object.Template.relationships.to, 0, '', '')
                     }
                     variant='contained'
                     color='primary'

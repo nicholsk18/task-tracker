@@ -19,16 +19,18 @@ import EditFields from './fragments/EditFields';
 import ViewValueFragment from '../view/fragments/ViewValueFragment';
 import { useHistory } from 'react-router-dom';
 import { deleteObjectById } from '../dataLayer/deleteData';
+import { DataModal } from '../models/DataModal';
+import { Relationship } from '../models/Relationship';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
   const history = useHistory();
 
-  const [object, setObject] = useState<any>();
-  const [type, setType] = useState<any>('Activity');
+  const [object, setObject] = useState<DataModal | any>();
+  const [type, setType] = useState<string>('Activity');
 
-  const handleChange = async (event: any) => {
-    const newType = event.target.value;
+  const handleChange = async (value: string) => {
+    const newType = value;
     setType(newType);
     const template = await getTemplate(newType);
     // have to update the relationships we can add
@@ -66,17 +68,18 @@ const EditObject: FunctionComponent = () => {
   function editObject(
     value: string,
     objectKey: string,
-    id: any // leaving for now in case need it later
+    id: number // leaving for now in case need it later
   ) {
-    const newObject: any = { ...object };
+    console.log(id);
+    const newObject = { ...object };
     newObject.data[objectKey] = value;
     setObject(newObject);
   }
 
-  function removeRelationship(objectKey: string, removedObject: any) {
-    const tempObject: any = { ...object };
+  function removeRelationship(objectKey: string, removedObject: Relationship) {
+    const tempObject = { ...object };
     const relationships = tempObject.data[objectKey].filter(
-      (relationshipObject: any) => relationshipObject.id !== removedObject.id
+      (relationshipObject: Relationship) => relationshipObject.id !== removedObject.id
     );
     const { id, type, name, _id } = tempObject.data;
 
@@ -87,13 +90,14 @@ const EditObject: FunctionComponent = () => {
 
   // still need to add logic on server side
   // to save new relationship object
-  function addRelationship(type: any, objID = 0, name = '', _id: 0) {
-    const tempObject: any = { ...object };
+  function addRelationship(type, objID = 0, name = '', _id = '') {
+    const tempObject = { ...object };
+    console.log(_id);
 
     // only do this if its not new object
     if (objID !== 0) {
       const isDuplicate = tempObject.data.relationships.find(
-        ({ id }: any) => id === objID
+        ({ id }) => id === objID
       );
 
       // no need add duplicate relationships
@@ -163,7 +167,7 @@ const EditObject: FunctionComponent = () => {
               aria-label='gender'
               name='gender1'
               value={type}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e.target.value)}
             >
               <FormControlLabel
                 value='Activity'

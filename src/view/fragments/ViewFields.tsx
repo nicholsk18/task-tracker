@@ -2,8 +2,9 @@ import React, { FunctionComponent } from 'react';
 import BoxContainer from '../../components/BoxContainer';
 import ViewRelationshipFragment from './ViewRelationshipFragment';
 import ViewValueFragment from './ViewValueFragment';
+import { DataModal } from '../../models/DataModal';
 
-const ViewFields: FunctionComponent<{ object: any }> = ({ object }) => {
+const ViewFields: FunctionComponent<{ object: DataModal }> = ({ object }) => {
   return (
     <>
       {object.Template.fields.map((objectKey: string, index: number) => {

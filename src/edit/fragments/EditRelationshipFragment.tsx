@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import RemoveRelationshipObjectFragment from '../../view/fragments/RemoveRelationshipObjectFragment';
-import { Relationships } from '../../models/Relationships';
-import { Relationship } from '../../models/Relationship';
 import SearchRelationship from '../../components/SearchRelationship';
+import { Relationship } from '../../models/Relationship';
 
 interface IProps {
-  relationships: Relationships[];
-  objectKey: string;
-  removeRelationship: { (objectKey: string, removeObject: Relationship): void };
+  relationships: Relationship[]
+  objectKey: string
+  removeRelationship: {
+    (objectKey: string, removedObject: Relationship): void;
+  };
+  addRelationship: { (type: string, objectID: number, name: string, _id: string): void };
 }
 
-const EditRelationshipFragment: FunctionComponent<any> = ({
+const EditRelationshipFragment: FunctionComponent<IProps> = ({
   relationships,
   objectKey,
   removeRelationship,
@@ -18,7 +20,7 @@ const EditRelationshipFragment: FunctionComponent<any> = ({
 }) => {
   return (
     <>
-      {relationships.map((relationship: any, index: number) => (
+      {relationships.map((relationship: Relationship, index: number) => (
         <div key={index}>
           {relationship.id === 0 ? (
             <SearchRelationship

@@ -5,14 +5,14 @@ import ViewValueFragment from './ViewValueFragment';
 import { Relationship } from '../../models/Relationship';
 
 interface IProps {
-  objects: Relationship[];
+  relationshipObject: Relationship,
   objectKey: string;
   removeRelationship: {
     (objectKey: string, removedObject: Relationship): void;
   };
 }
 
-const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
+const RemoveRelationshipObjectFragment: FunctionComponent<IProps> = ({
   relationshipObject,
   objectKey,
   removeRelationship,

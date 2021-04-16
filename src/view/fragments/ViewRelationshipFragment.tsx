@@ -1,22 +1,25 @@
 import React, { FunctionComponent } from 'react';
 import ViewRelationshipObjectFragment from './ViewRelationshipObjectFragment';
-import { Relationships } from '../../models/Relationships';
 import BoxContainer from '../../components/BoxContainer';
 import { Box } from '@material-ui/core';
+import { Relationship } from '../../models/Relationship';
 
-interface IProps {
-  relationships: Relationships[];
+interface IRelationships {
+  relationships: Relationship[]
 }
-const ViewRelationshipFragment: FunctionComponent<any> = ({
+
+const ViewRelationshipFragment: FunctionComponent<IRelationships> = ({
   relationships,
 }) => {
+
   return (
     <>
       {relationships.length > 0 ? (
-        relationships.map((relationship: Relationships, index: number) => (
+        relationships.map((relationship: Relationship, index: number) => (
           <div key={index}>
-            <ViewRelationshipObjectFragment relationshipObject={relationship} />
+            <ViewRelationshipObjectFragment relationship={relationship} />
           </div>
+
         ))
       ) : (
         <BoxContainer>

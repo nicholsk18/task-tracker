@@ -4,10 +4,11 @@ import Loading from '../components/Loading';
 import ButtonContainer from '../components/ButtonContainer';
 import ViewFields from './fragments/ViewFields';
 import ViewValueFragment from './fragments/ViewValueFragment';
+import { DataModal } from '../models/DataModal';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<any>();
+  const [object, setObject] = useState<DataModal>();
 
   useEffect(() => {
     if (urlID) {

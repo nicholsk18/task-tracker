@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
+import { DataObject } from '../../models/DataObject';
 
 interface IProps {
-  value: string;
+  object: DataObject
   objectKey: string;
-  editObject: { (value: string, objectKey: string): void };
+  editObject: { (value: string, objectKey: string, id: number): void };
 }
 
-const EditValueFragment: FunctionComponent<any> = ({
+const EditValueFragment: FunctionComponent<IProps> = ({
   object,
   objectKey,
   editObject,

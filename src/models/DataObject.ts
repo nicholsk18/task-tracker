@@ -1,8 +1,9 @@
-import { Relationships } from './Relationships';
+import { Relationship } from './Relationship';
 
 export type DataObject = {
-  Relationships: Relationships[];
   id: number;
+  type: string
   name: string;
-  type: string;
-};
+  relationships: Relationship[];
+  _id: string
+}
