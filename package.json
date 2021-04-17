@@ -23,10 +23,10 @@
     "typescript": "^4.1.3"
   },
   "scripts": {
-    "start": "yarn server & react-scripts start",
+    "start": "yarn build && yarn server",
     "dev": "react-scripts start",
-    "server": "yarn --cwd ./server/ add & yarn --cwd ./server/ start",
-    "build": "yarn server & react-scripts build",
+    "server": "yarn --cwd ./server/ start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier \"src/**/*.{js,ts,tsx,html}\" --write && prettier \"server/src/**/*.{js,ts}\" --write",

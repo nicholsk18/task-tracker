@@ -1,5 +1,9 @@
 # Changelog
 
+### 4/17/2021
+
+- Set up server to send frontend for `/` route
+
 ### 4/16/2021
 
 - file cleanup
@@ -81,7 +85,7 @@
   - removed DataTable_bak.json
   - kept DataTable.json to easily recreate data if needed
   - removed getRelationship helper
-  
+
 ### 3/24/2021
 
 - working on adding tinyDB
@@ -101,7 +105,3 @@
 ### 3/18/2021
 
 - changed data types from any to specific types for each component and function
-
-
-
-
