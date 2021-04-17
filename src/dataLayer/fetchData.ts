@@ -4,20 +4,22 @@ import { Template } from '../models/Template';
 import { Relationship } from '../models/Relationship';
 
 export const getObjectData = async (id: number): Promise<DataModal> => {
-  const path = `object/${id}`;
+  const path = `/object/${id}`;
   return await getData(path).then((data) => data);
 };
 
 // This is to fetch relationships
 // they will show up in autocomplete
-export const getRelationships = async (type: string): Promise<Relationship[]> => {
-  const path = `get/relationships`;
+export const getRelationships = async (
+  type: string
+): Promise<Relationship[]> => {
+  const path = `/get/relationships`;
   const obj = type;
   return await postData(path, obj).then((data) => data);
 };
 
 export const getTemplate = async (type: string): Promise<Template> => {
-  const path = 'get/template';
+  const path = '/get/template';
   return await postData(path, type).then((data) => data);
 };
 
