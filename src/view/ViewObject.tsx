@@ -5,6 +5,7 @@ import ButtonContainer from '../components/ButtonContainer';
 import ViewFields from './fragments/ViewFields';
 import ViewValueFragment from './fragments/ViewValueFragment';
 import { DataModal } from '../models/DataModal';
+import ViewTypeFragment from './fragments/ViewTypeFragment';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -27,7 +28,7 @@ const ViewObject: FunctionComponent = () => {
   return (
     <>
       {/* show type your viewing */}
-      <ViewValueFragment value={`View ${object.data.type}`} />
+      <ViewTypeFragment value={`View ${object.data.type}`} />
       <hr />
 
       <ViewFields object={object} />

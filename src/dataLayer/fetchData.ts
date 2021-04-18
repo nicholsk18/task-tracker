@@ -10,7 +10,9 @@ export const getObjectData = async (id: number): Promise<DataModal> => {
 
 // This is to fetch relationships
 // they will show up in autocomplete
-export const getRelationships = async (type: string): Promise<Relationship[]> => {
+export const getRelationships = async (
+  type: string
+): Promise<Relationship[]> => {
   const path = `get/relationships`;
   const obj = type;
   return await postData(path, obj).then((data) => data);

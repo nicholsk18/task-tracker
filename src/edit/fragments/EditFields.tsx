@@ -10,7 +10,9 @@ import { DataModal } from '../../models/DataModal';
 interface IProps {
   object: DataModal;
   editObject: { (value: string, objectKey: string, id: number): void };
-  addRelationship: { (type: string, objectID: number, name: string, _id: string): void };
+  addRelationship: {
+    (type: string, objectID: number, name: string, _id: string): void;
+  };
   removeRelationship: {
     (objectKey: string, removedObject: Relationship): void;
   };
@@ -53,7 +55,12 @@ const EditFields: FunctionComponent<IProps> = ({
                 <Box my={3}>
                   <Button
                     onClick={() =>
-                      addRelationship(object.Template.relationships.to, 0, '', '')
+                      addRelationship(
+                        object.Template.relationships.to,
+                        0,
+                        '',
+                        ''
+                      )
                     }
                     variant='contained'
                     color='primary'

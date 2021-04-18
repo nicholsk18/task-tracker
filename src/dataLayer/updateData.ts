@@ -7,7 +7,9 @@ export const updateObject = async (data: DataModal): Promise<DataModal> => {
   return await postData(path, data).then((data) => data);
 };
 
-export const createNewObject = async (object: DataObject): Promise<DataObject> => {
+export const createNewObject = async (
+  object: DataObject
+): Promise<DataObject> => {
   const path = 'create/object';
   return await postData(path, object);
 };

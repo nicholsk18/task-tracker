@@ -16,11 +16,11 @@ import {
 import { updateObject } from '../dataLayer/updateData';
 import Loading from '../components/Loading';
 import EditFields from './fragments/EditFields';
-import ViewValueFragment from '../view/fragments/ViewValueFragment';
 import { useHistory } from 'react-router-dom';
 import { deleteObjectById } from '../dataLayer/deleteData';
 import { DataModal } from '../models/DataModal';
 import { Relationship } from '../models/Relationship';
+import ViewTypeFragment from '../view/fragments/ViewTypeFragment';
 
 const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -79,7 +79,8 @@ const EditObject: FunctionComponent = () => {
   function removeRelationship(objectKey: string, removedObject: Relationship) {
     const tempObject = { ...object };
     const relationships = tempObject.data[objectKey].filter(
-      (relationshipObject: Relationship) => relationshipObject.id !== removedObject.id
+      (relationshipObject: Relationship) =>
+        relationshipObject.id !== removedObject.id
     );
     const { id, type, name, _id } = tempObject.data;
 
@@ -152,7 +153,7 @@ const EditObject: FunctionComponent = () => {
   return (
     <>
       {/* show type your viewing */}
-      <ViewValueFragment value={`Edit ${type}`} />
+      <ViewTypeFragment value={`Edit ${type}`} />
       <hr />
 
       {object.data.id === 0 ? (

@@ -3,6 +3,7 @@ import BoxContainer from '../../components/BoxContainer';
 import ViewRelationshipFragment from './ViewRelationshipFragment';
 import ViewValueFragment from './ViewValueFragment';
 import { DataModal } from '../../models/DataModal';
+import ViewTypeFragment from './ViewTypeFragment';
 
 const ViewFields: FunctionComponent<{ object: DataModal }> = ({ object }) => {
   return (
@@ -21,7 +22,7 @@ const ViewFields: FunctionComponent<{ object: DataModal }> = ({ object }) => {
           return (
             <BoxContainer key={index}>
               {/* how it relates */}
-              <ViewValueFragment value={objectKey} />
+              <ViewTypeFragment value={objectKey} />
 
               <ViewRelationshipFragment
                 relationships={object.data[objectKey]}

@@ -1,6 +1,6 @@
 export type Template = {
-  fields: string[]
+  fields: string[];
   relationships: {
-    to: string
-  }
-}
+    to: string;
+  };
+};

@@ -12,8 +12,10 @@ import { Relationship } from '../models/Relationship';
 const filter = createFilterOptions();
 
 interface IProps {
-  relationshipType: string
-  addRelationship: { (type: string, objectID: number, name: string, _id: string): void };
+  relationshipType: string;
+  addRelationship: {
+    (type: string, objectID: number, name: string, _id: string): void;
+  };
 }
 const SearchRelationship: FunctionComponent<IProps> = ({
   relationshipType,
@@ -63,7 +65,7 @@ const SearchRelationship: FunctionComponent<IProps> = ({
             id: 0,
             name: newValue,
             type: '',
-            _id: ''
+            _id: '',
           });
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
@@ -71,7 +73,7 @@ const SearchRelationship: FunctionComponent<IProps> = ({
             id: newValue.id,
             name: newValue.inputValue,
             type: newValue.type,
-            _id: ''
+            _id: '',
           });
         } else {
           setValue(newValue);

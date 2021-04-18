@@ -3,6 +3,8 @@
 ### 4/17/2021
 
 - Set up server to send frontend for `/` route
+- some light refactoring
+- working on heroku
 
 ### 4/16/2021
 

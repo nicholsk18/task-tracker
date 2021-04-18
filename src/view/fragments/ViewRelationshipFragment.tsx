@@ -5,13 +5,12 @@ import { Box } from '@material-ui/core';
 import { Relationship } from '../../models/Relationship';
 
 interface IRelationships {
-  relationships: Relationship[]
+  relationships: Relationship[];
 }
 
 const ViewRelationshipFragment: FunctionComponent<IRelationships> = ({
   relationships,
 }) => {
-
   return (
     <>
       {relationships.length > 0 ? (
@@ -19,7 +18,6 @@ const ViewRelationshipFragment: FunctionComponent<IRelationships> = ({
           <div key={index}>
             <ViewRelationshipObjectFragment relationship={relationship} />
           </div>
-
         ))
       ) : (
         <BoxContainer>

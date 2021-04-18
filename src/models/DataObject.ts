@@ -2,8 +2,8 @@ import { Relationship } from './Relationship';
 
 export type DataObject = {
   id: number;
-  type: string
+  type: string;
   name: string;
   relationships: Relationship[];
-  _id: string
-}
+  _id: string;
+};

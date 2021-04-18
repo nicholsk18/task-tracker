@@ -5,7 +5,7 @@ import ViewValueFragment from './ViewValueFragment';
 import { Relationship } from '../../models/Relationship';
 
 interface IRelationship {
-  relationship: Relationship
+  relationship: Relationship;
 }
 
 const ViewRelationshipObjectFragment: FunctionComponent<IRelationship> = ({

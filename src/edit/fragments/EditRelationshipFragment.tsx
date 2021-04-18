@@ -1,15 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import RemoveRelationshipObjectFragment from '../../view/fragments/RemoveRelationshipObjectFragment';
+import RemoveRelationshipObjectFragment from '../RemoveRelationshipObjectFragment';
 import SearchRelationship from '../../components/SearchRelationship';
 import { Relationship } from '../../models/Relationship';
 
 interface IProps {
-  relationships: Relationship[]
-  objectKey: string
+  relationships: Relationship[];
+  objectKey: string;
   removeRelationship: {
     (objectKey: string, removedObject: Relationship): void;
   };
-  addRelationship: { (type: string, objectID: number, name: string, _id: string): void };
+  addRelationship: {
+    (type: string, objectID: number, name: string, _id: string): void;
+  };
 }
 
 const EditRelationshipFragment: FunctionComponent<IProps> = ({

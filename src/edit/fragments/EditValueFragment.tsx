@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { DataObject } from '../../models/DataObject';
 
 interface IProps {
-  object: DataObject
+  object: DataObject;
   objectKey: string;
   editObject: { (value: string, objectKey: string, id: number): void };
 }
