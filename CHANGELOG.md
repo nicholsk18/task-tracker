@@ -1,5 +1,10 @@
 # Changelog
 
+### 4/19/2021
+
+- adding new methods
+- refctor based on slack code review
+
 ### 4/17/2021
 
 - Set up server to send frontend for `/` route

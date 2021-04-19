@@ -3,9 +3,10 @@ import { getObjectData } from '../dataLayer/fetchData';
 import Loading from '../components/Loading';
 import ButtonContainer from '../components/ButtonContainer';
 import ViewFields from './fragments/ViewFields';
-import ViewValueFragment from './fragments/ViewValueFragment';
 import { DataModal } from '../models/DataModal';
 import ViewTypeFragment from './fragments/ViewTypeFragment';
+import BoxContainer from '../components/BoxContainer';
+import ViewRelationships from './fragments/ViewRelationships';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
@@ -31,7 +32,25 @@ const ViewObject: FunctionComponent = () => {
       <ViewTypeFragment value={`View ${object.data.type}`} />
       <hr />
 
-      <ViewFields object={object} />
+      {/* we could make this switch component or something? */}
+      {object.Template.fields.map((objectKey: string, index: number) => {
+        if (typeof object.data[objectKey] === 'string') {
+          return (
+            <BoxContainer key={index}>
+              <ViewFields object={object} objectKey={objectKey}/>
+            </BoxContainer>
+          );
+        }
+
+        if (typeof object.data[objectKey] === 'object') {
+          return (
+            <BoxContainer key={index}>
+              <ViewRelationships object={object} objectKey={objectKey} />
+            </BoxContainer>
+          );
+        }
+        // other if() checks for any other fields data we add later
+      })}
 
       <ButtonContainer to={`/edit/${object.data.id}`} fullWidth={true}>
         Edit {object.data.type}
