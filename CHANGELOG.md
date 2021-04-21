@@ -1,5 +1,9 @@
 # Changelog
 
+### 4/21/21
+
+- merge fix
+
 ### 4/19/2021
 
 - adding new methods
