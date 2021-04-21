@@ -10,9 +10,9 @@ const {
   deleteObject,
 } = require('../helpers/database_helper');
 
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../build/index.html'));
-});
+// router.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../../build/index.html'));
+// });
 
 router.get('/object/:id', (req, res) => {
   const id = parseInt(req.params.id);
