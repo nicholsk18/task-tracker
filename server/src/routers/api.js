@@ -10,9 +10,6 @@ const {
   deleteObject,
 } = require('../helpers/database_helper');
 
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../build/index.html'));
-});
 
 router.get('/api/object/:id', (req, res) => {
   const id = parseInt(req.params.id);
@@ -54,6 +51,11 @@ router.delete('/api/delete/object', (req, res) => {
   const err = deleteObject(_id);
 
   res.send({ error: err });
+});
+
+router.get('*', (req, res) => {
+  // res.sendFile(path.join(__dirname, '../../build/index.html'));
+  res.sendFile(path.resolve('build', 'index.html'))
 });
 
 module.exports = router;

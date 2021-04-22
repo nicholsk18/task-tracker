@@ -1,9 +1,11 @@
 import { DataModal } from '../models/DataModal';
 import { DataObject } from '../models/DataObject';
 
-const API_PATH = process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_DEV_URL
+const API_PATH = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PROD_URL : process.env.REACT_APP_DEV_URL
 
 export const getData = (urlPath: string): Promise<DataModal> => {
+  console.log(API_PATH);
+  console.log(urlPath);
   return fetch(`${API_PATH}/${urlPath}`)
     .then((res) => res.json())
     .then((data) => data);

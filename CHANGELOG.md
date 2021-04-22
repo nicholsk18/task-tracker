@@ -6,6 +6,7 @@
 - changed links to use .env file
 - made dynamic paths for when we push to production
 - changed server paths to prepend `/api/` for when we call api
+- server now serves api and react app from one server (only production mode)
 
 ### 4/21/21
 
