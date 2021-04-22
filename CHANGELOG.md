@@ -1,5 +1,12 @@
 # Changelog
 
+### 4/22/21
+
+- removed Pacfile (I dont think it will be needed)
+- changed links to use .env file
+- made dynamic paths for when we push to production
+- changed server paths to prepend `/api/` for when we call api
+
 ### 4/21/21
 
 - merge fix
