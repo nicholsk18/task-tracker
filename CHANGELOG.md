@@ -7,6 +7,7 @@
 - made dynamic paths for when we push to production
 - changed server paths to prepend `/api/` for when we call api
 - server now serves api and react app from one server (only production mode)
+- Moved view type in to child but waiting to refactor till we change the server object
 
 ### 4/21/21
 
