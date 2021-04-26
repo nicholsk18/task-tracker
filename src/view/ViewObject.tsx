@@ -32,7 +32,7 @@ const ViewObject: FunctionComponent = () => {
         if (typeof object.data[objectKey] === 'string') {
           return (
             <BoxContainer key={index}>
-              <ViewFields object={object} objectKey={objectKey}/>
+              <ViewFields object={object} objectKey={objectKey} />
             </BoxContainer>
           );
         }

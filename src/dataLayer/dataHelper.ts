@@ -1,7 +1,10 @@
 import { DataModal } from '../models/DataModal';
 import { DataObject } from '../models/DataObject';
 
-const API_PATH = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PROD_URL : process.env.REACT_APP_DEV_URL
+const API_PATH =
+  process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_PROD_URL
+    : process.env.REACT_APP_DEV_URL;
 
 export const getData = (urlPath: string): Promise<DataModal> => {
   return fetch(`${API_PATH}/${urlPath}`)

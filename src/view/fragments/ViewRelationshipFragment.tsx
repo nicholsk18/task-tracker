@@ -17,15 +17,15 @@ const ViewRelationshipFragment: FunctionComponent<IRelationships> = ({
       <BoxContainer>
         <Box py={3}>No Relationships found</Box>
       </BoxContainer>
-    )
+    );
   }
   return (
     <>
       {relationships.map((relationship: Relationship, index: number) => (
-          <div key={index}>
-            <ViewRelationshipObjectFragment relationship={relationship} />
-          </div>
-        ))}
+        <div key={index}>
+          <ViewRelationshipObjectFragment relationship={relationship} />
+        </div>
+      ))}
     </>
   );
 };

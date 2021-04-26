@@ -1,26 +1,25 @@
 [
   {
-    "Templates": {
-      "type": "Template",
-      "Activity": {
+    "Templates": [
+      {
+        "type": "Activity",
         "fields": [
-          "name",
-          "relationships"
+          "name"
         ],
-        "relationships": {
-          "to": "Tag"
-        }
+        "relationships": [
+          "Tag"
+        ]
       },
-      "Tag": {
+      {
+        "type": "Tag",
         "fields": [
-          "name",
-          "relationships"
+          "name"
         ],
-        "relationships": {
-          "to": "Activity"
-        }
+        "relationships": [
+          "Activity"
+        ]
       }
-    }
+    ]
   },
   {
     "objects": [

@@ -1,5 +1,14 @@
 # Changelog
 
+### 4/26/21
+
+- created new template. (initSetup.json has unminified version)
+- changed the way template is stored in db. Now its stored even with main data
+- rewrote `populate()` to flush and clear data better before using init file to re-setup database
+- started rewriting the database helper to work with new template.
+  - Looks like new template structure will be a lot better, but now we will need to rewrite a lot of code
+  - 
+
 ### 4/22/21
 
 - removed Pacfile (I dont think it will be needed)

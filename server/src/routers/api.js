@@ -10,7 +10,6 @@ const {
   deleteObject,
 } = require('../helpers/database_helper');
 
-
 router.get('/api/object/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const dataObject = getObject(id);
