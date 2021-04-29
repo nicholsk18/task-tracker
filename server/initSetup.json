@@ -1,6 +1,6 @@
 [
   {
-    "Templates": [
+    "templates": [
       {
         "type": "Activity",
         "fields": [
@@ -26,44 +26,69 @@
       {
         "id": 1,
         "type": "Activity",
-        "name": "Running",
-        "relationships": [5, 6]
+        "name": "Running"
       },
       {
         "id": 2,
         "type": "Activity",
-        "name": "Biking",
-        "relationships": [5, 6]
+        "name": "Biking"
       },
       {
         "id": 3,
         "type": "Activity",
-        "name": "Sleeping",
-        "relationships": []
+        "name": "Sleeping"
       },
       {
         "id": 4,
         "type": "Activity",
-        "name": "Eating",
-        "relationships": [7]
+        "name": "Eating"
       },
       {
         "id": 5,
         "type": "Tag",
-        "name": "Outdoor",
-        "relationships": [1, 2]
+        "name": "Outdoor"
       },
       {
         "id": 6,
         "type": "Tag",
-        "name": "Exercise",
-        "relationships": [1, 2]
+        "name": "Exercise"
       },
       {
         "id": 7,
         "type": "Tag",
-        "name": "Healthy",
-        "relationships": [4]
+        "name": "Healthy"
+      }
+    ]
+  },
+  {
+    "relationships": [
+      {
+        "id": 1,
+        "to": [5, 6]
+      },
+      {
+        "id": 2,
+        "to": [5, 6]
+      },
+      {
+        "id": 3,
+        "to": []
+      },
+      {
+        "id": 4,
+        "to": [7]
+      },
+      {
+        "id": 5,
+        "to": [1, 2]
+      },
+      {
+        "id": 6,
+        "to": [1, 2]
+      },
+      {
+        "id": 7,
+        "to": [4]
       }
     ]
   }

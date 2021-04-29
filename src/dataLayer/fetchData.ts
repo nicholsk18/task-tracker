@@ -26,7 +26,7 @@ export const getTemplate = async (type: string): Promise<Template> => {
 export const getNewObject = async (type: string): Promise<DataModal> => {
   const template = await getTemplate(type);
   const object = {
-    Template: template,
+    template,
     data: {
       id: 0,
       name: '',

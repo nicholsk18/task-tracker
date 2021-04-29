@@ -26,7 +26,7 @@ const EditFields: FunctionComponent<IProps> = ({
 }) => {
   return (
     <>
-      {object.Template.fields.map((objectKey: string, index: number) => {
+      {object.template.fields.map((objectKey: string, index: number) => {
         if (typeof object.data[objectKey] === 'string') {
           return (
             <BoxContainer key={index}>
@@ -56,7 +56,7 @@ const EditFields: FunctionComponent<IProps> = ({
                   <Button
                     onClick={() =>
                       addRelationship(
-                        object.Template.relationships.to,
+                        object.template.relationships.to,
                         0,
                         '',
                         ''

@@ -2,6 +2,6 @@ import { Template } from './Template';
 import { DataObject } from './DataObject';
 
 export type DataModal = {
-  Template: Template;
+  template: Template;
   data: DataObject;
 };

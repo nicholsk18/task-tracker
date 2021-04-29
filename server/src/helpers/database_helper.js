@@ -24,17 +24,6 @@ const databaseData = new TinyDB('./database.db');
 //   return databaseData._data.data.find((object) => object.type === 'Template');
 // };
 
-// return object based on ID
-const getObjectById = (id) => {
-  return databaseData._data.data.find((object) => object.id === id);
-};
-
-const getTemplate = (type) => {
-  return databaseData._data.templates.find(
-    (template) => template.type === type
-  );
-};
-
 // get all the object relationships
 // const getRelationshipObjects = (ids) => {
 //   return ids.map((id) => {
@@ -54,33 +43,6 @@ const getTemplate = (type) => {
 //   // return build object
 //   return { id, type, name, relationships, _id };
 // };
-
-/**
- *  Main functions below
- */
-
-const getObject = (id) => {
-  // to recreate data if none is present
-
-  if (databaseData._data.data.length === 0) {
-    databaseData.flush(); // flush data to file
-    populate(); // remake from init file
-  }
-  const object = getObjectById(id);
-  const template = getTemplate(object.type);
-  const relationships = object.relationships.map((relID) => {
-    // this looks ugly be we get relationships
-    const relObj = getObjectById(relID);
-    delete relObj.relationships; // delete relationships relationship
-    return relObj; // return
-  });
-
-  // replace relationship id
-  // with relationship objects
-  object.relationships = relationships;
-
-  return { Template: template, data: object };
-};
 
 // const getRelationships = (type) => {
 //   return getRelationshipObjectByType(type);
@@ -188,6 +150,42 @@ const getObject = (id) => {
 //   return throwError ? throwError : null;
 // };
 
+// return object based on ID
+const getObjectById = (id) => {
+  return databaseData._data.objects.find((object) => object.id === id);
+};
+
+const getTemplate = (type) => {
+  return databaseData._data.templates.find(
+    (template) => template.type === type
+  );
+};
+
+const getRelationships = (id) => {
+  return databaseData._data.relationships.find(
+    (relationship) => relationship.id === id
+  );
+};
+
+/**
+ *  Main functions below
+ */
+
+const getObject = (id) => {
+  // to recreate data if none is present
+
+  if (databaseData._data.data.length === 0) {
+    databaseData.flush(); // flush data to file
+    populate(); // remake from init file
+  }
+  const object = getObjectById(id); // gets main object
+  const template = getTemplate(object.type); // gets template
+  const relationships = getRelationships(id); // gets relationships
+  object.relationships = relationships.to.map((id) => getObjectById(id)); // adds relationships to main object
+
+  return { template, data: object };
+};
+
 module.exports = {
   getObject,
   // getRelationships,
@@ -201,14 +199,13 @@ module.exports = {
 const populate = () => {
   databaseData.flush(); // flush memory
   // now make sure it fully empty
-  databaseData._data.data = [];
+  databaseData._data.objects = [];
   databaseData._data.templates = [];
+  databaseData._data.relationships = [];
 
-  initData[1]['objects'].forEach((object) => {
-    databaseData.insertItem(object);
-  });
-  databaseData._data.templates = initData[0].Templates;
+  databaseData._data.templates = initData[0].templates;
+  databaseData._data.objects = initData[1].objects;
+  databaseData._data.relationships = initData[2].relationships;
+
   databaseData.flush();
-
-  console.log(databaseData._data);
 };

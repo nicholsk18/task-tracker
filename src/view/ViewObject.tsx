@@ -3,52 +3,43 @@ import { getObjectData } from '../dataLayer/fetchData';
 import Loading from '../components/Loading';
 import ButtonContainer from '../components/ButtonContainer';
 import ViewFields from './fragments/ViewFields';
-import { DataModal } from '../models/DataModal';
-import BoxContainer from '../components/BoxContainer';
 import ViewRelationships from './fragments/ViewRelationships';
+import ViewTypeFragment from './fragments/ViewTypeFragment';
 
 const ViewObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
-  const [object, setObject] = useState<DataModal>();
+  const [object, setObject] = useState<any>();
+  const [template, setTemplate] = useState<any>();
 
   useEffect(() => {
     if (urlID) {
       // maybe better than before
       (async () => {
         const id = parseInt(urlID);
-        setObject(await getObjectData(id));
+        const { template, data } = await getObjectData(id);
+        setObject(data);
+        setTemplate(template);
       })();
     }
   }, [urlID]);
 
-  if (!object) {
+  if (!object || !template) {
     return <Loading />;
   }
 
   return (
     <>
-      {/* we could make this switch component or something? */}
-      {object.Template.fields.map((objectKey: string, index: number) => {
-        if (typeof object.data[objectKey] === 'string') {
-          return (
-            <BoxContainer key={index}>
-              <ViewFields object={object} objectKey={objectKey} />
-            </BoxContainer>
-          );
-        }
+      {/* I feel like this needs to be its own thing */}
+      <ViewTypeFragment value={`View ${object.type}`} />
+      <hr />
 
-        if (typeof object.data[objectKey] === 'object') {
-          return (
-            <BoxContainer key={index}>
-              <ViewRelationships object={object} objectKey={objectKey} />
-            </BoxContainer>
-          );
-        }
-        // other if() checks for any other fields data we add later
-      })}
+      {/* here we can also just pass template.fields */}
+      <ViewFields object={object} template={template} />
+      {/* and template.relationships */}
+      <ViewRelationships object={object} template={template} />
 
-      <ButtonContainer to={`/edit/${object.data.id}`} fullWidth={true}>
-        Edit {object.data.type}
+      <ButtonContainer to={`/edit/${object.id}`} fullWidth={true}>
+        Edit {object.type}
       </ButtonContainer>
 
       <ButtonContainer to={`/edit/0`} fullWidth={true}>

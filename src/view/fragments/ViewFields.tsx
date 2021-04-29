@@ -1,20 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import ViewValueFragment from './ViewValueFragment';
-import { DataModal } from '../../models/DataModal';
-import ViewTypeFragment from './ViewTypeFragment';
-import { Box } from '@material-ui/core';
+import BoxContainer from '../../components/BoxContainer';
 
-const ViewFields: FunctionComponent<{
-  object: DataModal;
-  objectKey: string;
-}> = ({ object, objectKey }) => {
+const ViewFields: FunctionComponent<any> = ({ object, template }) => {
   return (
     <>
-      <ViewTypeFragment value={`View ${object.data.type}`} />
-      <hr />
-
-      <span>{object.data.type} title:</span>
-      <ViewValueFragment value={object.data[objectKey]} />
+      {template.fields.map((key: any, index: number) => (
+        <div key={index}>
+          <BoxContainer>
+            <span>{object.type} title:</span>
+            <ViewValueFragment value={object[key]} />
+          </BoxContainer>
+        </div>
+      ))}
     </>
   );
 };

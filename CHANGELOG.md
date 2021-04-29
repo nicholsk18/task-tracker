@@ -1,5 +1,15 @@
 # Changelog
 
+### 4/29/21
+
+- changed tinyDB object to have `objects`, `templates`, `relationships`
+- changed the way server object gets build
+- ~~frontend now received `object` variable instead of `data`.~~
+  - keeping it as data for typescript reasons.
+- renamed `Template` to `template`
+- refactored some frontend functionality.
+
+
 ### 4/26/21
 
 - created new template. (initSetup.json has unminified version)
