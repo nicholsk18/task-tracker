@@ -1,5 +1,14 @@
 # Changelog
 
+### 4/30/21
+
+- removed DataTable_old.json and test.json
+- changed relationship structure to have `from` (activity) and `to` (tag)
+  - changed db to work with new relationship object
+- ViewObject works of new structure`
+- we now pass `fields` and `relationships` instead of the hole template
+
+
 ### 4/29/21
 
 - changed tinyDB object to have `objects`, `templates`, `relationships`

@@ -11,7 +11,6 @@ interface IRelationship {
 const ViewRelationshipObjectFragment: FunctionComponent<IRelationship> = ({
   relationship,
 }) => {
-  console.log(relationship);
   return (
     <BoxContainer>
       <Link to={`/view/${relationship.id}`}>

@@ -3,11 +3,10 @@ import ViewTypeFragment from './ViewTypeFragment';
 import ViewRelationshipFragment from './ViewRelationshipFragment';
 import BoxContainer from '../../components/BoxContainer';
 
-const ViewRelationships: FunctionComponent<any> = ({ object, template }) => {
-  console.log(template);
+const ViewRelationships: FunctionComponent<any> = ({ object, relationships }) => {
   return (
     <>
-      {template.relationships.map((key: any, index: number) => (
+      {relationships.map((key: any, index: number) => (
         <div key={index}>
           <BoxContainer>
             <ViewTypeFragment value={key} />
