@@ -161,10 +161,30 @@ const getTemplate = (type) => {
   );
 };
 
-const getRelationships = (id) => {
-  return databaseData._data.relationships.find(
-    (relationship) => relationship.id === id
-  );
+// helper function to build relationships
+const relationshipHelper = (id, keyID, relID) => {
+  let relationships = [];
+
+  databaseData._data.relationships.forEach((relationship) => {
+    if (relationship[keyID] === id) {
+      // solution for not mutating state
+      relationships = [
+        ...relationships,
+        { ...getObjectById(relationship[relID]) },
+      ];
+    }
+  });
+
+  return relationships;
+};
+
+const getRelationships = (id, type) => {
+  if (type === 'Activity') {
+    return relationshipHelper(id, 'from', 'to');
+  }
+  if (type === 'Tag') {
+    return relationshipHelper(id, 'to', 'from');
+  }
 };
 
 /**
@@ -180,8 +200,8 @@ const getObject = (id) => {
   }
   const object = getObjectById(id); // gets main object
   const template = getTemplate(object.type); // gets template
-  const relationships = getRelationships(id); // gets relationships
-  object.relationships = relationships.to.map((id) => getObjectById(id)); // adds relationships to main object
+  const relationships = getRelationships(id, object.type); // gets relationships
+  object.relationships = relationships; // adds relationships to main object
 
   return { template, data: object };
 };
