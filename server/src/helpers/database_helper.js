@@ -95,7 +95,7 @@ const databaseData = new TinyDB('./database.db');
 //
 //   return { Template: tempObject.Template, data: tempObject.data };
 // };
-//
+
 // const createObject = (object) => {
 //   // lets find the last id
 //   let lastID = object.id;
