@@ -7,6 +7,7 @@
 - fixed relationship fragment componenets
   - not everything fully works because api paths do not resolve
 - had to change types to any while I create a new object types
+- still cannot save object but we can add relationships (not new yet)
 
 ### 4/30/21
 

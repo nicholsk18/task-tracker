@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Box, Button } from '@material-ui/core';
-import BoxContainer from '../components/BoxContainer';
-import ViewValueFragment from '../view/fragments/ViewValueFragment';
-import { Relationship } from '../models/Relationship';
+import BoxContainer from '../../components/BoxContainer';
+import ViewValueFragment from '../../view/fragments/ViewValueFragment';
+import { Relationship } from '../../models/Relationship';
 
 interface IProps {
   relationshipObject: Relationship;

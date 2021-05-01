@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import RemoveRelationshipObjectFragment from '../RemoveRelationshipObjectFragment';
+import RemoveRelationshipObjectFragment from './RemoveRelationshipObjectFragment';
 import SearchRelationship from '../../components/SearchRelationship';
 import { Relationship } from '../../models/Relationship';
 

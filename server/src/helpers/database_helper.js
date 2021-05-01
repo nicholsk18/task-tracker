@@ -163,6 +163,18 @@ const getTemplate = (type) => {
 
 // helper function to build relationships
 const relationshipHelper = (id, keyID, relID) => {
+  // if id is 0 we need to fetch all relationships
+  if (id === 0) {
+    const relationshipIDs = [];
+    databaseData._data.relationships.forEach((relationship) => {
+      if (!relationshipIDs.includes(relationship[keyID])) {
+        relationshipIDs.push(relationship[keyID]);
+      }
+    });
+
+    return relationshipIDs.map((id) => getObjectById(id));
+  }
+
   let relationships = [];
 
   databaseData._data.relationships.forEach((relationship) => {
@@ -208,7 +220,7 @@ const getObject = (id) => {
 
 module.exports = {
   getObject,
-  // getRelationships,
+  getRelationships,
   // saveObject,
   // createObject,
   // getTemplate,

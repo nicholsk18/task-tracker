@@ -18,7 +18,7 @@ router.get('/api/object/:id', (req, res) => {
 
 router.post('/api/get/relationships', (req, res) => {
   const type = req.body.data;
-  const relationships = getRelationships(type);
+  const relationships = getRelationships(0, type);
 
   res.send(relationships);
 });
