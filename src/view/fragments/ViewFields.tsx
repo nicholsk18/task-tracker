@@ -5,7 +5,7 @@ import BoxContainer from '../../components/BoxContainer';
 const ViewFields: FunctionComponent<any> = ({ object, fields }) => {
   return (
     <>
-      {fields.map((key: any, index: number) => {
+      {fields.map((key: string, index: number) => {
         if (typeof object[key] === 'string') {
           return (
             <div key={index}>
@@ -14,16 +14,15 @@ const ViewFields: FunctionComponent<any> = ({ object, fields }) => {
                 <ViewValueFragment value={object[key]} />
               </BoxContainer>
             </div>
-          )
+          );
         }
 
         if (typeof object[key] === 'object') {
           // ViewObjectPartial
-          return <div>test</div>
         }
       })}
     </>
   );
-}
+};
 
 export default ViewFields;

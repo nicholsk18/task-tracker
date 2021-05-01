@@ -12,9 +12,9 @@ interface IProps {
   };
 }
 
-const RemoveRelationshipObjectFragment: FunctionComponent<IProps> = ({
+const RemoveRelationshipObjectFragment: FunctionComponent<any> = ({
   relationshipObject,
-  objectKey,
+  type,
   removeRelationship,
 }) => {
   return (
@@ -32,7 +32,7 @@ const RemoveRelationshipObjectFragment: FunctionComponent<IProps> = ({
             size='large'
             variant='contained'
             color='secondary'
-            onClick={() => removeRelationship(objectKey, relationshipObject)}
+            onClick={() => removeRelationship(type, relationshipObject)}
           >
             X
           </Button>

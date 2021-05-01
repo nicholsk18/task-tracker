@@ -1,5 +1,13 @@
 # Changelog
 
+### /5/1/21
+
+- worked on fixing EditObject issues with new object
+  - changed `editObject` to `editFields` (makes more sense?)
+- fixed relationship fragment componenets
+  - not everything fully works because api paths do not resolve
+- had to change types to any while I create a new object types
+
 ### 4/30/21
 
 - removed DataTable_old.json and test.json
@@ -7,7 +15,6 @@
   - changed db to work with new relationship object
 - ViewObject works of new structure`
 - we now pass `fields` and `relationships` instead of the hole template
-
 
 ### 4/29/21
 
@@ -18,7 +25,6 @@
 - renamed `Template` to `template`
 - refactored some frontend functionality.
 
-
 ### 4/26/21
 
 - created new template. (initSetup.json has unminified version)
@@ -26,7 +32,7 @@
 - rewrote `populate()` to flush and clear data better before using init file to re-setup database
 - started rewriting the database helper to work with new template.
   - Looks like new template structure will be a lot better, but now we will need to rewrite a lot of code
-  - 
+  -
 
 ### 4/22/21
 

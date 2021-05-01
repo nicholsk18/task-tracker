@@ -16,6 +16,7 @@ import {
 import { updateObject } from '../dataLayer/updateData';
 import Loading from '../components/Loading';
 import EditFields from './fragments/EditFields';
+import EditRelationships from './fragments/EditRelationships';
 import { useHistory } from 'react-router-dom';
 import { deleteObjectById } from '../dataLayer/deleteData';
 import { DataModal } from '../models/DataModal';
@@ -27,7 +28,7 @@ const EditObject: FunctionComponent = () => {
   const history = useHistory();
 
   const [object, setObject] = useState<any>();
-  const [template, setTemplate] = useState<any>()
+  const [template, setTemplate] = useState<any>();
   const [type, setType] = useState<string>('Activity');
 
   const handleChange = async (value: string) => {
@@ -55,7 +56,6 @@ const EditObject: FunctionComponent = () => {
       // }
 
       (async () => {
-        console.log(id);
         const { template, data } = await getObjectData(id);
         setObject(data);
         setTemplate(template);
@@ -67,89 +67,86 @@ const EditObject: FunctionComponent = () => {
     return <Loading />;
   }
 
-  // edit object could edit name relationship and remove relationship
-  // or break it up to having editName editRelationship removeRelationships
-  function editObject(
+  // maybe editValues be better name?
+  function editFields(
     value: string,
     objectKey: string,
     id: number // leaving for now in case need it later
   ) {
-  //   const newObject = { ...object };
-  //   newObject.data[objectKey] = value;
-  //   setObject(newObject);
+    const tempObject = { ...object };
+    tempObject[objectKey] = value;
+    setObject(tempObject);
   }
 
-  function removeRelationship(objectKey: string, removedObject: Relationship) {
-  //   const tempObject = { ...object };
-  //   const relationships = tempObject.data[objectKey].filter(
-  //     (relationshipObject: Relationship) =>
-  //       relationshipObject.id !== removedObject.id
-  //   );
-  //   const { id, type, name, _id } = tempObject.data;
-  //
-  //   // dont really like mutation but will work for now
-  //   tempObject.data = { id, type, name, relationships, _id };
-  //   setObject(tempObject);
+  function removeRelationship(removeType: string, removedObject: any) {
+    let tempObject = { ...object };
+    const relationships = tempObject.relationships.filter(
+      (relationshipObject: any) => relationshipObject.id !== removedObject.id
+    );
+    const { id, type, name } = tempObject;
+
+    // dont really like mutation but will work for now
+    tempObject = { id, type, name, relationships };
+    setObject(tempObject);
   }
 
   // still need to add logic on server side
   // to save new relationship object
-  function addRelationship(type, objID = 0, name = '', _id = '') {
-  //   const tempObject = { ...object };
-  //
-  //   // only do this if its not new object
-  //   if (objID !== 0) {
-  //     const isDuplicate = tempObject.data.relationships.find(
-  //       ({ id }) => id === objID
-  //     );
-  //
-  //     // no need add duplicate relationships
-  //     if (isDuplicate) {
-  //       alert('No need to duplicate');
-  //       // need to clear box after this
-  //       return;
-  //     }
-  //
-  //     // now that we know what relationship user wanted
-  //     // remove the last relationship object
-  //     // it should always be 0
-  //     tempObject.data.relationships.pop();
-  //   }
+  function addRelationship(type, objID = 0, name = '') {
+    const tempObject = { ...object };
 
-  //   const newRelationship = {
-  //     id: objID,
-  //     type,
-  //     name,
-  //   };
-  //
-  //   tempObject.data.relationships.push(newRelationship);
-  //   setObject(tempObject);
+    // only do this if its not new object
+    if (objID !== 0) {
+      const isDuplicate = tempObject.relationships.find(
+        ({ id }) => id === objID
+      );
+
+      // no need add duplicate relationships
+      if (isDuplicate) {
+        alert('No need to duplicate');
+        // need to clear box after this
+        return;
+      }
+
+      // now that we know what relationship user wanted
+      // remove the last relationship object
+      // it should always be 0
+      tempObject.relationships.pop();
+    }
+    const newRelationship = {
+      id: objID,
+      type,
+      name,
+    };
+
+    tempObject.relationships.push(newRelationship);
+    setObject(tempObject);
   }
 
   async function saveObject() {
-  //   if (object.data.name === '') {
-  //     // maybe a modal here?
-  //     alert('Need a name');
-  //     return;
-  //   }
-  //
-  //   // need error handling
-  //   const obj = await updateObject(object);
-  //   history.push(`/view/${obj.data.id}`);
+    if (object.name === '') {
+      // maybe a modal here?
+      alert('Need a name');
+      return;
+    }
+
+    // need error handling
+    const obj = await updateObject(object);
+    history.push(`/view/${obj.id}`);
   }
 
   async function deleteObject() {
-  //   const status = await deleteObjectById(object.data._id);
-  //
-  //   if (status.error) {
-  //     alert(status.error);
-  //     return;
-  //   }
-  //
-  //   // redirect to next page
-  //   // we will need to fix this later
-  //   const newID = object.data.id + 1;
-  //   history.push(`/view/${newID}`);
+    //   const status = await deleteObjectById(object.data._id);
+    //
+    //   if (status.error) {
+    //     alert(status.error);
+    //     return;
+    //   }
+    //
+    //   // redirect to next page
+    //   // we will need to fix this later
+    //   const newID = object.data.id + 1;
+    //   history.push(`/view/${newID}`);
   }
 
   return (
@@ -185,7 +182,13 @@ const EditObject: FunctionComponent = () => {
 
       <EditFields
         object={object}
-        editObject={editObject}
+        fields={template.fields}
+        editFields={editFields}
+      />
+
+      <EditRelationships
+        object={object}
+        relationships={template.relationships}
         addRelationship={addRelationship}
         removeRelationship={removeRelationship}
       />
@@ -211,7 +214,7 @@ const EditObject: FunctionComponent = () => {
           variant='contained'
           color='primary'
           fullWidth={false}
-          // onClick={saveObject}
+          onClick={saveObject}
         >
           Save {object.type}
         </Button>
@@ -223,7 +226,7 @@ const EditObject: FunctionComponent = () => {
             variant='contained'
             color='secondary'
             fullWidth={true}
-            // onClick={deleteObject}
+            onClick={deleteObject}
           >
             Delete {object.type}
           </Button>

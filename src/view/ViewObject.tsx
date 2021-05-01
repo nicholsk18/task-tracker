@@ -36,7 +36,10 @@ const ViewObject: FunctionComponent = () => {
       {/* here we can also just pass template.fields */}
       <ViewFields object={object} fields={template.fields} />
       {/* and template.relationships */}
-      <ViewRelationships object={object} relationships={template.relationships} />
+      <ViewRelationships
+        object={object}
+        relationships={template.relationships}
+      />
 
       <ButtonContainer to={`/edit/${object.id}`} fullWidth={true}>
         Edit {object.type}

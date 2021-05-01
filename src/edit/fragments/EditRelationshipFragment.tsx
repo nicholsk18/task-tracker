@@ -14,9 +14,9 @@ interface IProps {
   };
 }
 
-const EditRelationshipFragment: FunctionComponent<IProps> = ({
+const EditRelationshipFragment: FunctionComponent<any> = ({
   relationships,
-  objectKey,
+  type,
   removeRelationship,
   addRelationship,
 }) => {
@@ -32,7 +32,7 @@ const EditRelationshipFragment: FunctionComponent<IProps> = ({
           ) : (
             <RemoveRelationshipObjectFragment
               relationshipObject={relationship}
-              objectKey={objectKey}
+              type={type}
               removeRelationship={removeRelationship}
             />
           )}

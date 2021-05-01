@@ -3,7 +3,10 @@ import ViewTypeFragment from './ViewTypeFragment';
 import ViewRelationshipFragment from './ViewRelationshipFragment';
 import BoxContainer from '../../components/BoxContainer';
 
-const ViewRelationships: FunctionComponent<any> = ({ object, relationships }) => {
+const ViewRelationships: FunctionComponent<any> = ({
+  object,
+  relationships,
+}) => {
   return (
     <>
       {relationships.map((key: any, index: number) => (
