@@ -132,12 +132,13 @@ const EditObject: FunctionComponent = () => {
 
     // need error handling
     const obj = await updateObject(object);
-    history.push(`/view/${obj.id}`);
+    history.push(`/view/${obj.data.id}`);
   }
 
   async function deleteObject() {
-    //   const status = await deleteObjectById(object.data._id);
-    //
+    console.log(object);
+    const status = await deleteObjectById(object.id);
+
     //   if (status.error) {
     //     alert(status.error);
     //     return;

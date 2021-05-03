@@ -152,13 +152,16 @@ const databaseData = new TinyDB('./database.db');
 
 // return object based on ID
 const getObjectById = (id) => {
-  return databaseData._data.objects.find((object) => object.id === id);
+  const object = databaseData._data.objects.find((object) => object.id === id);
+  return { ...object };
 };
 
 const getTemplate = (type) => {
-  return databaseData._data.templates.find(
+  const template = databaseData._data.templates.find(
     (template) => template.type === type
   );
+
+  return { ...template };
 };
 
 // helper function to build relationships
@@ -218,10 +221,41 @@ const getObject = (id) => {
   return { template, data: object };
 };
 
+const saveObject = (newObject) => {
+  // console.log(newObject);
+  const { id, type, name, relationships } = newObject;
+  const relObjects = databaseData._data.relationships.filter(
+    (obj) => obj.from !== id
+  );
+
+  databaseData._data.relationships = [];
+  const newRelationships = [];
+  relationships.forEach((obj, index) => {
+    newRelationships.push({ id: index, from: id, to: obj.id });
+  });
+
+  relObjects.forEach((obj) => {
+    newRelationships.push({ id: obj.id, from: obj.from, to: obj.to });
+  });
+
+  databaseData._data.relationships = newRelationships; // some reason this wont save
+  databaseData.flush();
+
+  databaseData._data.objects.map((object) => {
+    if (object.id == id) {
+      object.id = id;
+      object.type = type;
+      object.name = name;
+    }
+  });
+
+  return getObject(id);
+};
+
 module.exports = {
   getObject,
   getRelationships,
-  // saveObject,
+  saveObject,
   // createObject,
   // getTemplate,
   // deleteObject,
