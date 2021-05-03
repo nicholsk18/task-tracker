@@ -1,6 +1,12 @@
 # Changelog
 
-### /5/1/21
+### 5/3/21
+
+- Worked on fixing `saveObject` server method
+- when saving new name it worjks.
+- saving relationships still needs work
+
+### 5/1/21
 
 - worked on fixing EditObject issues with new object
   - changed `editObject` to `editFields` (makes more sense?)
