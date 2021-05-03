@@ -18,7 +18,7 @@ router.get('/api/object/:id', (req, res) => {
 
 router.post('/api/get/relationships', (req, res) => {
   const type = req.body.data;
-  const relationships = getRelationships(type);
+  const relationships = getRelationships(0, type);
 
   res.send(relationships);
 });
@@ -40,7 +40,6 @@ router.post('/api/save/object', (req, res) => {
 
 router.post('/api/create/object', (req, res) => {
   const obj = req.body.data;
-  console.log(obj);
   const newObj = createObject(obj);
   res.send(newObj);
 });

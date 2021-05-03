@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import RemoveRelationshipObjectFragment from '../RemoveRelationshipObjectFragment';
+import RemoveRelationshipObjectFragment from './RemoveRelationshipObjectFragment';
 import SearchRelationship from '../../components/SearchRelationship';
 import { Relationship } from '../../models/Relationship';
 
@@ -14,9 +14,9 @@ interface IProps {
   };
 }
 
-const EditRelationshipFragment: FunctionComponent<IProps> = ({
+const EditRelationshipFragment: FunctionComponent<any> = ({
   relationships,
-  objectKey,
+  type,
   removeRelationship,
   addRelationship,
 }) => {
@@ -32,7 +32,7 @@ const EditRelationshipFragment: FunctionComponent<IProps> = ({
           ) : (
             <RemoveRelationshipObjectFragment
               relationshipObject={relationship}
-              objectKey={objectKey}
+              type={type}
               removeRelationship={removeRelationship}
             />
           )}

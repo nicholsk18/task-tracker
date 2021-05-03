@@ -95,7 +95,7 @@ const databaseData = new TinyDB('./database.db');
 //
 //   return { Template: tempObject.Template, data: tempObject.data };
 // };
-//
+
 // const createObject = (object) => {
 //   // lets find the last id
 //   let lastID = object.id;
@@ -152,19 +152,54 @@ const databaseData = new TinyDB('./database.db');
 
 // return object based on ID
 const getObjectById = (id) => {
-  return databaseData._data.objects.find((object) => object.id === id);
+  const object = databaseData._data.objects.find((object) => object.id === id);
+  return { ...object };
 };
 
 const getTemplate = (type) => {
-  return databaseData._data.templates.find(
+  const template = databaseData._data.templates.find(
     (template) => template.type === type
   );
+
+  return { ...template };
 };
 
-const getRelationships = (id) => {
-  return databaseData._data.relationships.find(
-    (relationship) => relationship.id === id
-  );
+// helper function to build relationships
+const relationshipHelper = (id, keyID, relID) => {
+  // if id is 0 we need to fetch all relationships
+  if (id === 0) {
+    const relationshipIDs = [];
+    databaseData._data.relationships.forEach((relationship) => {
+      if (!relationshipIDs.includes(relationship[keyID])) {
+        relationshipIDs.push(relationship[keyID]);
+      }
+    });
+
+    return relationshipIDs.map((id) => getObjectById(id));
+  }
+
+  let relationships = [];
+
+  databaseData._data.relationships.forEach((relationship) => {
+    if (relationship[keyID] === id) {
+      // solution for not mutating state
+      relationships = [
+        ...relationships,
+        { ...getObjectById(relationship[relID]) },
+      ];
+    }
+  });
+
+  return relationships;
+};
+
+const getRelationships = (id, type) => {
+  if (type === 'Activity') {
+    return relationshipHelper(id, 'from', 'to');
+  }
+  if (type === 'Tag') {
+    return relationshipHelper(id, 'to', 'from');
+  }
 };
 
 /**
@@ -180,16 +215,47 @@ const getObject = (id) => {
   }
   const object = getObjectById(id); // gets main object
   const template = getTemplate(object.type); // gets template
-  const relationships = getRelationships(id); // gets relationships
-  object.relationships = relationships.to.map((id) => getObjectById(id)); // adds relationships to main object
+  const relationships = getRelationships(id, object.type); // gets relationships
+  object.relationships = relationships; // adds relationships to main object
 
   return { template, data: object };
 };
 
+const saveObject = (newObject) => {
+  // console.log(newObject);
+  const { id, type, name, relationships } = newObject;
+  const relObjects = databaseData._data.relationships.filter(
+    (obj) => obj.from !== id
+  );
+
+  databaseData._data.relationships = [];
+  const newRelationships = [];
+  relationships.forEach((obj, index) => {
+    newRelationships.push({ id: index, from: id, to: obj.id });
+  });
+
+  relObjects.forEach((obj) => {
+    newRelationships.push({ id: obj.id, from: obj.from, to: obj.to });
+  });
+
+  databaseData._data.relationships = newRelationships; // some reason this wont save
+  databaseData.flush();
+
+  databaseData._data.objects.map((object) => {
+    if (object.id == id) {
+      object.id = id;
+      object.type = type;
+      object.name = name;
+    }
+  });
+
+  return getObject(id);
+};
+
 module.exports = {
   getObject,
-  // getRelationships,
-  // saveObject,
+  getRelationships,
+  saveObject,
   // createObject,
   // getTemplate,
   // deleteObject,

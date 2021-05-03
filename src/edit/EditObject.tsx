@@ -16,6 +16,7 @@ import {
 import { updateObject } from '../dataLayer/updateData';
 import Loading from '../components/Loading';
 import EditFields from './fragments/EditFields';
+import EditRelationships from './fragments/EditRelationships';
 import { useHistory } from 'react-router-dom';
 import { deleteObjectById } from '../dataLayer/deleteData';
 import { DataModal } from '../models/DataModal';
@@ -26,78 +27,77 @@ const EditObject: FunctionComponent = () => {
   const urlID = window.location.pathname.split('/').pop();
   const history = useHistory();
 
-  const [object, setObject] = useState<DataModal | any>();
+  const [object, setObject] = useState<any>();
+  const [template, setTemplate] = useState<any>();
   const [type, setType] = useState<string>('Activity');
 
   const handleChange = async (value: string) => {
-    const newType = value;
-    setType(newType);
-    const template = await getTemplate(newType);
-    // have to update the relationships we can add
-
-    const tempObj = { ...object };
-    tempObj.data.type = newType;
-    tempObj.Template = template;
-    setObject(tempObj);
+    // const newType = value;
+    // setType(newType);
+    // const template = await getTemplate(newType);
+    // // have to update the relationships we can add
+    //
+    // const tempObj = { ...object };
+    // tempObj.data.type = newType;
+    // tempObj.Template = template;
+    // setObject(tempObj);
   };
 
   useEffect(() => {
     if (urlID) {
       const id = parseInt(urlID);
-      if (id === 0) {
-        (async () => {
-          const objectData = await getNewObject(type);
-          setObject(objectData);
-          setType(objectData.data.type);
-        })();
-        return;
-      }
+      // if (id === 0) {
+      //   (async () => {
+      //     const objectData = await getNewObject(type);
+      //     setObject(objectData);
+      //     setType(objectData.data.type);
+      //   })();
+      //   return;
+      // }
 
       (async () => {
-        setObject(await getObjectData(id));
+        const { template, data } = await getObjectData(id);
+        setObject(data);
+        setTemplate(template);
       })();
     }
   }, [urlID]);
 
-  if (!object) {
+  if (!object || !template) {
     return <Loading />;
   }
 
-  // edit object could edit name relationship and remove relationship
-  // or break it up to having editName editRelationship removeRelationships
-  function editObject(
+  // maybe editValues be better name?
+  function editFields(
     value: string,
     objectKey: string,
     id: number // leaving for now in case need it later
   ) {
-    console.log(id);
-    const newObject = { ...object };
-    newObject.data[objectKey] = value;
-    setObject(newObject);
+    const tempObject = { ...object };
+    tempObject[objectKey] = value;
+    setObject(tempObject);
   }
 
-  function removeRelationship(objectKey: string, removedObject: Relationship) {
-    const tempObject = { ...object };
-    const relationships = tempObject.data[objectKey].filter(
-      (relationshipObject: Relationship) =>
-        relationshipObject.id !== removedObject.id
+  function removeRelationship(removeType: string, removedObject: any) {
+    let tempObject = { ...object };
+    const relationships = tempObject.relationships.filter(
+      (relationshipObject: any) => relationshipObject.id !== removedObject.id
     );
-    const { id, type, name, _id } = tempObject.data;
+    const { id, type, name } = tempObject;
 
     // dont really like mutation but will work for now
-    tempObject.data = { id, type, name, relationships, _id };
+    tempObject = { id, type, name, relationships };
     setObject(tempObject);
   }
 
   // still need to add logic on server side
   // to save new relationship object
-  function addRelationship(type, objID = 0, name = '', _id = '') {
+  function addRelationship(type, objID = 0, name = '') {
     const tempObject = { ...object };
-    console.log(_id);
 
     // only do this if its not new object
     if (objID !== 0) {
-      const isDuplicate = tempObject.data.relationships.find(
+      const isDuplicate = tempObject.relationships.find(
         ({ id }) => id === objID
       );
 
@@ -111,21 +111,20 @@ const EditObject: FunctionComponent = () => {
       // now that we know what relationship user wanted
       // remove the last relationship object
       // it should always be 0
-      tempObject.data.relationships.pop();
+      tempObject.relationships.pop();
     }
-
     const newRelationship = {
       id: objID,
       type,
       name,
     };
 
-    tempObject.data.relationships.push(newRelationship);
+    tempObject.relationships.push(newRelationship);
     setObject(tempObject);
   }
 
   async function saveObject() {
-    if (object.data.name === '') {
+    if (object.name === '') {
       // maybe a modal here?
       alert('Need a name');
       return;
@@ -137,26 +136,27 @@ const EditObject: FunctionComponent = () => {
   }
 
   async function deleteObject() {
-    const status = await deleteObjectById(object.data._id);
+    console.log(object);
+    const status = await deleteObjectById(object.id);
 
-    if (status.error) {
-      alert(status.error);
-      return;
-    }
-
-    // redirect to next page
-    // we will need to fix this later
-    const newID = object.data.id + 1;
-    history.push(`/view/${newID}`);
+    //   if (status.error) {
+    //     alert(status.error);
+    //     return;
+    //   }
+    //
+    //   // redirect to next page
+    //   // we will need to fix this later
+    //   const newID = object.data.id + 1;
+    //   history.push(`/view/${newID}`);
   }
 
   return (
     <>
       {/* show type your viewing */}
-      <ViewTypeFragment value={`Edit ${type}`} />
+      <ViewTypeFragment value={`Edit ${object.type}`} />
       <hr />
 
-      {object.data.id === 0 ? (
+      {object.id === 0 ? (
         <Box mx={4} my={2}>
           <Box>
             <h2>Pick Object Type</h2>
@@ -183,7 +183,13 @@ const EditObject: FunctionComponent = () => {
 
       <EditFields
         object={object}
-        editObject={editObject}
+        fields={template.fields}
+        editFields={editFields}
+      />
+
+      <EditRelationships
+        object={object}
+        relationships={template.relationships}
         addRelationship={addRelationship}
         removeRelationship={removeRelationship}
       />
@@ -195,13 +201,13 @@ const EditObject: FunctionComponent = () => {
         justifyContent='space-around'
       >
         <Button
-          href={`/view/${object.data.id}`}
+          href={`/view/${object.id}`}
           style={{ padding: '10px 40px' }}
           variant='contained'
           color='primary'
           fullWidth={false}
         >
-          View {object.data.type}
+          View {object.type}
         </Button>
 
         <Button
@@ -211,11 +217,11 @@ const EditObject: FunctionComponent = () => {
           fullWidth={false}
           onClick={saveObject}
         >
-          Save {object.data.type}
+          Save {object.type}
         </Button>
       </Box>
 
-      {object.data.id !== 0 ? (
+      {object.id !== 0 ? (
         <Box m={3}>
           <Button
             variant='contained'
@@ -223,7 +229,7 @@ const EditObject: FunctionComponent = () => {
             fullWidth={true}
             onClick={deleteObject}
           >
-            Delete {object.data.type}
+            Delete {object.type}
           </Button>
         </Box>
       ) : null}

@@ -18,56 +18,19 @@ interface IProps {
   };
 }
 
-const EditFields: FunctionComponent<IProps> = ({
-  object,
-  editObject,
-  addRelationship,
-  removeRelationship,
-}) => {
+const EditFields: FunctionComponent<any> = ({ object, fields, editFields }) => {
   return (
     <>
-      {object.template.fields.map((objectKey: string, index: number) => {
-        if (typeof object.data[objectKey] === 'string') {
-          return (
-            <BoxContainer key={index}>
-              <EditValueFragment
-                object={object.data}
-                objectKey={objectKey}
-                editObject={editObject}
-              />
-            </BoxContainer>
-          );
-        }
-
-        if (typeof object.data[objectKey] === 'object') {
+      {fields.map((key: string, index: number) => {
+        if (typeof object[key] === 'string') {
           return (
             <div key={index}>
-              <BoxContainer>
-                <ViewValueFragment value={objectKey} />
-
-                <EditRelationshipFragment
-                  relationships={object.data[objectKey]}
-                  objectKey={objectKey}
-                  removeRelationship={removeRelationship}
-                  addRelationship={addRelationship}
+              <BoxContainer key={index}>
+                <EditValueFragment
+                  object={object}
+                  objectKey={key}
+                  editFields={editFields}
                 />
-
-                <Box my={3}>
-                  <Button
-                    onClick={() =>
-                      addRelationship(
-                        object.template.relationships.to,
-                        0,
-                        '',
-                        ''
-                      )
-                    }
-                    variant='contained'
-                    color='primary'
-                  >
-                    Add Relationship
-                  </Button>
-                </Box>
               </BoxContainer>
             </div>
           );

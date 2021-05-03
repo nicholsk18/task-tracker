@@ -6,16 +6,15 @@ const API_PATH =
     ? process.env.REACT_APP_PROD_URL
     : process.env.REACT_APP_DEV_URL;
 
-export const getData = (urlPath: string): Promise<DataModal> => {
+export const getData = (urlPath: string): Promise<any> => {
   return fetch(`${API_PATH}/${urlPath}`)
     .then((res) => res.json())
     .then((data) => data);
 };
 
-export const postData = (
-  path: string,
-  data: DataModal | DataObject | string
-): Promise<any> => {
+export const postData = (path: string, data: any): Promise<any> => {
+  console.log(`${API_PATH}/${path}`);
+
   return fetch(`${API_PATH}/${path}`, {
     method: 'POST',
     headers: {

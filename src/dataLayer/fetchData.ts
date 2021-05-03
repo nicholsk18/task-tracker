@@ -10,9 +10,7 @@ export const getObjectData = async (id: number): Promise<DataModal> => {
 
 // This is to fetch relationships
 // they will show up in autocomplete
-export const getRelationships = async (
-  type: string
-): Promise<Relationship[]> => {
+export const getRelationships = async (type: string): Promise<any> => {
   const path = `get/relationships`;
   const obj = type;
   return await postData(path, obj).then((data) => data);
@@ -23,7 +21,7 @@ export const getTemplate = async (type: string): Promise<Template> => {
   return await postData(path, type).then((data) => data);
 };
 
-export const getNewObject = async (type: string): Promise<DataModal> => {
+export const getNewObject = async (type: string): Promise<any> => {
   const template = await getTemplate(type);
   const object = {
     template,
@@ -32,7 +30,6 @@ export const getNewObject = async (type: string): Promise<DataModal> => {
       name: '',
       type: type,
       relationships: [],
-      _id: '',
     },
   };
 
