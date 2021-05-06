@@ -31,29 +31,31 @@ const EditObject: FunctionComponent = () => {
   const [template, setTemplate] = useState<any>();
   const [type, setType] = useState<string>('Activity');
 
-  const handleChange = async (value: string) => {
-    // const newType = value;
-    // setType(newType);
-    // const template = await getTemplate(newType);
-    // // have to update the relationships we can add
-    //
-    // const tempObj = { ...object };
-    // tempObj.data.type = newType;
-    // tempObj.Template = template;
-    // setObject(tempObj);
+  const handleTypeChange = async (value: string) => {
+    const newType = value;
+    const template = await getTemplate(newType);
+
+    const tempObj = { ...object };
+    tempObj.type = newType;
+
+
+    setType(newType);
+    setTemplate(template);
+    setObject(tempObj);
   };
 
   useEffect(() => {
     if (urlID) {
       const id = parseInt(urlID);
-      // if (id === 0) {
-      //   (async () => {
-      //     const objectData = await getNewObject(type);
-      //     setObject(objectData);
-      //     setType(objectData.data.type);
-      //   })();
-      //   return;
-      // }
+      if (id === 0) {
+        (async () => {
+          const { template, data } = await getNewObject(type);
+          setObject(data);
+          setType(data.type);
+          setTemplate(template)
+        })();
+        return;
+      }
 
       (async () => {
         const { template, data } = await getObjectData(id);
@@ -132,7 +134,8 @@ const EditObject: FunctionComponent = () => {
 
     // need error handling
     const obj = await updateObject(object);
-    history.push(`/view/${obj.data.id}`);
+    alert("save does not work till relationships are fix")
+    // history.push(`/view/${obj.data.id}`);
   }
 
   async function deleteObject() {
@@ -168,7 +171,7 @@ const EditObject: FunctionComponent = () => {
               aria-label='gender'
               name='gender1'
               value={type}
-              onChange={(e) => handleChange(e.target.value)}
+              onChange={(e) => handleTypeChange(e.target.value)}
             >
               <FormControlLabel
                 value='Activity'
@@ -201,7 +204,7 @@ const EditObject: FunctionComponent = () => {
         justifyContent='space-around'
       >
         <Button
-          href={`/view/${object.id}`}
+          href={`/view/${object.id || 1}`}
           style={{ padding: '10px 40px' }}
           variant='contained'
           color='primary'

@@ -1,5 +1,10 @@
 # Changelog
 
+### 5/6/21
+
+- fixed create object aka `edit/0`
+- save object still does not work. relationships will be different so needs to be fixed after
+
 ### 5/3/21
 
 - Worked on fixing `saveObject` server method

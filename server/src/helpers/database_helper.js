@@ -2,70 +2,6 @@ const initData = require('../../initSetup.json');
 const TinyDB = require('tinydb');
 const databaseData = new TinyDB('./database.db');
 
-// right now either template or objects
-// const getRelationshipObjectByType = (type) => {
-//   const relationships = [];
-//   databaseData._data.data.forEach((object) => {
-//     if (object.type === type) {
-//       const newRel = {
-//         id: object.id,
-//         type: object.type,
-//         name: object.name,
-//         _id: object._id,
-//       };
-//       relationships.push(newRel);
-//     }
-//   });
-//   return relationships;
-// };
-
-// return just the template object data
-// const getObjectTemplate = () => {
-//   return databaseData._data.data.find((object) => object.type === 'Template');
-// };
-
-// get all the object relationships
-// const getRelationshipObjects = (ids) => {
-//   return ids.map((id) => {
-//     // should we remove relationship relationships?
-//     const { relationships, ...data } = getObjectById(id);
-//     return data;
-//   });
-// };
-
-// const buildObject = (object) => {
-//   // object relationship ids
-//   const relationshipIDs = object['relationships'];
-//   // lets get all the relationships
-//   const relationships = getRelationshipObjects(relationshipIDs);
-//   // lets not mutate the object
-//   const { id, type, name, _id } = object;
-//   // return build object
-//   return { id, type, name, relationships, _id };
-// };
-
-// const getRelationships = (type) => {
-//   return getRelationshipObjectByType(type);
-// };
-//
-// const getTemplate = (type) => {
-//   const template = getObjectTemplate();
-//   return template[type];
-// };
-//
-// // update related relashinships
-// const updateRelationships = (object, updateID) => {
-//   const { _id } = getObjectById(object.id);
-//   databaseData.findById(_id, (err, item) => {
-//     const isMatch = item.relationships.find((relID) => relID === updateID);
-//     if (!isMatch) {
-//       item.relationships.push(updateID);
-//     }
-//   });
-//
-//   databaseData.flush();
-// };
-
 // const saveObject = (object) => {
 //   const tempObject = { ...object };
 //   let { id, name, relationships, _id } = tempObject.data;
@@ -113,22 +49,7 @@ const databaseData = new TinyDB('./database.db');
 //   databaseData.flush();
 //   return getObjectById(object.id);
 // };
-//
-// const removeRelationships = (obj) => {
-//   obj.relationships.forEach((id) => {
-//     const relObj = getObjectById(id);
-//     databaseData.findById(relObj._id, (err, item) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//
-//       item.relationships = item.relationships.filter(
-//         (relID) => relID !== obj.id
-//       );
-//     });
-//   });
-// };
-//
+
 // const deleteObject = (_id) => {
 //   const obj = databaseData.findById(_id, (err, item) => {
 //     if (err) {
@@ -193,6 +114,10 @@ const relationshipHelper = (id, keyID, relID) => {
   return relationships;
 };
 
+/**
+ *  Main functions below
+ */
+
 const getRelationships = (id, type) => {
   if (type === 'Activity') {
     return relationshipHelper(id, 'from', 'to');
@@ -201,10 +126,6 @@ const getRelationships = (id, type) => {
     return relationshipHelper(id, 'to', 'from');
   }
 };
-
-/**
- *  Main functions below
- */
 
 const getObject = (id) => {
   // to recreate data if none is present
@@ -257,7 +178,7 @@ module.exports = {
   getRelationships,
   saveObject,
   // createObject,
-  // getTemplate,
+  getTemplate,
   // deleteObject,
 };
 

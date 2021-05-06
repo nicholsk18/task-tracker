@@ -22,7 +22,7 @@ const EditRelationshipFragment: FunctionComponent<any> = ({
 }) => {
   return (
     <>
-      {relationships.map((relationship: Relationship, index: number) => (
+      {relationships.map((relationship: any, index: number) => (
         <div key={index}>
           {relationship.id === 0 ? (
             <SearchRelationship
